@@ -8,6 +8,7 @@ using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using iTextSharp.text.xml;
 using Microsoft.Reporting.WebForms;
 using static ReportModel;
 
@@ -21,9 +22,10 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
             DateTime d = DateTime.Now;
             d = d.AddMonths(-2);
 
-            Session["StartDate"] = d.ToString("MM/dd/yyyy");
-            Session["EndDate"] = DateTime.Now.ToString("MM/dd/yyyy");
-            //_dtFromDate
+            Session["StartDate"] = d.ToString("dd/MM/yyyy");
+            Session["EndDate"] = DateTime.Now.ToString("dd/MM/yyyy");
+            dtFromDate.Text = Session["StartDate"].ToString();
+            dtToDate.Text = Session["EndDate"].ToString();
             //generate report
             Report_Search repParamSearch = new Report_Search();
             ReportViewer1.Visible = false;
@@ -31,13 +33,11 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         else
         {
             // Set From and To Date From Session Variable
-
         }
     }
 
     protected void lbCompany_SelectedIndexChanged(object sender, EventArgs e)
     {
-
         PopulateSearchDropdowns(lbCompany.SelectedValue);
     }
 
@@ -63,7 +63,6 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         ReportViewer1.ProcessingMode = ProcessingMode.Local;
         ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Report_PendingPurchaseOrder.rdlc");
 
-        //DataSet dt = (new Report_DL()).GetReportData_PendingPO(repParamSearch);
         DataSet dt = (new Report_DL()).BuildReportData_PendingPO(repParamSearch);
 
         ReportViewer1.LocalReport.DataSources.Clear();
@@ -72,19 +71,22 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
             Name = "dsPendingPO",
             Value = dt.Tables[0]
         });
-
         ReportViewer1.LocalReport.Refresh();
     }
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-
         Report_Search repParamSearch = new Report_Search();
-        repParamSearch.StartDate = Page.Request.Form["_dtFromDate"].ToString();
-        repParamSearch.EndDate = Page.Request.Form["_dtToDate"].ToString();
 
-        Session["StartDate"] = Page.Request.Form["_dtFromDate"].ToString();
-        Session["EndDate"] = Page.Request.Form["_dtToDate"].ToString();
+        Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+        DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
+        DateTime enddate = Convert.ToDateTime(dtToDate.Text);
+
+        repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
+        repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
+
+        Session["StartDate"] = repParamSearch.StartDate;
+        Session["EndDate"] = repParamSearch.EndDate;
 
         //--- Company:: Multi Select List Box Values --
         string strCompany = string.Empty;
@@ -100,7 +102,6 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         {
             repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
         }
-
         //--- Party Name::  Multi Select List Box Values  Party Name--
         string strPartyName = string.Empty;
         foreach (ListItem item in lbPartyName.Items)
@@ -146,7 +147,6 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
             repParamSearch.ItemName = strPONumber.Remove(strPONumber.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
         }
 
-
         bool blncontinue = true;
 
         if (blncontinue)
@@ -162,14 +162,12 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         GenerateRDLCReport(repParamSearch);
         string FromDate = Request.Form["_dtFromDate"];
 
-
         lbCompany.SelectedIndex = -1;
         lbPartyName.SelectedIndex = -1;
         lbItemName.SelectedIndex = -1;
         lbPartyName.SelectedIndex = -1;
         lbPONumber.SelectedIndex = -1;
         //--- Set Current Date in Date Fileds Input Box
-
         lblmsg.Text = "";
     }
 
