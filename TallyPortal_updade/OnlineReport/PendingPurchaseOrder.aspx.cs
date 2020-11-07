@@ -168,7 +168,7 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         lbPartyName.SelectedIndex = -1;
         lbPONumber.SelectedIndex = -1;
         //--- Set Current Date in Date Fileds Input Box
-        lblmsg.Text = "";
+        //lblmsg.Text = "";
     }
 
     protected void btnExporttoCSV_Click(object sender, EventArgs e)
