@@ -6,27 +6,31 @@ using System.Web;
 
     public class ReportModel
     {
-        #region --Commoon Report Search --
-        public class Search_DropdownList
-        {
-            public List<String> lst_Company { get; set; }
-            public List<String> lst_Godown { get; set; }
-            public List<String> lst_Party { get; set; }
-            public List<String> lst_Item { get; set; }
-            public List<String> lst_StockCategory { get; set; }
-            public List<String> lst_PONumber { get; set; }
-        }
-        public class Report_Search
-        {
-            public string CompanyName { get; set; }
-            public string StartDate { get; set; }
-            public string EndDate { get; set; }
-            public string GodownName { get; set; }
-            public string PartyName { get; set; }
-            public string ItemName { get; set; }
-            public string PONumber { get; set; }
-            public string StockGroup { get; set; }
-        }
+    #region --Commoon Report Search --
+    public class Search_DropdownList
+    {
+        public List<String> lst_Company { get; set; }
+        public List<String> lst_Godown { get; set; }
+        public List<String> lst_Party { get; set; }
+        public List<String> lst_Item { get; set; }
+        public List<String> lst_StockCategory { get; set; }
+        public List<String> lst_PONumber { get; set; }
+        public List<String> lst_CostCenter { get; set; }
+
+    }
+    public class Report_Search
+    {
+        public string CompanyName { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string GodownName { get; set; }
+        public string PartyName { get; set; }
+        public string ItemName { get; set; }
+        public string PONumber { get; set; }
+        public string StockGroup { get; set; }
+        public string CostCenter { get; set; }
+        public string StockCategory { get; set; }
+    }
 
         #endregion
 

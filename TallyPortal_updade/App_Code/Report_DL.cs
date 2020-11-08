@@ -110,6 +110,18 @@ public class Report_DL
                     ddlData.lst_PONumber.Add(Common.GetString(rdr["VoucherNo"]));
                 }
                 rdr.Close();
+
+                //--- Cost Center ----
+                ddlData.lst_CostCenter = new List<string>();
+                ddlData.lst_CostCenter.Add("select");
+                sql = "Select Upper(CostCentreName) as [CostCentreName] FROM  TD_Mst_CostCentre where CompanyID=2 Order by CostCentreName";
+                cmd = new SqlCommand(sql, Common.conn);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    ddlData.lst_CostCenter.Add(Common.GetString(rdr["CostCentreName"]));
+                }
+                rdr.Close();
             }
 
 
@@ -494,5 +506,100 @@ public class Report_DL
     #endregion
 
 
+    #region --- Pending Purchase Order Report --
+    public DataSet BuildReportData_VendorOutstanding(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("VendorOutstandingReport");
 
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        if (repParamSearch.PartyName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.PartyName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@PartyName_List", strSQL);
+
+
+        strSQL = "";
+        if (repParamSearch.CostCenter is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.CostCenter.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@CostCenter_List", strSQL);
+      
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsVendorOutstanding = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsVendorOutstanding, "rpt_VendorOutstanding");
+        }
+        return dsVendorOutstanding;
+    }
+
+    #endregion
+
+
+    #region --- Godown Stock Transfer Report --
+    public DataSet BuildReportData_GodownStockTransfer(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("GodownStockTransfer");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        if (repParamSearch.StockCategory is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.StockCategory.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockCategory_List", strSQL);
+
+
+        strSQL = "";
+        if (repParamSearch.ItemName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.ItemName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockItemName_List", strSQL);
+
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsGodownStockTransfer = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsGodownStockTransfer, "rpt_GodownStockTransfer");
+        }
+        return dsGodownStockTransfer;
+    }
+
+    #endregion
 }

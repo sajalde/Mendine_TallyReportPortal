@@ -1,7 +1,4 @@
---- List of Cost Center ----
---Select Upper(CostCentreName) as [CostCentreName] FROM  TD_Mst_CostCentre where CompanyID=2 Order by CostCentreName
--- CostCenter in Table -- TD_Txn_VchHdr
-
+--- Vendor Outstanding Report ----
 DECLARE @CompanyNames as Varchar(2000)='', @DateFrom datetime= Null,  @DateTo datetime=Null,   @PartyName_List as Varchar(250)='', @CostCenter_List as Varchar(250)=''
 
 Set @CompanyNames='Mendine Pharmaceuticals Pvt Ltd. (FY 2019-20)Server'
@@ -38,38 +35,28 @@ WHERE VT.VoucherType = 'Purchase' And BL.Amount > 0 AND AH.Date >= @DateFrom AND
 GROUP BY MC.CompanyID, 	AH.PartyLedgerName, 	BL.BillName,	AH.CostCentreName
 
 
-SELECT     
-TD_Mst_Company.CompanyID, 
+SELECT  MC.CompanyID, AL.LedgerName, BL.BillName, SUM(BL.Amount*-1) as PaymentAmount,
 	CASE 
-		WHEN TD_Txn_BillLine.Date IS NULL THEN TD_Txn_VchHdr.Date
-		ELSE TD_Txn_BillLine.Date
-	END As PaymentDate, 
-	TD_Txn_AccLine.LedgerName, 
-	TD_Txn_BillLine.BillName, 
-	SUM(TD_Txn_BillLine.Amount) as PaymentAmount
+		WHEN BL.Date IS NULL THEN VH.Date
+		ELSE BL.Date
+	END As PaymentDate
 INTO #Payments
-FROM         TD_Mst_VoucherType INNER JOIN
-                      TD_Mst_Company ON TD_Mst_VoucherType.CompanyID = TD_Mst_Company.CompanyID INNER JOIN
-                      TD_Txn_AccLine INNER JOIN
-                      TD_Txn_VchHdr ON TD_Txn_AccLine.CompanyID = TD_Txn_VchHdr.CompanyID AND 
-                      TD_Txn_AccLine.VoucherID = TD_Txn_VchHdr.VoucherID INNER JOIN
-                      TD_Txn_BillLine ON TD_Txn_AccLine.CompanyID = TD_Txn_BillLine.Companyid AND TD_Txn_AccLine.VoucherID = TD_Txn_BillLine.VoucherId AND 
-                      TD_Txn_AccLine.AccLineNo = TD_Txn_BillLine.AccLineNo ON TD_Mst_VoucherType.CompanyID = TD_Txn_VchHdr.CompanyID AND 
-                      TD_Mst_VoucherType.VoucherTypeName = TD_Txn_VchHdr.VoucherTypeName
-WHERE TD_Mst_VoucherType.VoucherType = 'Payment' OR TD_Mst_VoucherType.VoucherType = 'Debit Note' OR TD_Mst_VoucherType.VoucherType = 'Journal'
+FROM TD_Mst_VoucherType as VT 
+INNER JOIN TD_Mst_Company as MC ON VT.CompanyID = MC.CompanyID 
+INNER JOIN TD_Txn_AccLine as AL
+INNER JOIN TD_Txn_VchHdr as VH ON AL.CompanyID = VH.CompanyID AND AL.VoucherID = VH.VoucherID
+INNER JOIN TD_Txn_BillLine as BL ON AL.CompanyID = BL.Companyid AND AL.VoucherID = BL.VoucherId AND AL.AccLineNo = BL.AccLineNo ON VT.CompanyID = VH.CompanyID AND  VT.VoucherTypeName = VH.VoucherTypeName
+WHERE VT.VoucherType = 'Payment' OR VT.VoucherType = 'Debit Note' OR VT.VoucherType = 'Journal'
 	--AND TD_Mst_Company.CompanyID = @CompanyIDs
-GROUP BY
-TD_Mst_Company.CompanyID, 
+GROUP BY MC.CompanyID, AL.LedgerName,  BL.BillName,
 	CASE 
-		WHEN TD_Txn_BillLine.Date IS NULL THEN TD_Txn_VchHdr.Date
-		ELSE TD_Txn_BillLine.Date
-	END, 
-	TD_Txn_AccLine.LedgerName, 
-	TD_Txn_BillLine.BillName
+		WHEN BL.Date IS NULL THEN VH.Date
+		ELSE BL.Date
+	END
 
-Select L.StateName, L.ParentLedgerGroup as PartyGroup, B.*,P.PaymentDate,P.PaymentAmount, DATEDIFF(D,BillDate,PaymentDate) As PaymentDays
-FROM
-#Bills B 
+Select  B.*,P.PaymentDate, P.PaymentAmount, (b.BillAmount - p.PaymentAmount) as [PendingAmount],  DATEDIFF(D,BillDate,PaymentDate) As PaymentDays,
+L.StateName, L.ParentLedgerGroup as PartyGroup
+FROM #Bills B 
    LEFT OUTER JOIN #Payments P ON b.CompanyID = P.CompanyID AND B.PartyName = P.LedgerName AND B.BillNo = P.BillName 
    LEFT OUTER JOIN TD_Mst_Ledger L ON B.CompanyID = L.CompanyID And B.PartyName = L.LedgerName
-   
+where  (b.BillAmount - p.PaymentAmount)>0 
