@@ -46,6 +46,11 @@
                                     <li>
                                         <asp:HyperLink ID="tallyGodownStockTransfer" runat="server" NavigateUrl="~/OnlineReport/GodownStockTransfer.aspx">Godown Stock Transfer</asp:HyperLink>
                                     </li>
+                                    
+                                    <li>
+                                        <asp:HyperLink ID="tallyGodownStockSummary" runat="server" NavigateUrl="~/OnlineReport/GodownStockSummary.aspx">Godown Stock Summary</asp:HyperLink>
+                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>

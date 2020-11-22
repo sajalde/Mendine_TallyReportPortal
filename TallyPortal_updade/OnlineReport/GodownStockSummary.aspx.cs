@@ -1,60 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using iTextSharp.text.xml;
 using Microsoft.Reporting.WebForms;
 using static ReportModel;
 
-public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
+public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
 {
-
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (!Page.IsPostBack)
         {
-            PopulateSearchDropdowns();
-            //applyrole();
+            PopulateSearchDropdowns(null);
+            DateTime d = DateTime.Now;
+            d = d.AddMonths(-3);
+
+            Session["StartDate"] = d.ToString("dd/MM/yyyy");
+            Session["EndDate"] = DateTime.Now.ToString("dd/MM/yyyy");
+            dtFromDate.Text = Session["StartDate"].ToString();
+            dtToDate.Text = Session["EndDate"].ToString();
             //generate report
-            FinalProductStock_Search repParamSearch = new FinalProductStock_Search();
+            Report_Search repParamSearch = new Report_Search();
             ReportViewer1.Visible = false;
-            //GenerateRDLCReport(repParamSearch);
+        }
+        else
+        {
+            // Set From and To Date From Session Variable
         }
     }
-    private void PopulateSearchDropdowns()
+
+    protected void lbCompany_SelectedIndexChanged(object sender, EventArgs e)
     {
-        FinalProductStock_Dropdown objData = (new Report_DL()).GetDropdownData_FinalProductStock();
+        PopulateSearchDropdowns(lbCompany.SelectedValue);
+    }
+
+    private void PopulateSearchDropdowns(string CompanyName)
+    {
+        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName);
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
 
-        lbItemName.DataSource = objData.lst_StockItemName;
-        lbItemName.DataBind();
+        lbGodown.DataSource = objData.lst_Godown;
+        lbGodown.DataBind();
 
-        lbGodownName.DataSource = objData.lst_GodownName;
-        lbGodownName.DataBind();
-
-        lbStockGroup.DataSource = objData.lst_StockGroup;
-        lbStockGroup.DataBind();
+        lbStockItemName.DataSource = objData.lst_Item;
+        lbStockItemName.DataBind();
     }
 
-    private void GenerateRDLCReport(FinalProductStock_Search repParamSearch)
+    private void GenerateRDLCReport(Report_Search repParamSearch)
     {
         ReportViewer1.Visible = true;
         ReportViewer1.ProcessingMode = ProcessingMode.Local;
-        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/FinalProduct.rdlc");
+        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Report_GodownStockSummary.rdlc");
 
-        DataSet dt = (new Report_DL()).GetReportData_FinalProductStock(repParamSearch);
+        DataSet dt = (new Report_DL()).BuildReportData_GodownStockSummary(repParamSearch);
 
         ReportViewer1.LocalReport.DataSources.Clear();
         ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()
         {
-            Name = "dsFinalProductStock",
+            Name = "dsGodownStockSummary",
             Value = dt.Tables[0]
         });
-
         ReportViewer1.LocalReport.Refresh();
     }
 
@@ -74,7 +87,18 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         }
         else
         {
-            FinalProductStock_Search repParamSearch = new FinalProductStock_Search();
+            Report_Search repParamSearch = new Report_Search();
+
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+            DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
+            DateTime enddate = Convert.ToDateTime(dtToDate.Text);
+
+            repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
+            repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
+
+            Session["StartDate"] = repParamSearch.StartDate;
+            Session["EndDate"] = repParamSearch.EndDate;
+
             //--- Company:: Multi Select List Box Values --
             string strCompany = string.Empty;
             foreach (ListItem item in lbCompany.Items)
@@ -87,55 +111,37 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
             }
             if (lbCompany.SelectedIndex != -1)
             {
-                repParamSearch.Company = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
+                repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
             }
-
-            //--- ItemName::  Multi Select List Box Values  ItemName--
-            string strItemName = string.Empty;
-            foreach (ListItem item in lbItemName.Items)
+            //--- Godown Name::  Multi Select List Box Values  Godown Name--
+            string strGodown = string.Empty;
+            foreach (ListItem item in lbGodown.Items)
             {
                 if (item.Selected)
                 {
-                    strItemName += "'" + item.Text + "'";
-                    strItemName += ",";
+                    strGodown += "'" + item.Text + "'";
+                    strGodown += ",";
                 }
             }
-            if (lbItemName.SelectedIndex != -1)
+            if (lbGodown.SelectedIndex != -1)
             {
-                repParamSearch.ItemName = strItemName.Remove(strItemName.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+                repParamSearch.GodownName_Source = strGodown.Remove(strGodown.Length - 1, 1);
             }
-            //--- GodownName:: Multi Select List Box Values  ItemName--
-            string strGodownName = string.Empty;
-            foreach (ListItem item in lbGodownName.Items)
+
+            //--- StockItemName::  Multi Select List Box Values  Item--
+            string strStockItemName = string.Empty;
+            foreach (ListItem item in lbStockItemName.Items)
             {
                 if (item.Selected)
                 {
-                    strGodownName += "'" + item.Text + "'";
-                    strGodownName += ",";
+                    strStockItemName += "'" + item.Text + "'";
+                    strStockItemName += ",";
                 }
             }
-            if (lbGodownName.SelectedIndex != -1)
+            if (lbStockItemName.SelectedIndex != -1)
             {
-                repParamSearch.GodownName = strGodownName.Remove(strGodownName.Length - 1, 1);// lbGodownName.SelectedItem.Text;
+                repParamSearch.ItemName = strStockItemName.Remove(strStockItemName.Length - 1, 1);// Remove last;
             }
-
-            //--- StockGroup:: Multi Select List Box Values  ItemName--
-            string strStockGroup = string.Empty;
-            foreach (ListItem item in lbStockGroup.Items)
-            {
-                if (item.Selected)
-                {
-                    strStockGroup += "'" + item.Text + "'";
-                    strStockGroup += ",";
-                }
-            }
-            if (lbStockGroup.SelectedIndex != -1)
-            {
-                repParamSearch.StockGroup = strStockGroup.Remove(strStockGroup.Length - 1, 1);// lbStockGroup.SelectedItem.Text;
-            }
-
-            repParamSearch.StartDate_StockDate = dtFromDate_StockDate.Text;// Page.Request.Form["_dtFromDate_StockDate"].ToString();
-            repParamSearch.EndDate_StockDate = dtFromDate_StockDate.Text;//Page.Request.Form["_dtFromDate_StockDate"].ToString();
 
             bool blncontinue = true;
 
@@ -148,15 +154,15 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
 
     protected void btnReset_Click(object sender, EventArgs e)
     {
-        FinalProductStock_Search repParamSearch = new FinalProductStock_Search();
-        string FromDate_StockDate = Request.Form["_dtFromDate_StockDate"];
-        lbItemName.SelectedIndex = -1;
-        lbCompany.SelectedIndex = -1;
-        lbGodownName.SelectedIndex = -1;
-        lbStockGroup.SelectedIndex = -1;
-        //--- Set Current Date in Date Fileds Input Box
-        lblmsg.Text = "";
+        Report_Search repParamSearch = new Report_Search();
 
+        //GenerateRDLCReport(repParamSearch);
+        string FromDate = Request.Form["_dtFromDate"];
+
+        lbCompany.SelectedIndex = -1;
+        lbGodown.SelectedIndex = -1;
+        lbStockItemName.SelectedIndex = -1;
+        //--- Set Current Date in Date Fileds Input Box
         ReportViewer1.LocalReport.DataSources.Clear();
     }
 
@@ -182,10 +188,9 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=FinalProductStockReport." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=PendingPurchaseOrderReport." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();
     }
 }
-

@@ -74,67 +74,82 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-        Report_Search repParamSearch = new Report_Search();
-
-        Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
-        DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
-        DateTime enddate = Convert.ToDateTime(dtToDate.Text);
-
-        repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
-        repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
-
-        Session["StartDate"] = repParamSearch.StartDate;
-        Session["EndDate"] = repParamSearch.EndDate;
-
-        //--- Company:: Multi Select List Box Values --
-        string strCompany = string.Empty;
-        foreach (ListItem item in lbCompany.Items)
+        if (lbCompany.SelectedIndex == -1)
         {
-            if (item.Selected)
+            string message = "Please Select Company Name from List !!";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append("<script type = 'text/javascript'>");
+            sb.Append("window.onload=function(){");
+            sb.Append("alert('");
+            sb.Append(message);
+            sb.Append("')};");
+            sb.Append("</script>");
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+        }
+        else
+        {
+            Report_Search repParamSearch = new Report_Search();
+
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+            DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
+            DateTime enddate = Convert.ToDateTime(dtToDate.Text);
+
+            repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
+            repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
+
+            Session["StartDate"] = repParamSearch.StartDate;
+            Session["EndDate"] = repParamSearch.EndDate;
+
+            //--- Company:: Multi Select List Box Values --
+            string strCompany = string.Empty;
+            foreach (ListItem item in lbCompany.Items)
             {
-                strCompany += "'" + item.Text + "'";
-                strCompany += ",";
+                if (item.Selected)
+                {
+                    strCompany += "'" + item.Text + "'";
+                    strCompany += ",";
+                }
             }
-        }
-        if (lbCompany.SelectedIndex != -1)
-        {
-            repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
-        }
-        //--- Party Name::  Multi Select List Box Values  Party Name--
-        string strPartyName = string.Empty;
-        foreach (ListItem item in lbPartyName.Items)
-        {
-            if (item.Selected)
+            if (lbCompany.SelectedIndex != -1)
             {
-                strPartyName += "'" + item.Text + "'";
-                strPartyName += ",";
+                repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
             }
-        }
-        if (lbPartyName.SelectedIndex != -1)
-        {
-            repParamSearch.PartyName = strPartyName.Remove(strPartyName.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
-        }
-       
-        //--- Cost center::  Multi Select List Box Values  PO Number--
-        string strCostcenter = string.Empty;
-        foreach (ListItem item in lbCostCenter.Items)
-        {
-            if (item.Selected)
+            //--- Party Name::  Multi Select List Box Values  Party Name--
+            string strPartyName = string.Empty;
+            foreach (ListItem item in lbPartyName.Items)
             {
-                strCostcenter += "'" + item.Text + "'";
-                strCostcenter += ",";
+                if (item.Selected)
+                {
+                    strPartyName += "'" + item.Text + "'";
+                    strPartyName += ",";
+                }
             }
-        }
-        if (lbCostCenter.SelectedIndex != -1)
-        {
-            repParamSearch.ItemName = strCostcenter.Remove(strCostcenter.Length - 1, 1);// Remove last;
-        }
+            if (lbPartyName.SelectedIndex != -1)
+            {
+                repParamSearch.PartyName = strPartyName.Remove(strPartyName.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+            }
 
-        bool blncontinue = true;
+            //--- Cost center::  Multi Select List Box Values  PO Number--
+            string strCostcenter = string.Empty;
+            foreach (ListItem item in lbCostCenter.Items)
+            {
+                if (item.Selected)
+                {
+                    strCostcenter += "'" + item.Text + "'";
+                    strCostcenter += ",";
+                }
+            }
+            if (lbCostCenter.SelectedIndex != -1)
+            {
+                repParamSearch.ItemName = strCostcenter.Remove(strCostcenter.Length - 1, 1);// Remove last;
+            }
 
-        if (blncontinue)
-        {
-            GenerateRDLCReport(repParamSearch);
+            bool blncontinue = true;
+
+            if (blncontinue)
+            {
+                GenerateRDLCReport(repParamSearch);
+            }
         }
     }
 
@@ -149,7 +164,7 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         lbPartyName.SelectedIndex = -1;
         lbCostCenter.SelectedIndex = -1;
         //--- Set Current Date in Date Fileds Input Box
-        //lblmsg.Text = "";
+        ReportViewer1.LocalReport.DataSources.Clear();
     }
 
     protected void btnExporttoCSV_Click(object sender, EventArgs e)

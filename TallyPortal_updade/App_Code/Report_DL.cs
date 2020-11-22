@@ -591,6 +591,29 @@ public class Report_DL
         RDLCReportSQL = RDLCReportSQL.Replace("@StockItemName_List", strSQL);
 
 
+        strSQL = "";
+        if (repParamSearch.GodownName_Source is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.GodownName_Source.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@GodownName_Source_List", strSQL);
+
+        strSQL = "";
+        if (repParamSearch.GodownName_Destination is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.GodownName_Destination.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@GodownName_Destination_List", strSQL);
+
+
         SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
         DataSet dsGodownStockTransfer = new DataSet();
         using (SqlDataAdapter sda = new SqlDataAdapter())
@@ -602,4 +625,53 @@ public class Report_DL
     }
 
     #endregion
+
+    #region --- Godown Stock Summary Report --
+    public DataSet BuildReportData_GodownStockSummary(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("GodownStockSummary");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        if (repParamSearch.GodownName_Source is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.GodownName_Source.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@GodwnName_List", strSQL);
+
+
+        strSQL = "";
+        if (repParamSearch.ItemName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.ItemName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockItemName_List", strSQL);
+
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsGodownStockSummary = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsGodownStockSummary, "rpt_GodownStockSummary");
+        }
+        return dsGodownStockSummary;
+    }
+
+    #endregion
+
 }

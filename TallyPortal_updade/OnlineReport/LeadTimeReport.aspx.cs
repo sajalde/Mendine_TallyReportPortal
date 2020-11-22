@@ -61,76 +61,73 @@ public partial class OnlineReport_LeadTimeReport : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-        //--- Multi Select List Box Values --
-        string strPartyName = string.Empty;
-        foreach (ListItem item in lbPartyName.Items)
-        {
-            if (item.Selected)
+            //--- Multi Select List Box Values --
+            string strPartyName = string.Empty;
+            foreach (ListItem item in lbPartyName.Items)
             {
-                strPartyName += "'" + item.Text + "'";
-                strPartyName += ",";
+                if (item.Selected)
+                {
+                    strPartyName += "'" + item.Text + "'";
+                    strPartyName += ",";
+                }
             }
-        }
-        //--- Multi Select List Box Values --
-        string strItemName = string.Empty;
-        foreach (ListItem item in lbItemName.Items)
-        {
-            if (item.Selected)
+            //--- Multi Select List Box Values --
+            string strItemName = string.Empty;
+            foreach (ListItem item in lbItemName.Items)
             {
-                strItemName += "'" + item.Text + "'";
-                strItemName += ",";
+                if (item.Selected)
+                {
+                    strItemName += "'" + item.Text + "'";
+                    strItemName += ",";
+                }
             }
-        }
 
-        LeadTime_Search repParamSearch = new LeadTime_Search();
-        if (lbPartyName.SelectedIndex > 0)
-        {
-            repParamSearch.PartyName = strPartyName.Remove(strPartyName.Length - 1, 1);// Remove last ,
+            LeadTime_Search repParamSearch = new LeadTime_Search();
+            if (lbPartyName.SelectedIndex > 0)
+            {
+                repParamSearch.PartyName = strPartyName.Remove(strPartyName.Length - 1, 1);// Remove last ,
 
-        }
+            }
 
-        if (lbItemName.SelectedIndex > 0)
-        {
-            repParamSearch.ItemName = strItemName.Remove(strItemName.Length - 1, 1);// Remove last ,// lbItemName.SelectedItem.Text;
-        }
-        //repParamSearch.ItemName = lbItemName.SelectedItem.Text;
-        Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+            if (lbItemName.SelectedIndex > 0)
+            {
+                repParamSearch.ItemName = strItemName.Remove(strItemName.Length - 1, 1);// Remove last ,// lbItemName.SelectedItem.Text;
+            }
+            //repParamSearch.ItemName = lbItemName.SelectedItem.Text;
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
 
-        DateTime postartDate = Convert.ToDateTime(dtFromDate_PO.Text);
-        DateTime poenddate= Convert.ToDateTime(dtToDate_PO.Text);
+            DateTime postartDate = Convert.ToDateTime(dtFromDate_PO.Text);
+            DateTime poenddate = Convert.ToDateTime(dtToDate_PO.Text);
 
-        repParamSearch.StartDate_PO = postartDate.ToString("MM/dd/yyyy");//Page.Request.Form["_dtFromDate_PO"].ToString();
-        repParamSearch.EndtDate_PO = poenddate.ToString("MM/dd/yyyy");//Page.Request.Form["_dtToDate_PO"].ToString();
-        if(dtFromDate_GRN.Text !="")
-        { 
-        repParamSearch.StartDate_GRN = DateTime.Parse(dtFromDate_GRN.Text).ToString("MM/dd/yyyy"); // Page.Request.Form["_dtFromDate_GRN"].ToString();
-        repParamSearch.EndtDate_GRN = DateTime.Parse(dtToDate_GRN.Text).ToString("MM/dd/yyyy"); // Page.Request.Form["_dtToDate_GRN"].ToString();
-        }
+            repParamSearch.StartDate_PO = postartDate.ToString("MM/dd/yyyy");//Page.Request.Form["_dtFromDate_PO"].ToString();
+            repParamSearch.EndtDate_PO = poenddate.ToString("MM/dd/yyyy");//Page.Request.Form["_dtToDate_PO"].ToString();
+            if (dtFromDate_GRN.Text != "")
+            {
+                repParamSearch.StartDate_GRN = DateTime.Parse(dtFromDate_GRN.Text).ToString("MM/dd/yyyy"); // Page.Request.Form["_dtFromDate_GRN"].ToString();
+                repParamSearch.EndtDate_GRN = DateTime.Parse(dtToDate_GRN.Text).ToString("MM/dd/yyyy"); // Page.Request.Form["_dtToDate_GRN"].ToString();
+            }
 
-        if (dtFromDate_Invoice.Text != "")
-        {
-            repParamSearch.StartDate_Invoice = DateTime.Parse(dtFromDate_Invoice.Text).ToString("MM/dd/yyyy"); // Page.Request.Form["_dtFromDate_Invoice"].ToString();
-            repParamSearch.EndtDate_Invoice = DateTime.Parse(dtToDate_Invoice.Text).ToString("MM/dd/yyyy"); // Page.Request.Form["_dtToDate_Invoice"].ToString();
-        }
-        bool blncontinue = true;
+            if (dtFromDate_Invoice.Text != "")
+            {
+                repParamSearch.StartDate_Invoice = DateTime.Parse(dtFromDate_Invoice.Text).ToString("MM/dd/yyyy"); // Page.Request.Form["_dtFromDate_Invoice"].ToString();
+                repParamSearch.EndtDate_Invoice = DateTime.Parse(dtToDate_Invoice.Text).ToString("MM/dd/yyyy"); // Page.Request.Form["_dtToDate_Invoice"].ToString();
+            }
+            bool blncontinue = true;
 
-        if (blncontinue)
-        {
-            GenerateRDLCReport(repParamSearch);
-        }
+            if (blncontinue)
+            {
+                GenerateRDLCReport(repParamSearch);
+            }
+        
     }
 
     protected void btnReset_Click(object sender, EventArgs e)
     {
         LeadTime_Search repParamSearch = new LeadTime_Search();
-
-        GenerateRDLCReport(repParamSearch);
         string PODateFrom = Request.Form["dtFromDate_PO"];
-
         lbItemName.SelectedIndex = -1;
         lbPartyName.SelectedIndex = -1;
-        //--- Set Current Date in Date Fileds Input Box
-
+        ReportViewer1.LocalReport.DataSources.Clear();
         lblmsg.Text = "";
     }
 

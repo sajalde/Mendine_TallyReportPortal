@@ -23,13 +23,14 @@ using System.Web;
         public string CompanyName { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
-        public string GodownName { get; set; }
+        public string GodownName_Source { get; set; }
         public string PartyName { get; set; }
         public string ItemName { get; set; }
         public string PONumber { get; set; }
         public string StockGroup { get; set; }
         public string CostCenter { get; set; }
         public string StockCategory { get; set; }
+        public string GodownName_Destination { get; set; }
     }
 
         #endregion

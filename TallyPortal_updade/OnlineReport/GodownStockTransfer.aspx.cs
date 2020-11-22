@@ -53,6 +53,12 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         lbStockItemName.DataSource = objData.lst_Item;
         lbStockItemName.DataBind();
 
+        lbSourceGodown.DataSource = objData.lst_Godown;
+        lbSourceGodown.DataBind();
+
+        lbDestinationGodown.DataSource = objData.lst_Godown;
+        lbDestinationGodown.DataBind();
+
     }
 
     private void GenerateRDLCReport(Report_Search repParamSearch)
@@ -74,67 +80,112 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-        Report_Search repParamSearch = new Report_Search();
-
-        Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
-        DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
-        DateTime enddate = Convert.ToDateTime(dtToDate.Text);
-
-        repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
-        repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
-
-        Session["StartDate"] = repParamSearch.StartDate;
-        Session["EndDate"] = repParamSearch.EndDate;
-
-        //--- Company:: Multi Select List Box Values --
-        string strCompany = string.Empty;
-        foreach (ListItem item in lbCompany.Items)
+        if (lbCompany.SelectedIndex == -1)
         {
-            if (item.Selected)
+            string message = "Please Select Company Name from List !!";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append("<script type = 'text/javascript'>");
+            sb.Append("window.onload=function(){");
+            sb.Append("alert('");
+            sb.Append(message);
+            sb.Append("')};");
+            sb.Append("</script>");
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+        }
+        else
+        {
+            Report_Search repParamSearch = new Report_Search();
+
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+            DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
+            DateTime enddate = Convert.ToDateTime(dtToDate.Text);
+
+            repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
+            repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
+
+            Session["StartDate"] = repParamSearch.StartDate;
+            Session["EndDate"] = repParamSearch.EndDate;
+
+            //--- Company:: Multi Select List Box Values --
+            string strCompany = string.Empty;
+            foreach (ListItem item in lbCompany.Items)
             {
-                strCompany += "'" + item.Text + "'";
-                strCompany += ",";
+                if (item.Selected)
+                {
+                    strCompany += "'" + item.Text + "'";
+                    strCompany += ",";
+                }
             }
-        }
-        if (lbCompany.SelectedIndex != -1)
-        {
-            repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
-        }
-        //--- Party Name::  Multi Select List Box Values  Party Name--
-        string strStockCategory = string.Empty;
-        foreach (ListItem item in lbStockCategory.Items)
-        {
-            if (item.Selected)
+            if (lbCompany.SelectedIndex != -1)
             {
-                strStockCategory += "'" + item.Text + "'";
-                strStockCategory += ",";
+                repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
             }
-        }
-        if (lbStockCategory.SelectedIndex != -1)
-        {
-            repParamSearch.PartyName = strStockCategory.Remove(strStockCategory.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
-        }
-       
-        //--- Cost center::  Multi Select List Box Values  Item--
-        string strStockItemName = string.Empty;
-        foreach (ListItem item in lbStockItemName.Items)
-        {
-            if (item.Selected)
+            //--- StockCategory::  Multi Select List Box Values  Party Name--
+            string strStockCategory = string.Empty;
+            foreach (ListItem item in lbStockCategory.Items)
             {
-                strStockItemName += "'" + item.Text + "'";
-                strStockItemName += ",";
+                if (item.Selected)
+                {
+                    strStockCategory += "'" + item.Text + "'";
+                    strStockCategory += ",";
+                }
             }
-        }
-        if (lbStockItemName.SelectedIndex != -1)
-        {
-            repParamSearch.ItemName = strStockItemName.Remove(strStockItemName.Length - 1, 1);// Remove last;
-        }
+            if (lbStockCategory.SelectedIndex != -1)
+            {
+                repParamSearch.PartyName = strStockCategory.Remove(strStockCategory.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+            }
 
-        bool blncontinue = true;
+            //--- StockItemName::  Multi Select List Box Values  Item--
+            string strStockItemName = string.Empty;
+            foreach (ListItem item in lbStockItemName.Items)
+            {
+                if (item.Selected)
+                {
+                    strStockItemName += "'" + item.Text + "'";
+                    strStockItemName += ",";
+                }
+            }
+            if (lbStockItemName.SelectedIndex != -1)
+            {
+                repParamSearch.ItemName = strStockItemName.Remove(strStockItemName.Length - 1, 1);// Remove last;
+            }
 
-        if (blncontinue)
-        {
-            GenerateRDLCReport(repParamSearch);
+            //--- Source Godown::  Multi Select List Box Values  Item--
+            string strSourceGodown = string.Empty;
+            foreach (ListItem item in lbSourceGodown.Items)
+            {
+                if (item.Selected)
+                {
+                    strSourceGodown += "'" + item.Text + "'";
+                    strSourceGodown += ",";
+                }
+            }
+            if (lbSourceGodown.SelectedIndex != -1)
+            {
+                repParamSearch.GodownName_Source = strSourceGodown.Remove(strSourceGodown.Length - 1, 1);// Remove last;
+            }
+
+            //--- Destination Godown::  Multi Select List Box Values  Item--
+            string strDestinationGodown = string.Empty;
+            foreach (ListItem item in lbDestinationGodown.Items)
+            {
+                if (item.Selected)
+                {
+                    strDestinationGodown += "'" + item.Text + "'";
+                    strDestinationGodown += ",";
+                }
+            }
+            if (lbDestinationGodown.SelectedIndex != -1)
+            {
+                repParamSearch.GodownName_Destination = strDestinationGodown.Remove(strDestinationGodown.Length - 1, 1);// Remove last;
+            }
+
+            bool blncontinue = true;
+
+            if (blncontinue)
+            {
+                GenerateRDLCReport(repParamSearch);
+            }
         }
     }
 
@@ -142,14 +193,16 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
     {
         Report_Search repParamSearch = new Report_Search();
 
-        GenerateRDLCReport(repParamSearch);
+        //GenerateRDLCReport(repParamSearch);
         string FromDate = Request.Form["_dtFromDate"];
 
         lbCompany.SelectedIndex = -1;
         lbStockCategory.SelectedIndex = -1;
         lbStockItemName.SelectedIndex = -1;
+        lbSourceGodown.SelectedIndex = -1;
+        lbDestinationGodown.SelectedIndex = -1;
         //--- Set Current Date in Date Fileds Input Box
-        //lblmsg.Text = "";
+        ReportViewer1.LocalReport.DataSources.Clear();
     }
 
     protected void btnExporttoCSV_Click(object sender, EventArgs e)

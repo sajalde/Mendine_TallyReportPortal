@@ -14,13 +14,15 @@ using static ReportModel;
 
 public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
 {
+    public enum MessageType { Success, Error, Info, Warning };
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             PopulateSearchDropdowns(null);
             DateTime d = DateTime.Now;
-            d = d.AddMonths(-2);
+            d = d.AddMonths(-3);
 
             Session["StartDate"] = d.ToString("dd/MM/yyyy");
             Session["EndDate"] = DateTime.Now.ToString("dd/MM/yyyy");
@@ -76,99 +78,112 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-        Report_Search repParamSearch = new Report_Search();
 
-        Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
-        DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
-        DateTime enddate = Convert.ToDateTime(dtToDate.Text);
-
-        repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
-        repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
-
-        Session["StartDate"] = repParamSearch.StartDate;
-        Session["EndDate"] = repParamSearch.EndDate;
-
-        //--- Company:: Multi Select List Box Values --
-        string strCompany = string.Empty;
-        foreach (ListItem item in lbCompany.Items)
+        if (lbCompany.SelectedIndex == -1)
         {
-            if (item.Selected)
+            string message = "Please Select Company Name from List !!";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append("<script type = 'text/javascript'>");
+            sb.Append("window.onload=function(){");
+            sb.Append("alert('");
+            sb.Append(message);
+            sb.Append("')};");
+            sb.Append("</script>");
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+        }
+        else
+        {
+            Report_Search repParamSearch = new Report_Search();
+
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+            DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
+            DateTime enddate = Convert.ToDateTime(dtToDate.Text);
+
+            repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
+            repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
+
+            Session["StartDate"] = repParamSearch.StartDate;
+            Session["EndDate"] = repParamSearch.EndDate;
+
+            //--- Company:: Multi Select List Box Values --
+            string strCompany = string.Empty;
+            foreach (ListItem item in lbCompany.Items)
             {
-                strCompany += "'" + item.Text + "'";
-                strCompany += ",";
+                if (item.Selected)
+                {
+                    strCompany += "'" + item.Text + "'";
+                    strCompany += ",";
+                }
             }
-        }
-        if (lbCompany.SelectedIndex != -1)
-        {
-            repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
-        }
-        //--- Party Name::  Multi Select List Box Values  Party Name--
-        string strPartyName = string.Empty;
-        foreach (ListItem item in lbPartyName.Items)
-        {
-            if (item.Selected)
+            if (lbCompany.SelectedIndex != -1)
             {
-                strPartyName += "'" + item.Text + "'";
-                strPartyName += ",";
+                repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
             }
-        }
-        if (lbPartyName.SelectedIndex != -1)
-        {
-            repParamSearch.PartyName = strPartyName.Remove(strPartyName.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
-        }
-
-        //--- ItemName::  Multi Select List Box Values  ItemName--
-        string strItemName = string.Empty;
-        foreach (ListItem item in lbItemName.Items)
-        {
-            if (item.Selected)
+            //--- Party Name::  Multi Select List Box Values  Party Name--
+            string strPartyName = string.Empty;
+            foreach (ListItem item in lbPartyName.Items)
             {
-                strItemName += "'" + item.Text + "'";
-                strItemName += ",";
+                if (item.Selected)
+                {
+                    strPartyName += "'" + item.Text + "'";
+                    strPartyName += ",";
+                }
             }
-        }
-        if (lbItemName.SelectedIndex != -1)
-        {
-            repParamSearch.ItemName = strItemName.Remove(strItemName.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
-        }
-
-        //--- Purchase Order No::  Multi Select List Box Values  PO Number--
-        string strPONumber = string.Empty;
-        foreach (ListItem item in lbPONumber.Items)
-        {
-            if (item.Selected)
+            if (lbPartyName.SelectedIndex != -1)
             {
-                strPONumber += "'" + item.Text + "'";
-                strPONumber += ",";
+                repParamSearch.PartyName = strPartyName.Remove(strPartyName.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
             }
-        }
-        if (lbPONumber.SelectedIndex != -1)
-        {
-            repParamSearch.ItemName = strPONumber.Remove(strPONumber.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
-        }
 
-        bool blncontinue = true;
+            //--- ItemName::  Multi Select List Box Values  ItemName--
+            string strItemName = string.Empty;
+            foreach (ListItem item in lbItemName.Items)
+            {
+                if (item.Selected)
+                {
+                    strItemName += "'" + item.Text + "'";
+                    strItemName += ",";
+                }
+            }
+            if (lbItemName.SelectedIndex != -1)
+            {
+                repParamSearch.ItemName = strItemName.Remove(strItemName.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+            }
 
-        if (blncontinue)
-        {
-            GenerateRDLCReport(repParamSearch);
+            //--- Purchase Order No::  Multi Select List Box Values  PO Number--
+            string strPONumber = string.Empty;
+            foreach (ListItem item in lbPONumber.Items)
+            {
+                if (item.Selected)
+                {
+                    strPONumber += "'" + item.Text + "'";
+                    strPONumber += ",";
+                }
+            }
+            if (lbPONumber.SelectedIndex != -1)
+            {
+                repParamSearch.ItemName = strPONumber.Remove(strPONumber.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+            }
+
+            bool blncontinue = true;
+
+            if (blncontinue)
+            {
+                GenerateRDLCReport(repParamSearch);
+            }
         }
     }
 
     protected void btnReset_Click(object sender, EventArgs e)
     {
         Report_Search repParamSearch = new Report_Search();
-
-        GenerateRDLCReport(repParamSearch);
         string FromDate = Request.Form["_dtFromDate"];
-
         lbCompany.SelectedIndex = -1;
         lbPartyName.SelectedIndex = -1;
         lbItemName.SelectedIndex = -1;
         lbPartyName.SelectedIndex = -1;
         lbPONumber.SelectedIndex = -1;
-        //--- Set Current Date in Date Fileds Input Box
-        //lblmsg.Text = "";
+
+        ReportViewer1.LocalReport.DataSources.Clear();
     }
 
     protected void btnExporttoCSV_Click(object sender, EventArgs e)
