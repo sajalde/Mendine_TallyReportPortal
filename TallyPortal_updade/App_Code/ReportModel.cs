@@ -14,6 +14,7 @@ using System.Web;
         public List<String> lst_Party { get; set; }
         public List<String> lst_Item { get; set; }
         public List<String> lst_StockCategory { get; set; }
+        public List<String> lst_StockGroup { get; set; }
         public List<String> lst_PONumber { get; set; }
         public List<String> lst_CostCenter { get; set; }
 

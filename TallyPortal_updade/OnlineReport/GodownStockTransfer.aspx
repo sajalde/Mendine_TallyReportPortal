@@ -56,7 +56,7 @@
                             <div class="form-group col-md-3">
                                 <div class="form-group">
                                     <label>Stock Category</label>
-                                    <asp:ListBox ID="lbStockCategory" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
+                                    <asp:ListBox ID="lbStockCategory" runat="server" SelectionMode="Multiple" Width="75%"  AutoPostBack="True" OnSelectedIndexChanged="lbStockCategory_SelectedIndexChanged"></asp:ListBox>
                                 </div>
                             </div>
 
@@ -134,8 +134,17 @@
                             includeSelectAllOption: true,
                             maxHeight: 400,
                             enableFiltering: true,
-                            enableCaseInsensitiveFiltering: true
+                            enableCaseInsensitiveFiltering: true,
+                            
+                            enableClickableOptGroups: true,
+                            onChange: function (option, checked, select) {
+                                //alert('onChange triggered ...');
+                            }
                         });
+                        $('#lbStockCategory-select-onChange-button').on('click', function () {
+                            $('#lbStockCategory-select-onChange').multiselect('select', '1', true);
+                        });
+
                         $('[id*=lbStockItemName]').multiselect({
                             includeSelectAllOption: true,
                             maxHeight: 400,

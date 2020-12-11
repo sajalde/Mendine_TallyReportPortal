@@ -87,6 +87,18 @@ public class Report_DL
                 }
                 rdr.Close();
 
+                //--- Stock Group Drop Down ----
+                ddlData.lst_StockGroup = new List<string>();
+                ddlData.lst_StockGroup.Add("select");
+                sql = "Select Distinct Upper(StockGroupName) as [StockGroupName] from TD_Mst_StockGroup where CompanyID=" + CompanyID + " order by Upper(StockGroupName)";
+                cmd = new SqlCommand(sql, Common.conn);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    ddlData.lst_StockGroup.Add(Common.GetString(rdr["StockGroupName"]));
+                }
+                rdr.Close();
+
                 //--- Stock Item Drop Down ----
                 ddlData.lst_Item = new List<string>();
                 ddlData.lst_Item.Add("select");
@@ -137,7 +149,96 @@ public class Report_DL
         return ddlData;
     }
 
+    public List<String> Common_BindStockItemByCategory(string CompanyName, string Categories)
+    {
+        Int32? CompanyID = 0;
+        Search_DropdownList ddlData = new Search_DropdownList();
+        string sql = string.Empty;
+        SqlCommand cmd = null;
+        SqlDataReader rdr = null;
+        Common.OpenConnection();
+        try
+        {
+            //---------- Get Company Id by Name
+            sql = "Select CompanyID from TD_Mst_Company where CompanyName='" + CompanyName + "'";
+            cmd = new SqlCommand(sql, Common.conn);
+            rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                CompanyID = Convert.ToInt32(Common.GetString(rdr["CompanyID"]));
+            }
 
+            rdr.Close();
+
+            //--- Stock Item Drop Down ----
+            ddlData.lst_Item = new List<string>();
+            ddlData.lst_Item.Add("select");
+            sql = "Select Distinct Upper(StockItemName) as [ItemName]  from TD_Mst_StockItem Where CompanyID=" + CompanyID + " And StockCategory In ("+ Categories  + ") order by ItemName";
+            cmd = new SqlCommand(sql, Common.conn);
+            rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                ddlData.lst_Item.Add(Common.GetString(rdr["ItemName"]));
+            }
+            rdr.Close();
+        }
+
+        catch (Exception ex)
+        {
+        }
+        finally
+        {
+            Common.CloseConnection();
+        }
+
+        return ddlData.lst_Item;
+    }
+
+
+    public List<String> Common_BindStockItemByStockGroup(string CompanyName, string Groups)
+    {
+        Int32? CompanyID = 0;
+        Search_DropdownList ddlData = new Search_DropdownList();
+        string sql = string.Empty;
+        SqlCommand cmd = null;
+        SqlDataReader rdr = null;
+        Common.OpenConnection();
+        try
+        {
+            //---------- Get Company Id by Name
+            sql = "Select CompanyID from TD_Mst_Company where CompanyName='" + CompanyName + "'";
+            cmd = new SqlCommand(sql, Common.conn);
+            rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                CompanyID = Convert.ToInt32(Common.GetString(rdr["CompanyID"]));
+            }
+
+            rdr.Close();
+
+            //--- Stock Item Drop Down ----
+            ddlData.lst_Item = new List<string>();
+            ddlData.lst_Item.Add("select");
+            sql = "Select Distinct Upper(StockItemName) as [ItemName]  from TD_Mst_StockItem Where CompanyID=" + CompanyID + " And StockGroup In (" + Groups + ") order by ItemName";
+            cmd = new SqlCommand(sql, Common.conn);
+            rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                ddlData.lst_Item.Add(Common.GetString(rdr["ItemName"]));
+            }
+            rdr.Close();
+        }
+
+        catch (Exception ex)
+        {
+        }
+        finally
+        {
+            Common.CloseConnection();
+        }
+
+        return ddlData.lst_Item;
+    }
     #endregion
 
     #region -- Common SQL Fetch Function --
@@ -298,152 +399,63 @@ public class Report_DL
 
     #endregion
 
-    #region -- FinalProductStock --
-
-    #region Bind Drop Down
-    public FinalProductStock_Dropdown GetDropdownData_FinalProductStock()
+    #region --- Final Product Stock --
+    public DataSet BuildReportData_FinalProductStock(Report_Search repParamSearch)
     {
-        FinalProductStock_Dropdown ddlData = new FinalProductStock_Dropdown();
-        Common.OpenConnection();
-        try
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("FinalProductStock");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        strSQL = "";
+        if (repParamSearch.GodownName_Source is null)
         {
-            //--- Company Drop Down ----
-            ddlData.lst_Company = new List<string>();
-            ddlData.lst_Company.Add("select");
-
-            //String sql = "Select Distinct CompanyID from TD_Txn_StockDetails order by CompanyID";
-            String sql = "Select CompanyID, Upper(CompanyName) as [CompanyName] from TD_Mst_Company order by CompanyName";
-            SqlCommand cmd = new SqlCommand(sql, Common.conn);
-            SqlDataReader rdr = cmd.ExecuteReader();
-            while (rdr.Read())
-            {
-                //ddlData.lst_Company.Add(Common.GetString(rdr["CompanyID"]));
-                ddlData.lst_Company.Add(Common.GetString(rdr["CompanyName"]));
-            }
-            rdr.Close();
-
-
-            //--- lst_StockItemName Drop Down ----
-            ddlData.lst_StockItemName = new List<string>();
-            ddlData.lst_StockItemName.Add("select");
-            sql = "select distinct Upper(StockItemName) as [StockItemName] from TD_Txn_InvLine where Len(StockItemName)>2 order by StockItemName";
-            cmd = new SqlCommand(sql, Common.conn);
-            rdr = cmd.ExecuteReader();
-            while (rdr.Read())
-            {
-                ddlData.lst_StockItemName.Add(Common.GetString(rdr["StockItemName"]));
-            }
-            rdr.Close();
-
-            //--- GodownName Drop Down ----
-            ddlData.lst_GodownName = new List<string>();
-            ddlData.lst_GodownName.Add("select");
-            sql = "Select Distinct Upper(GodownName) as [GodownName] from tblGodownName order by GodownName";
-            cmd = new SqlCommand(sql, Common.conn);
-            rdr = cmd.ExecuteReader();
-            while (rdr.Read())
-            {
-                ddlData.lst_GodownName.Add(Common.GetString(rdr["GodownName"]));
-            }
-            rdr.Close();
-
-            //--- StockGroup Drop Down ----
-            ddlData.lst_StockGroup = new List<string>();
-            ddlData.lst_StockGroup.Add("select");
-            sql = "Select Distinct Upper(StockGroup) as [StockGroup] from TD_Mst_StockItem order by StockGroup";
-            cmd = new SqlCommand(sql, Common.conn);
-            rdr = cmd.ExecuteReader();
-            while (rdr.Read())
-            {
-                ddlData.lst_StockGroup.Add(Common.GetString(rdr["StockGroup"]));
-            }
-            rdr.Close();
+            strSQL += "''" + "";
         }
-        catch (Exception ex)
+        else
         {
+            strSQL += "'" + repParamSearch.GodownName_Source.Replace("'", "") + "'";
         }
-        finally
+        RDLCReportSQL = RDLCReportSQL.Replace("@GodownName_List", strSQL);
+
+        strSQL = "";
+        if (repParamSearch.StockGroup is null)
         {
-            Common.CloseConnection();
+            strSQL += "''" + "";
         }
-
-        return ddlData;
-    }
-    #endregion
-
-    #region Get Report Search Data ---
-    public DataSet GetReportData_FinalProductStock(FinalProductStock_Search repParamSearch)
-    {
-        LeadTime_Report_List lstLeadTimeReport = new LeadTime_Report_List();
-        Common.OpenConnection();
-        String strSQL = "";
-
-        //strSQL += "SELECT  sd.CompanyID, sd.StockDate, sd.StockItemName, sd.GodownName, sd.BatchName, sd.Quantity, sd.UOM, sd.Rate, sd.Amount * -1 AS amount, SI.StockGroup ";
-        //strSQL += "FROM     dbo.TD_Txn_StockDetails AS sd ";
-        //strSQL += "INNER JOIN dbo.TD_Mst_StockItem AS SI ON sd.CompanyID = SI.CompanyID AND sd.StockItemName = SI.StockItemName ";
-
-        strSQL += " SELECT c.CompanyName AS[CompanyID], sd.StockDate, sd.StockItemName, sd.GodownName, sd.BatchName, sd.Quantity, sd.UOM, sd.Rate, sd.Amount * -1 AS amount, SI.StockGroup";
-        strSQL += " FROM  dbo.TD_Txn_StockDetails AS sd INNER JOIN dbo.TD_Mst_StockItem AS SI ON sd.CompanyID = SI.CompanyID AND sd.StockItemName = SI.StockItemName";
-        strSQL += " Inner Join TD_Mst_Company as C On c.CompanyID = Sd.CompanyID";
-
-        string WhSQL = "";
-        string strconcat = "";
-
-        if (repParamSearch.Company != null && repParamSearch.Company != "" && repParamSearch.Company != "select")
+        else
         {
-            WhSQL = WhSQL + strconcat + " C.CompanyName In (" + repParamSearch.Company + ")";
-            strconcat = " and ";
+            strSQL += "'" + repParamSearch.StockGroup.Replace("'", "") + "'";
         }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockGroup_List", strSQL);
 
-        if (repParamSearch.StockGroup != null && repParamSearch.StockGroup != "" && repParamSearch.StockGroup != "select")
+
+        strSQL = "";
+        if (repParamSearch.ItemName is null)
         {
-            WhSQL = WhSQL + strconcat + " SI.StockGroup In (" + repParamSearch.StockGroup + ")";
-            strconcat = " and ";
+            strSQL += "''" + "";
         }
-
-        if (repParamSearch.GodownName != null && repParamSearch.GodownName != "" && repParamSearch.GodownName != "select")
+        else
         {
-            WhSQL = WhSQL + strconcat + " sd.GodownName In (" + repParamSearch.GodownName + ")";
-            strconcat = " and ";
+            strSQL += "'" + repParamSearch.ItemName.Replace("'", "") + "'";
         }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockItemName_List", strSQL);
 
-        if (repParamSearch.StartDate_StockDate != null && repParamSearch.StartDate_StockDate != "")
-        {
-            WhSQL = WhSQL + strconcat + " sd.StockDate>='" + repParamSearch.StartDate_StockDate + "'";
-            strconcat = " and ";
-        }
-        //if (repParamSearch.StartDate_StockDate != null && repParamSearch.StartDate_StockDate != "")
-        //{
-        //    WhSQL = WhSQL + strconcat + " sd.StockDate<='" + repParamSearch.StartDate_StockDate + "'";
-        //    strconcat = " and ";
-        //}
-        if (repParamSearch.EndDate_StockDate != null && repParamSearch.EndDate_StockDate != "")
-        {
-            WhSQL = WhSQL + strconcat + " sd.StockDate<='" + repParamSearch.EndDate_StockDate + "'";
-            strconcat = " and ";
-        }
 
-        if (repParamSearch.ItemName != null && repParamSearch.ItemName != "" && repParamSearch.ItemName != "select")
-        {
-            WhSQL = WhSQL + strconcat + " sd.StockItemName In (" + repParamSearch.ItemName + ")";
-            strconcat = " and ";
-        }
-
-        if (WhSQL != null && WhSQL != "")
-            strSQL = strSQL + " where " + WhSQL;
-
-        strSQL += " Order by CompanyID, StockDate, StockGroup, GodownName";
-
-        SqlCommand cmd = new SqlCommand(strSQL, Common.conn);
-        DataSet dsLeadTime = new DataSet();
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsFinalProductStock = new DataSet();
         using (SqlDataAdapter sda = new SqlDataAdapter())
         {
             sda.SelectCommand = cmd;
-            sda.Fill(dsLeadTime, "rpt_LeadTime");
+            sda.Fill(dsFinalProductStock, "rpt_FinalProductStock");
         }
-        return dsLeadTime;
+        return dsFinalProductStock;
     }
-    #endregion
 
     #endregion
 
@@ -505,8 +517,7 @@ public class Report_DL
 
     #endregion
 
-
-    #region --- Pending Purchase Order Report --
+    #region --- VendorOutstanding --
     public DataSet BuildReportData_VendorOutstanding(Report_Search repParamSearch)
     {
         string RDLCReportSQL = string.Empty;
@@ -553,7 +564,6 @@ public class Report_DL
     }
 
     #endregion
-
 
     #region --- Godown Stock Transfer Report --
     public DataSet BuildReportData_GodownStockTransfer(Report_Search repParamSearch)
@@ -673,5 +683,7 @@ public class Report_DL
     }
 
     #endregion
+
+    
 
 }

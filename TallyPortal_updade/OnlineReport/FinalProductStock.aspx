@@ -1,175 +1,171 @@
-﻿<%@ Page Title="Final Product Stock Report" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="FinalProductStock.aspx.cs" Inherits="OnlineReport_FinalProductStock" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="FinalProductStock.aspx.cs" Inherits="OnlineReport_FinalProductStock" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-
-
+    <script type="text/javascript" src="../lib/jquery-3.3.1.min.js"></script>
+    <link href="../lib/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../lib/bootstrap.min.js"></script>
+    <link href="../lib/bootstrap-multiselect.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../lib/bootstrap-multiselect.min.js"></script>
 
     <asp:UpdatePanel runat="server" ID="pnl_report">
         <ContentTemplate>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 style="text-align: center">Final Product Stock Report</h2>
+                        </div>
+                    </div>
+                </div>
 
-            <script src="../lib/jquery-3.3.1.min.js"></script>
-            <link href="../lib/bootstrap.min.css" rel="stylesheet" />
-            <script src="../lib/bootstrap.min.js"></script>
-            <link href="../lib/bootstrap-multiselect.css" rel="stylesheet" />
-            <script src="../lib/bootstrap-multiselect.min.js"></script>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-group col-md-2">
+                                <div class="form-group">
+                                    <label>Stock Date</label>
+                                    <asp:TextBox ID="dtFromDate" runat="server"></asp:TextBox>
+                                    <asp:CalendarExtender ID="txttodate_CalendarExtender" runat="server" Format="dd/MM/yyyy"
+                                        TargetControlID="dtFromDate" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-8">
+                                <div class="form-group">
+                                    <label>Company</label>
+                                    <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" Width="75%" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged"></asp:ListBox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                              <div class="form-group col-md-3">
+                                <div class="form-group">
+                                    <label>Source Godown</label>
+                                    <asp:ListBox ID="lbGodownName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <div class="form-group">
+                                    <label>Stock Group</label>
+                                    <asp:ListBox ID="lbStockGroup" runat="server" SelectionMode="Multiple" Width="75%"  AutoPostBack="True" OnSelectedIndexChanged="lbStockGroup_SelectedIndexChanged" ></asp:ListBox>
+                                </div>
+                            </div>
 
 
+                            <div class="form-group col-md-3">
+                                <div class="form-group">
+                                    <label>Stock Item Name</label>
+                                    <asp:ListBox ID="lbStockItemName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
+                                </div>
+                            </div>
 
-            <div style="height: 50px; text-align: center;">
-                <h2>Final Product Stock Report</h2>
+                        </div>
+
+                    <div class="mb-4 mt-4">
+                        <div class="m-4">
+                            <div class="form-group mb-0 text-center">
+                                <asp:Button ID="btnSearch" runat="server" Text="Show Report" class="btn btn-success waves-effect waves-light" OnClick="btnSearch_Click" />
+                                <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-danger waves-effect waves-light" OnClick="btnReset_Click" />
+                                <asp:Button ID="btnExporttoCSV" runat="server" Text="Export to Excel" class="btn btn-info waves-effect waves-light" OnClick="btnExporttoCSV_Click" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <%--  <div style="text-align:right; padding-right:50px;height:50px;">
-            <asp:LinkButton ID="lnklogout" runat="server" Text="Logout"></asp:LinkButton>
-        </div>--%>
-            <%--<div class="panel panel-default">
-                            <div class="panel-body">
-                                 <div id="wp" style="display : none; min-height : 200px; text-align : center; font-size : 22px; font-weight : bold;"> Please wait</div>
-                                <div id="searchp" style="display : none;">--%>
-            <div id="wp" style="display: none; min-height: 200px; text-align: center; font-size: 22px; font-weight: bold;">Please wait</div>
-            <div id="searchp" style="display: none;">
 
-                <div style="padding-top: 10px; padding-bottom: 40px;">
-                    <asp:Label ID="lblmsg" runat="server" ForeColor="Red"></asp:Label>
-                </div>
-
-                <div id="adminsearch" style="visibility: visible">
-                    <table style="width: 100%">
-                        <tr>
-                            <td colspan="17" style="text-align: center" class="style5">
-
-                                <asp:UpdateProgress ID="UpdateProgress1" AssociatedUpdatePanelID="pnl_report" runat="server">
-                                    <ProgressTemplate>
-                                        <div style="margin: auto; font-family: Trebuchet MS; filter: alpha(opacity=100); opacity: 1; font-size: small; vertical-align: middle; top: auto; position: absolute; right: auto; color: #FFFFFF;">
-                                            <img alt="ajax-progress" src="../Image/ajax-progress.gif"></img>
-                                        </div>
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td colspan="2" style="text-align: left; width: 20%; font-weight: bold;">Stock Date</td>
-                            <td style="width: 20%; font-weight: bold;">Company</td>
-                            <td style="width: 20%; font-weight: bold;">Item Name</td>
-                            <td style="width: 20%; font-weight: bold;">Godown Name</td>
-                            <td style="width: 20%; font-weight: bold;">Stock Group</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 10%">
-                                <%--<input type="text" id="dtFromDate_StockDate" name="_dtFromDate_StockDate" /> --%>
-                                <asp:TextBox ID="dtFromDate_StockDate" runat="server"></asp:TextBox>
-                                <asp:CalendarExtender ID="txttodate_CalendarExtender" runat="server" Format="dd/MM/yyyy"
-                                    TargetControlID="dtFromDate_StockDate" />
-
-
-                            </td>
-                            <td style="width: 10%">
-                                <%--  From &nbsp;--%>
-
-                                <%--  To &nbsp;
-                         <input type="text" id="dtToDate_StockDate"  name="_dtToDate_StockDate" />--%>
-                            </td>
-                            <td style="width: 20%">
-                                <asp:ListBox ID="lbCompany" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
-                            </td>
-                            <td style="width: 20%">
-                                <asp:ListBox ID="lbItemName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
-                            </td>
-                            <td style="width: 20%">
-                                <asp:ListBox ID="lbGodownName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
-                            </td>
-                            <td style="width: 20%">
-                                <asp:ListBox ID="lbStockGroup" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="padding-top: 40px;" colspan="2"></td>
-                            <td style="text-align: center">
-                                <asp:Button ID="btnSearch" runat="server" Text="Search" Width="90%" Height="35px" BackColor="#0066CC" Font-Bold="True" ForeColor="#CCFFFF" OnClick="btnSearch_Click" />
-                            </td>
-                            <td style="text-align: center">
-                                <asp:Button ID="btnReset" runat="server" Text="Reset" Width="90%" Height="35px" BackColor="#0066CC" Font-Bold="True" ForeColor="#CCFFFF" OnClick="btnReset_Click" />
-                            </td>
-                            <td>
-                                <asp:Button ID="btnExporttoCSV" runat="server" Text="Export to CSV" Width="90%" Height="35px" BackColor="#0066CC" Font-Bold="True" ForeColor="#CCFFFF" OnClick="btnExporttoCSV_Click" />
-                            </td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </div>
-
-
-
+            <div class="row">
+                <div class="form-group col-md-12">
                 <rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Width="100%" Height="723px" AsyncRendering="False" InteractivityPostBackMode="AlwaysSynchronous" PageCountMode="Actual" ShowBackButton="False" ShowDocumentMapButton="False" ShowExportControls="False" ShowFindControls="False" ShowParameterPrompts="False" ShowPrintButton="False" ShowRefreshButton="False" ShowZoomControl="False">
                     <LocalReport ReportPath="rdlcs\FinalProduct.rdlc">
                     </LocalReport>
                 </rsweb:ReportViewer>
+                </div>
+            </div>
 
             </div>
 
-
-
-
-            <%--</div>
-     </div>--%>
-
-            <%--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
-
-            <%--<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>--%>
-            <%--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>--%>
-            <%--https://github.com/davidstutz/bootstrap-multiselect--%>
-            <%--<script src="//cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
-    type="text/javascript"></script>--%>
-            <%--<script src="../Content/libs/bootstrap-multiselect/bootstrap-multiselect.min.js"></script>--%>
-
             <script type="text/javascript">  
                 $(function () {
-                    $("#dtFromDate_StockDate").datepicker();
-                    $("#dtToDate_StockDate").datepicker();
+                    $("#dtFromDate").datepicker();
+                    $("#dtToDate").datepicker();
                 });
             </script>
 
             <script type="text/javascript">  
                 function pageLoad(sender, args) {
                     $(document).ready(function () {
+                        var StartDate = '<%=Session["StartDate"]%>';
+                        $("#dtFromDate").val(StartDate);
+
+                        var EndDate = '<%=Session["EndDate"]%>';
+                        $("#dtToDate").val(EndDate);
+
                         $('[id*=lbCompany]').multiselect({
                             includeSelectAllOption: true,
                             maxHeight: 400,
-                            enableFiltering: true,
+                            enableFiltering: false,
                             enableCaseInsensitiveFiltering: true
                         });
-                        $('[id*=lbItemName]').multiselect({
-                            includeSelectAllOption: true,
-                            maxHeight: 400,
-                            enableFiltering: true,
-                            enableCaseInsensitiveFiltering: true
-                        });
+
                         $('[id*=lbGodownName]').multiselect({
                             includeSelectAllOption: true,
                             maxHeight: 400,
                             enableFiltering: true,
                             enableCaseInsensitiveFiltering: true
                         });
+
+
                         $('[id*=lbStockGroup]').multiselect({
+                            includeSelectAllOption: true,
+                            maxHeight: 400,
+                            enableFiltering: true,
+                            enableCaseInsensitiveFiltering: true,
+
+                            enableClickableOptGroups: true,
+                            onChange: function (option, checked, select) {
+                                //alert('onChange triggered ...');
+                            }
+                        });
+                        $('#lbStockGroup-select-onChange-button').on('click', function () {
+                            $('#lbStockGroup-select-onChange').multiselect('select', '1', true);
+                        });
+
+                        $('[id*=lbStockItemName]').multiselect({
                             includeSelectAllOption: true,
                             maxHeight: 400,
                             enableFiltering: true,
                             enableCaseInsensitiveFiltering: true
                         });
-
+  
+                        setTimeout(function () {
+                            window.document.getElementById('wp').style.display = 'none';
+                            window.document.getElementById('searchp').style.display = '';
+                        }, 100);
                     });
+                }
+                function ShowProgress() {
                     setTimeout(function () {
-                        window.document.getElementById('wp').style.display = 'none';
-                        window.document.getElementById('searchp').style.display = '';
+                        var modal = $('<div />');
+                        modal.addClass("modal");
+                        $('body').append(modal);
+                        var loading = $(".loading");
+                        loading.show();
+                        var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+                        var left = Math.max($(window).width() / 2 - loading[0].offsetWidth / 2, 0);
+                        loading.css({ top: top, left: left });
                     }, 100);
                 }
+                $('form').live("submit", function () {
+                    //ShowProgress();
+                });
             </script>
 
         </ContentTemplate>
@@ -179,6 +175,8 @@
             <asp:PostBackTrigger ControlID="btnReset" />
             <asp:PostBackTrigger ControlID="btnExporttoCSV" />
         </Triggers>
+
     </asp:UpdatePanel>
 
 </asp:Content>
+

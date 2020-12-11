@@ -14,6 +14,12 @@ using static ReportModel;
 
 public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
 {
+    protected void Page_Init(object sender, EventArgs e)
+    {
+        var OnLostFocus = Page.ClientScript.GetPostBackEventReference
+                               (lbStockCategory, "OnBlur");
+        lbStockCategory.Attributes.Add("onblur", OnLostFocus);
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -32,7 +38,8 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         }
         else
         {
-            // Set From and To Date From Session Variable
+            var ControlObject = Request.Params[Page.postEventSourceID];
+            var ControlFeature = Request.Params[Page.postEventArgumentID];
         }
     }
 
@@ -132,7 +139,7 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
             }
             if (lbStockCategory.SelectedIndex != -1)
             {
-                repParamSearch.PartyName = strStockCategory.Remove(strStockCategory.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+                repParamSearch.StockCategory = strStockCategory.Remove(strStockCategory.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
             }
 
             //--- StockItemName::  Multi Select List Box Values  Item--
@@ -231,5 +238,27 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();
+    }
+
+    protected void lbStockCategory_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //--- StockCategory::  Multi Select List Box Values --
+        string strStockCategory = string.Empty;
+        foreach (ListItem item in lbStockCategory.Items)
+        {
+            if (item.Selected)
+            {
+                strStockCategory += "'" + item.Text + "'";
+                strStockCategory += ",";
+            }
+        }
+        if (lbStockCategory.SelectedIndex != -1)
+        {
+            strStockCategory = strStockCategory.Remove(strStockCategory.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+        }
+        var stockitem = new List<string>();
+        stockitem = (new Report_DL()).Common_BindStockItemByCategory(lbCompany.SelectedValue, strStockCategory);
+        lbStockItemName.DataSource = stockitem;// objData.lst_Item;
+        lbStockItemName.DataBind();
     }
 }
