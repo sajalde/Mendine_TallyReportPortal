@@ -61,13 +61,15 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Report_GodownStockSummary.rdlc");
 
         DataSet dt = (new Report_DL()).BuildReportData_GodownStockSummary(repParamSearch);
-
-        ReportViewer1.LocalReport.DataSources.Clear();
-        ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()
+        if (dt.Tables.Count > 1)
         {
-            Name = "dsGodownStockSummary",
-            Value = dt.Tables[0]
-        });
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()
+            {
+                Name = "dsGodownStockSummary",
+                Value = dt.Tables[0]
+            });
+        }
         ReportViewer1.LocalReport.Refresh();
     }
 

@@ -70,13 +70,15 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/FinalProduct.rdlc");
 
         DataSet dt = (new Report_DL()).BuildReportData_FinalProductStock(repParamSearch);
-
-        ReportViewer1.LocalReport.DataSources.Clear();
-        ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()
+        if (dt.Tables.Count > 1)
         {
-            Name = "dsFinalProductStock",
-            Value = dt.Tables[0]
-        });
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()
+            {
+                Name = "dsFinalProductStock",
+                Value = dt.Tables[0]
+            });
+        }
         ReportViewer1.LocalReport.Refresh();
     }
 

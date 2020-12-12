@@ -32,6 +32,11 @@ using System.Web;
         public string CostCenter { get; set; }
         public string StockCategory { get; set; }
         public string GodownName_Destination { get; set; }
+        public string StartDate_GRN { get; set; }
+        public string EndDate_GRN { get; set; }
+        public string StartDate_Invoice { get; set; }
+        public string EndDate_Invoice { get; set; }
+
     }
 
         #endregion

@@ -459,6 +459,62 @@ public class Report_DL
 
     #endregion
 
+    #region --- Final Product Stock --
+    public DataSet BuildReportData_LeadTimeReport(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("LeadTimeReport");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+
+        RDLCReportSQL = RDLCReportSQL.Replace("@PO_DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@PO_DateTo", "'" + repParamSearch.EndDate + "'");
+
+        RDLCReportSQL = RDLCReportSQL.Replace("@GRN_DateFrom", "'" + repParamSearch.StartDate_GRN + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@GRN_DateTo", "'" + repParamSearch.EndDate_GRN + "'");
+
+        RDLCReportSQL = RDLCReportSQL.Replace("@Invoice_DateFrom", "'" + repParamSearch.StartDate_Invoice + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@Invoice_DateTo", "'" + repParamSearch.EndDate_Invoice + "'");
+
+        strSQL = "";
+        if (repParamSearch.PartyName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.PartyName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@PartyName_List", strSQL);
+
+
+        strSQL = "";
+        if (repParamSearch.ItemName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.ItemName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockItemName_List", strSQL);
+
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsLeadTime = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsLeadTime, "rpt_dsLeadTime");
+        }
+        return dsLeadTime;
+    }
+
+    #endregion
+
     #region --- Pending Purchase Order Report --
     public DataSet BuildReportData_PendingPO(Report_Search repParamSearch)
     {
