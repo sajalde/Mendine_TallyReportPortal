@@ -243,4 +243,29 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         lbStockItemName.DataSource = StockItemName;// objData.lst_Item;
         lbStockItemName.DataBind();
     }
+
+    protected void lbGodownName_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //--- GodownName::  Multi Select List Box Values --
+        string strGodownName = string.Empty;
+        foreach (ListItem item in lbGodownName.Items)
+        {
+            if (item.Selected)
+            {
+                strGodownName += "'" + item.Text + "'";
+                strGodownName += ",";
+            }
+        }
+        if (lbGodownName.SelectedIndex != -1)
+        {
+            strGodownName = strGodownName.Remove(strGodownName.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+        }
+        var StockGroup = new List<string>();
+        StockGroup = (new Report_DL()).Common_BindStockGroupByGodown(lbCompany.SelectedValue, strGodownName);
+        lbStockGroup.DataSource = StockGroup;// objData.lst_Item;
+        lbStockGroup.DataBind();
+
+        lbStockItemName.Items.Clear();
+        lbStockItemName.DataBind();
+    }
 }

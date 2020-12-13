@@ -239,6 +239,52 @@ public class Report_DL
 
         return ddlData.lst_Item;
     }
+
+    public List<String> Common_BindStockGroupByGodown(string CompanyName, string Godowns)
+    {
+        Int32? CompanyID = 0;
+        Search_DropdownList ddlData = new Search_DropdownList();
+        string sql = string.Empty;
+        SqlCommand cmd = null;
+        SqlDataReader rdr = null;
+        Common.OpenConnection();
+        try
+        {
+            //---------- Get Company Id by Name
+            sql = "Select CompanyID from TD_Mst_Company where CompanyName='" + CompanyName + "'";
+            cmd = new SqlCommand(sql, Common.conn);
+            rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                CompanyID = Convert.ToInt32(Common.GetString(rdr["CompanyID"]));
+            }
+
+            rdr.Close();
+
+            //--- Stock group Drop Down ----
+            ddlData.lst_StockGroup = new List<string>();
+            ddlData.lst_StockGroup.Add("select");
+            sql = "Select Distinct Upper(StockGroupName) as [StockGroupName]  from TD_Mst_Godown_Stockgroup Where CompanyID=" + CompanyID + " And GodownName In (" + Godowns + ") order by StockGroupName";
+            cmd = new SqlCommand(sql, Common.conn);
+            rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                ddlData.lst_StockGroup.Add(Common.GetString(rdr["StockGroupName"]));
+            }
+            rdr.Close();
+        }
+
+        catch (Exception ex)
+        {
+        }
+        finally
+        {
+            Common.CloseConnection();
+        }
+
+        return ddlData.lst_StockGroup;
+    }
+
     #endregion
 
     #region -- Common SQL Fetch Function --

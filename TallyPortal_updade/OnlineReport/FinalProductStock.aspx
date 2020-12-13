@@ -47,7 +47,7 @@
                               <div class="form-group col-md-3">
                                 <div class="form-group">
                                     <label>Source Godown</label>
-                                    <asp:ListBox ID="lbGodownName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
+                                    <asp:ListBox ID="lbGodownName" runat="server" SelectionMode="Multiple" Width="75%"  AutoPostBack="True" OnSelectedIndexChanged="lbGodownName_SelectedIndexChanged"></asp:ListBox>
                                 </div>
                             </div>
 
