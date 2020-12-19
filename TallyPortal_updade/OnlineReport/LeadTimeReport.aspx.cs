@@ -75,7 +75,7 @@ public partial class OnlineReport_LeadTimeReport : System.Web.UI.Page
         ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Report_LeadTime.rdlc");
 
         DataSet dt = (new Report_DL()).BuildReportData_LeadTimeReport(repParamSearch);
-        if (dt.Tables.Count > 1)
+        if (dt.Tables.Count >= 1)
         {
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()

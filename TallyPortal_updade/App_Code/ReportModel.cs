@@ -17,7 +17,8 @@ using System.Web;
         public List<String> lst_StockGroup { get; set; }
         public List<String> lst_PONumber { get; set; }
         public List<String> lst_CostCenter { get; set; }
-
+        public List<String> lst_HQ { get; set; }
+        public List<String> lst_VoucherType { get; set; }
     }
     public class Report_Search
     {
@@ -36,7 +37,8 @@ using System.Web;
         public string EndDate_GRN { get; set; }
         public string StartDate_Invoice { get; set; }
         public string EndDate_Invoice { get; set; }
-
+        public string VoucherType { get; set; }
+        public string HQ { get; set; }
     }
 
         #endregion

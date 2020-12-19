@@ -51,6 +51,17 @@
                                         <asp:HyperLink ID="tallyGodownStockSummary" runat="server" NavigateUrl="~/OnlineReport/GodownStockSummary.aspx">Godown Stock Summary</asp:HyperLink>
                                     </li>
                                     
+                                     <li>
+                                        <asp:HyperLink ID="tallyPendingPurchaseBill" runat="server" NavigateUrl="~/OnlineReport/PendingPurchaseBill.aspx">Pending Purchase Bill</asp:HyperLink>
+                                    </li>
+
+                                    <li>
+                                        <asp:HyperLink ID="tallyPendingSalesBill" runat="server" NavigateUrl="~/OnlineReport/PendingSalesBill.aspx">Pending Sales Bill</asp:HyperLink>
+                                    </li>
+                                    
+                                    <li>
+                                        <asp:HyperLink ID="tallyStockDetails" runat="server" NavigateUrl="~/OnlineReport/StockDetails.aspx">Stock Details</asp:HyperLink>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

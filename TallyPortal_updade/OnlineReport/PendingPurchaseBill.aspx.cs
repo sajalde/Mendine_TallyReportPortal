@@ -12,7 +12,7 @@ using iTextSharp.text.xml;
 using Microsoft.Reporting.WebForms;
 using static ReportModel;
 
-public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
+public partial class OnlineReport_PendingPurchaseBill : System.Web.UI.Page
 {
     protected void Page_Init(object sender, EventArgs e)
     {
@@ -26,11 +26,13 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         {
             PopulateSearchDropdowns(null);
             DateTime d = DateTime.Now;
+
             d = d.AddMonths(-2);
 
             Session["StartDate"] = d.ToString("dd/MM/yyyy");
             Session["EndDate"] = DateTime.Now.ToString("dd/MM/yyyy");
             dtFromDate.Text = Session["StartDate"].ToString();
+            dtToDate.Text = Session["EndDate"].ToString();
             //generate report
             Report_Search repParamSearch = new Report_Search();
             ReportViewer1.Visible = false;
@@ -53,8 +55,8 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
 
-        lbGodownName.DataSource = objData.lst_Godown;
-        lbGodownName.DataBind();
+        lbVendorName.DataSource = objData.lst_Party;
+        lbVendorName.DataBind();
 
         lbStockGroup.DataSource = objData.lst_StockGroup;
         lbStockGroup.DataBind();
@@ -67,15 +69,15 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
     {
         ReportViewer1.Visible = true;
         ReportViewer1.ProcessingMode = ProcessingMode.Local;
-        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/FinalProduct.rdlc");
+        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Report_PendingPurchaseBill.rdlc");
 
-        DataSet dt = (new Report_DL()).BuildReportData_FinalProductStock(repParamSearch);
+        DataSet dt = (new Report_DL()).BuildReportData_PendingPurchaseBill(repParamSearch);
         if (dt.Tables.Count >= 1)
         {
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()
             {
-                Name = "dsFinalProductStock",
+                Name = "dsPendingPurchaseBill",
                 Value = dt.Tables[0]
             });
         }
@@ -102,7 +104,7 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
 
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
             DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
-            DateTime enddate = Convert.ToDateTime(dtFromDate.Text);
+            DateTime enddate = Convert.ToDateTime(dtToDate.Text);
 
             repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
             repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
@@ -124,22 +126,22 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
             {
                 repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
             }
-            //--- Source Godown::  Multi Select List Box Values  Item--
-            string strSourceGodown = string.Empty;
-            foreach (ListItem item in lbGodownName.Items)
+            //--- Vendor::  Multi Select List Box Values  Item--
+            string strVendorName = string.Empty;
+            foreach (ListItem item in lbVendorName.Items)
             {
                 if (item.Selected)
                 {
-                    strSourceGodown += "'" + item.Text + "'";
-                    strSourceGodown += ",";
+                    strVendorName += "'" + item.Text + "'";
+                    strVendorName += ",";
                 }
             }
-            if (lbGodownName.SelectedIndex != -1)
+            if (lbVendorName.SelectedIndex != -1)
             {
-                repParamSearch.GodownName_Source = strSourceGodown.Remove(strSourceGodown.Length - 1, 1);// Remove last;
+                repParamSearch.PartyName = strVendorName.Remove(strVendorName.Length - 1, 1);// Remove last;
             }
 
-            //--- StockGroup::  Multi Select List Box Values  Party Name--
+            //--- StockGroup::  Multi Select List Box Values  --
             string strStockGroup = string.Empty;
             foreach (ListItem item in lbStockGroup.Items)
             {
@@ -185,11 +187,12 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
 
         //GenerateRDLCReport(repParamSearch);
         string FromDate = Request.Form["_dtFromDate"];
+        string ToDate = Request.Form["_dtToDate"];
 
         lbCompany.SelectedIndex = -1;
         lbStockGroup.SelectedIndex = -1;
         lbStockItemName.SelectedIndex = -1;
-        lbGodownName.SelectedIndex = -1;
+        lbVendorName.SelectedIndex = -1;
         //--- Set Current Date in Date Fileds Input Box
         ReportViewer1.LocalReport.DataSources.Clear();
     }
@@ -241,31 +244,6 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         var StockItemName = new List<string>();
         StockItemName = (new Report_DL()).Common_BindStockItemByStockGroup(lbCompany.SelectedValue, strStockGroup);
         lbStockItemName.DataSource = StockItemName;// objData.lst_Item;
-        lbStockItemName.DataBind();
-    }
-
-    protected void lbGodownName_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        //--- GodownName::  Multi Select List Box Values --
-        string strGodownName = string.Empty;
-        foreach (ListItem item in lbGodownName.Items)
-        {
-            if (item.Selected)
-            {
-                strGodownName += "'" + item.Text + "'";
-                strGodownName += ",";
-            }
-        }
-        if (lbGodownName.SelectedIndex != -1)
-        {
-            strGodownName = strGodownName.Remove(strGodownName.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
-        }
-        var StockGroup = new List<string>();
-        StockGroup = (new Report_DL()).Common_BindStockGroupByGodown(lbCompany.SelectedValue, strGodownName);
-        lbStockGroup.DataSource = StockGroup;// objData.lst_Item;
-        lbStockGroup.DataBind();
-
-        lbStockItemName.Items.Clear();
         lbStockItemName.DataBind();
     }
 }

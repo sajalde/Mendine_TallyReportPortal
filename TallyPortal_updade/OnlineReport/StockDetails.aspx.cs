@@ -12,13 +12,13 @@ using iTextSharp.text.xml;
 using Microsoft.Reporting.WebForms;
 using static ReportModel;
 
-public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
+public partial class OnlineReport_StockDetails : System.Web.UI.Page
 {
     protected void Page_Init(object sender, EventArgs e)
     {
         var OnLostFocus = Page.ClientScript.GetPostBackEventReference
-                               (lbStockGroup, "OnBlur");
-        lbStockGroup.Attributes.Add("onblur", OnLostFocus);
+                               (lbStockCategory, "OnBlur");
+        lbStockCategory.Attributes.Add("onblur", OnLostFocus);
     }
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -31,6 +31,7 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
             Session["StartDate"] = d.ToString("dd/MM/yyyy");
             Session["EndDate"] = DateTime.Now.ToString("dd/MM/yyyy");
             dtFromDate.Text = Session["StartDate"].ToString();
+            dtToDate.Text = Session["EndDate"].ToString();
             //generate report
             Report_Search repParamSearch = new Report_Search();
             ReportViewer1.Visible = false;
@@ -53,29 +54,29 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
 
-        lbGodownName.DataSource = objData.lst_Godown;
-        lbGodownName.DataBind();
-
-        lbStockGroup.DataSource = objData.lst_StockGroup;
-        lbStockGroup.DataBind();
+        lbStockCategory.DataSource = objData.lst_StockCategory;
+        lbStockCategory.DataBind();
 
         lbStockItemName.DataSource = objData.lst_Item;
         lbStockItemName.DataBind();
+
+        lbVoucherType.DataSource = objData.lst_VoucherType;
+        lbVoucherType.DataBind();
     }
 
     private void GenerateRDLCReport(Report_Search repParamSearch)
     {
         ReportViewer1.Visible = true;
         ReportViewer1.ProcessingMode = ProcessingMode.Local;
-        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/FinalProduct.rdlc");
+        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Report_StockDetails.rdlc");
 
-        DataSet dt = (new Report_DL()).BuildReportData_FinalProductStock(repParamSearch);
+        DataSet dt = (new Report_DL()).BuildReportData_StockDetails(repParamSearch);
         if (dt.Tables.Count >= 1)
         {
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()
             {
-                Name = "dsFinalProductStock",
+                Name = "dsStockDetails",
                 Value = dt.Tables[0]
             });
         }
@@ -102,7 +103,7 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
 
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
             DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
-            DateTime enddate = Convert.ToDateTime(dtFromDate.Text);
+            DateTime enddate = Convert.ToDateTime(dtToDate.Text);
 
             repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
             repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
@@ -124,34 +125,19 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
             {
                 repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
             }
-            //--- Source Godown::  Multi Select List Box Values  Item--
-            string strSourceGodown = string.Empty;
-            foreach (ListItem item in lbGodownName.Items)
+            //--- StockCategory::  Multi Select List Box Values  Party Name--
+            string strStockCategory = string.Empty;
+            foreach (ListItem item in lbStockCategory.Items)
             {
                 if (item.Selected)
                 {
-                    strSourceGodown += "'" + item.Text + "'";
-                    strSourceGodown += ",";
+                    strStockCategory += "'" + item.Text + "'";
+                    strStockCategory += ",";
                 }
             }
-            if (lbGodownName.SelectedIndex != -1)
+            if (lbStockCategory.SelectedIndex != -1)
             {
-                repParamSearch.GodownName_Source = strSourceGodown.Remove(strSourceGodown.Length - 1, 1);// Remove last;
-            }
-
-            //--- StockGroup::  Multi Select List Box Values  Party Name--
-            string strStockGroup = string.Empty;
-            foreach (ListItem item in lbStockGroup.Items)
-            {
-                if (item.Selected)
-                {
-                    strStockGroup += "'" + item.Text + "'";
-                    strStockGroup += ",";
-                }
-            }
-            if (lbStockGroup.SelectedIndex != -1)
-            {
-                repParamSearch.StockGroup = strStockGroup.Remove(strStockGroup.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+                repParamSearch.StockCategory = strStockCategory.Remove(strStockCategory.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
             }
 
             //--- StockItemName::  Multi Select List Box Values  Item--
@@ -167,6 +153,21 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
             if (lbStockItemName.SelectedIndex != -1)
             {
                 repParamSearch.ItemName = strStockItemName.Remove(strStockItemName.Length - 1, 1);// Remove last;
+            }
+
+            //--- VoucherType::  Multi Select List Box Values  Item--
+            string strVoucherType = string.Empty;
+            foreach (ListItem item in lbVoucherType.Items)
+            {
+                if (item.Selected)
+                {
+                    strVoucherType += "'" + item.Text + "'";
+                    strVoucherType += ",";
+                }
+            }
+            if (lbVoucherType.SelectedIndex != -1)
+            {
+                repParamSearch.GodownName_Source = strVoucherType.Remove(strVoucherType.Length - 1, 1);// Remove last;
             }
 
 
@@ -187,9 +188,9 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         string FromDate = Request.Form["_dtFromDate"];
 
         lbCompany.SelectedIndex = -1;
-        lbStockGroup.SelectedIndex = -1;
+        lbStockCategory.SelectedIndex = -1;
         lbStockItemName.SelectedIndex = -1;
-        lbGodownName.SelectedIndex = -1;
+        lbVoucherType.SelectedIndex = -1;
         //--- Set Current Date in Date Fileds Input Box
         ReportViewer1.LocalReport.DataSources.Clear();
     }
@@ -216,56 +217,31 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=PendingPurchaseOrderReport." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=VoucherType." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();
     }
 
-    protected void lbStockGroup_SelectedIndexChanged(object sender, EventArgs e)
+    protected void lbStockCategory_SelectedIndexChanged(object sender, EventArgs e)
     {
         //--- StockCategory::  Multi Select List Box Values --
-        string strStockGroup = string.Empty;
-        foreach (ListItem item in lbStockGroup.Items)
+        string strStockCategory = string.Empty;
+        foreach (ListItem item in lbStockCategory.Items)
         {
             if (item.Selected)
             {
-                strStockGroup += "'" + item.Text + "'";
-                strStockGroup += ",";
+                strStockCategory += "'" + item.Text + "'";
+                strStockCategory += ",";
             }
         }
-        if (lbStockGroup.SelectedIndex != -1)
+        if (lbStockCategory.SelectedIndex != -1)
         {
-            strStockGroup = strStockGroup.Remove(strStockGroup.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+            strStockCategory = strStockCategory.Remove(strStockCategory.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
         }
-        var StockItemName = new List<string>();
-        StockItemName = (new Report_DL()).Common_BindStockItemByStockGroup(lbCompany.SelectedValue, strStockGroup);
-        lbStockItemName.DataSource = StockItemName;// objData.lst_Item;
-        lbStockItemName.DataBind();
-    }
-
-    protected void lbGodownName_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        //--- GodownName::  Multi Select List Box Values --
-        string strGodownName = string.Empty;
-        foreach (ListItem item in lbGodownName.Items)
-        {
-            if (item.Selected)
-            {
-                strGodownName += "'" + item.Text + "'";
-                strGodownName += ",";
-            }
-        }
-        if (lbGodownName.SelectedIndex != -1)
-        {
-            strGodownName = strGodownName.Remove(strGodownName.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
-        }
-        var StockGroup = new List<string>();
-        StockGroup = (new Report_DL()).Common_BindStockGroupByGodown(lbCompany.SelectedValue, strGodownName);
-        lbStockGroup.DataSource = StockGroup;// objData.lst_Item;
-        lbStockGroup.DataBind();
-
-        lbStockItemName.Items.Clear();
+        var stockitem = new List<string>();
+        stockitem = (new Report_DL()).Common_BindStockItemByCategory(lbCompany.SelectedValue, strStockCategory);
+        lbStockItemName.DataSource = stockitem;// objData.lst_Item;
         lbStockItemName.DataBind();
     }
 }

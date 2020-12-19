@@ -1,5 +1,6 @@
 --------- Stock Details----
---DECLARE @CompanyNames as Varchar(2000)='',   @DateFrom datetime= Null,  @DateTo datetime=Null,  @StockCategoryName_List as Varchar(500)='', @StockItemName_List as Varchar(500)=''
+--DECLARE @CompanyNames as Varchar(2000)='',   @DateFrom datetime= Null,  @DateTo datetime=Null,  @StockCategoryName_List as Varchar(500)='', @StockItemName_List as Varchar(500)='',
+--		@VoucherType_List as Varchar(500)=''
 
 --Set @CompanyNames='Mendine Pharmaceuticals Pvt Ltd. (FY 2019-20)Server'
 --SET @DateFrom ='01/01/2020'
@@ -7,12 +8,13 @@
 
 --SET @StockCategoryName_List = ''
 --SET @StockItemName_List = ''
-
+--SET @VoucherType_List = ''
 
 IF OBJECT_ID('tempdb..#tmpCompanyName') IS NOT NULL DROP TABLE #tmpCompanyName
 IF OBJECT_ID('tempdb..#tmpCompanyID') IS NOT NULL DROP TABLE #tmpCompanyID
 IF OBJECT_ID('tempdb..#tmpStockCategoryName') IS NOT NULL DROP TABLE #tmpStockCategoryName
 IF OBJECT_ID('tempdb..#tmpStockItemName') IS NOT NULL DROP TABLE #tmpStockItemName
+IF OBJECT_ID('tempdb..#tmpVoucherType') IS NOT NULL DROP TABLE #tmpVoucherType
 
 IF OBJECT_ID('tempdb..#StockDetails') IS NOT NULL DROP TABLE #StockDetails
 
@@ -20,7 +22,7 @@ SELECT NAME AS 'CompanyName' INTO #tmpCompanyName  from dbo.GetTableFromString(i
 Select c.CompanyID Into #tmpCompanyID  From #tmpCompanyName as t Inner Join TD_Mst_Company as c ON c.CompanyName=t.CompanyName
 SELECT NAME AS 'StockCategoryName' INTO #tmpStockCategoryName from dbo.GetTableFromString(isnull(@StockCategoryName_List,''))
 SELECT NAME AS 'StockItemName' INTO #tmpStockItemName from dbo.GetTableFromString(isnull(@StockItemName_List,''))
-
+SELECT NAME AS 'VoucherType' INTO #tmpVoucherType from dbo.GetTableFromString(isnull(@VoucherType_List,''))
 
 BEGIN
 CREATE TABLE #StockDetails(
