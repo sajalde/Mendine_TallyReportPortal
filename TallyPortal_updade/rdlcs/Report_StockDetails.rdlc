@@ -646,6 +646,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>dd-MMM-yy</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
