@@ -375,7 +375,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Quantity.Value, "dsNegativeStockReport")</Value>
+                              <Value />
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -449,7 +449,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>Amount</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -475,6 +475,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -669,7 +670,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Amount.ValueSum(Fields!Amount.Value, "dsNegativeStockReport")</Value>
+                              <Value>=Fields!Amount.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>

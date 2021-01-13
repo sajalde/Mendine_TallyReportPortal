@@ -1003,4 +1003,64 @@ public class Report_DL
 
     #endregion
 
+
+    #region --- Debit Credit Note Register --
+    public DataSet BuildReportData_DebitCreditNoteRegister(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("DebitCreditNoteRegister");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        strSQL = "";
+        if (repParamSearch.PartyName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.PartyName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@PartyName_List", strSQL);
+
+        strSQL = "";
+        if (repParamSearch.VoucherType is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.VoucherType.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@VoucherType_List", strSQL);
+
+
+        strSQL = "";
+        if (repParamSearch.ItemName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.ItemName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockItemName_List", strSQL);
+
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsRep = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsRep, "Report_DebitCreditNoteRegister");
+        }
+        return dsRep;
+    }
+
+    #endregion
 }
