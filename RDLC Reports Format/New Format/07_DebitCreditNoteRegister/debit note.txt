@@ -1,0 +1,7 @@
+SELECT       TD_Txn_VchHdr.CompanyID AS companyname,TD_Txn_VchHdr.VoucherTypeName, TD_Txn_VchHdr.Date, TD_Txn_VchHdr.PartyName,  TD_Txn_VchHdr.Reference, TD_Txn_VchHdr.CostCentreName, TD_Txn_InvLine.StockItemName, 
+                         TD_Txn_InvLine.Rate, TD_Txn_InvLine.RateUOM, TD_Txn_InvLine.Amount, TD_Txn_InvLine.ActualQuantity, 
+                          TD_Txn_VchHdr.Narration 
+FROM            TD_Txn_VchHdr INNER JOIN
+                         TD_Txn_InvLine ON TD_Txn_VchHdr.CompanyID = TD_Txn_InvLine.CompanyId AND TD_Txn_VchHdr.VoucherID = TD_Txn_InvLine.VoucherID FULL OUTER JOIN
+                         TD_Txn_AccLine ON TD_Txn_InvLine.AccLineNo = TD_Txn_AccLine.AccLineNo AND TD_Txn_VchHdr.CompanyID = TD_Txn_AccLine.CompanyID AND TD_Txn_InvLine.VoucherID = TD_Txn_AccLine.VoucherID
+						 where VoucherTypeName like '%Debit Note%' or VoucherTypeName like '%credit%'

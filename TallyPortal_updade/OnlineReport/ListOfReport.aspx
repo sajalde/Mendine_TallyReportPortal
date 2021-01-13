@@ -62,6 +62,18 @@
                                     <li>
                                         <asp:HyperLink ID="tallyStockDetails" runat="server" NavigateUrl="~/OnlineReport/StockDetails.aspx">Stock Details</asp:HyperLink>
                                     </li>
+
+                                    <li>
+                                        <asp:HyperLink ID="tallyDebitCreditNoteRegister" runat="server" NavigateUrl="~/OnlineReport/DebitCreditNoteRegister.aspx">Debit Credit Note Register</asp:HyperLink>
+                                    </li>
+
+                                    <li>
+                                        <asp:HyperLink ID="tallyJournalRegister" runat="server" NavigateUrl="~/OnlineReport/JournalRegister.aspx">Journal Register</asp:HyperLink>
+                                    </li>
+
+                                     <li>
+                                        <asp:HyperLink ID="tallyNegativeStockReport" runat="server" NavigateUrl="~/OnlineReport/NegativeStockReport.aspx">Negative Stock Report</asp:HyperLink>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
