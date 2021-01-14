@@ -17,66 +17,74 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container1">
         <div class="row">
-            <div class=" col-md-5">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header with-border" style="color: #fff">
+                        <h3 class="box-title">Tally Report</h3>
+                    </div>
+                    <%--<div class="box-body">
+                        <ul>
+                            <li>
+                                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/OnlineReport/FinalProductStock.aspx">Final Product Stock Statement</asp:HyperLink>
+                            </li>
+                        </ul>
+                    </div>--%>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class=" col-md-3 ">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <label for="info">Stock Module</label>
+                        </div>
+                        <ul>
+                            <li>
+                                <asp:HyperLink ID="tallFinalstock" runat="server" NavigateUrl="~/OnlineReport/FinalProductStock.aspx">Final Product Stock Statement</asp:HyperLink>
+                            </li>
+
+                            <li>
+                                <asp:HyperLink ID="tallyGodownStockTransfer" runat="server" NavigateUrl="~/OnlineReport/GodownStockTransfer.aspx">Godown Stock Transfer</asp:HyperLink>
+                            </li>
+
+                            <li>
+                                <asp:HyperLink ID="tallyGodownStockSummary" runat="server" NavigateUrl="~/OnlineReport/GodownStockSummary.aspx">Godown Stock Summary</asp:HyperLink>
+                            </li>
+
+                            <li>
+                                <asp:HyperLink ID="tallyStockDetails" runat="server" NavigateUrl="~/OnlineReport/StockDetails.aspx">Stock Details</asp:HyperLink>
+                            </li>
+
+                            <li>
+                                <asp:HyperLink ID="Tallylead" runat="server" NavigateUrl="~/OnlineReport/LeadTimeReport.aspx">Lead Time Report</asp:HyperLink>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-md-3">
                 <div class="panel panel-default">
                     <div class=" panel-body">
                         <div class="col-md-12">
-                            <label for="info">Tally Reports Module</label>
+                            <label for="info">Purchase Module</label>
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
                                 <ul>
                                     <li>
-                                        <asp:HyperLink ID="lblAccounts" NavigateUrl="~/OnlineReport/ListOfReport.aspx?id=Accounts" runat="server">Accounts Module</asp:HyperLink>
-                                    </li>
-                                </ul>
-
-                                <ul>
-                                    <li>
-                                        <asp:HyperLink ID="tallFinalstock" runat="server" NavigateUrl="~/OnlineReport/FinalProductStock.aspx">Final Product Stock Statement</asp:HyperLink>
-                                    </li>
-
-                                    <li>
-                                        <asp:HyperLink ID="Tallylead" runat="server" NavigateUrl="~/OnlineReport/LeadTimeReport.aspx">Lead Time Report</asp:HyperLink>
-                                    </li>
-
-                                    <li>
                                         <asp:HyperLink ID="tallyPendingpo" runat="server" NavigateUrl="~/OnlineReport/PendingPurchaseOrder.aspx">Pending PO</asp:HyperLink>
                                     </li>
-
-                                    <li>
-                                        <asp:HyperLink ID="tallyVendorOutstanding" runat="server" NavigateUrl="~/OnlineReport/VendorOutstanding.aspx">Vendor Outstanding</asp:HyperLink>
-                                    </li>
-
-                                    <li>
-                                        <asp:HyperLink ID="tallyGodownStockTransfer" runat="server" NavigateUrl="~/OnlineReport/GodownStockTransfer.aspx">Godown Stock Transfer</asp:HyperLink>
-                                    </li>
-
-                                    <li>
-                                        <asp:HyperLink ID="tallyGodownStockSummary" runat="server" NavigateUrl="~/OnlineReport/GodownStockSummary.aspx">Godown Stock Summary</asp:HyperLink>
-                                    </li>
-
                                     <li>
                                         <asp:HyperLink ID="tallyPendingPurchaseBill" runat="server" NavigateUrl="~/OnlineReport/PendingPurchaseBill.aspx">Pending Purchase Bill</asp:HyperLink>
                                     </li>
-
                                     <li>
-                                        <asp:HyperLink ID="tallyPendingSalesBill" runat="server" NavigateUrl="~/OnlineReport/PendingSalesBill.aspx">Pending Sales Bill</asp:HyperLink>
+                                        <asp:HyperLink ID="tallyVendorOutstanding" runat="server" NavigateUrl="~/OnlineReport/VendorOutstanding.aspx">Vendor Outstanding</asp:HyperLink>
                                     </li>
-
-                                    <li>
-                                        <asp:HyperLink ID="tallyStockDetails" runat="server" NavigateUrl="~/OnlineReport/StockDetails.aspx">Stock Details</asp:HyperLink>
-                                    </li>
-
-                                    <li>
-                                        <asp:HyperLink ID="tallyDebitCreditNoteRegister" runat="server" NavigateUrl="~/OnlineReport/DebitCreditNoteRegister.aspx">Debit Credit Note Register</asp:HyperLink>
-                                    </li>
-
-                                    <li>
-                                        <asp:HyperLink ID="tallyJournalRegister" runat="server" NavigateUrl="~/OnlineReport/JournalRegister.aspx">Journal Register</asp:HyperLink>
-                                    </li>
-
                                     <li>
                                         <asp:HyperLink ID="tallyNegativeStockReport" runat="server" NavigateUrl="~/OnlineReport/NegativeStockReport.aspx">Negative Stock Report</asp:HyperLink>
                                     </li>
@@ -87,20 +95,38 @@
                 </div>
             </div>
 
-            <div class=" col-md-6">
+            <div class=" col-md-3">
                 <div class="panel panel-default">
                     <div class=" panel-body">
                         <div class="col-md-12">
-                            <label for="info">Tally Reports</label>
+                            <label for="info">Sales Module</label>
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul>
                                         <li>
-                                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/OnlineReport/FinalProductStock.aspx">Final Product Stock Statement</asp:HyperLink>
+                                            <asp:HyperLink ID="tallyPendingSalesBill" runat="server" NavigateUrl="~/OnlineReport/PendingSalesBill.aspx">Pending Sales Bill</asp:HyperLink>
                                         </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class=" col-md-3">
+                <div class="panel panel-default">
+                    <div class=" panel-body">
+                        <div class="col-md-12">
+                            <label for="info">Accounts Module</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul>
                                         <li>
-                                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/OnlineReport/LeadTimeReport.aspx">Lead Time Report</asp:HyperLink>
+                                            <asp:HyperLink ID="tallyDebitCreditNoteRegister" runat="server" NavigateUrl="~/OnlineReport/DebitCreditNoteRegister.aspx">Debit Credit Note Register</asp:HyperLink>
+                                        </li>
+                                        <li>
+                                            <asp:HyperLink ID="tallyJournalRegister" runat="server" NavigateUrl="~/OnlineReport/JournalRegister.aspx">Journal Register</asp:HyperLink>
                                         </li>
 
                                     </ul>
@@ -111,4 +137,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </asp:Content>
