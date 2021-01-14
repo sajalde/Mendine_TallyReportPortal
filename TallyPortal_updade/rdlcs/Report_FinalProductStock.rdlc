@@ -1222,21 +1222,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>FINAL PRODUCT STOCK</Value>
-                  <Style>
-                    <FontFamily>Tahoma</FontFamily>
-                    <FontWeight>Bold</FontWeight>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value />
+                  <Value>FINIAL STOCK REPORT</Value>
                   <Style>
                     <FontFamily>Tahoma</FontFamily>
                     <FontWeight>Bold</FontWeight>

@@ -159,6 +159,18 @@ public class Report_DL
                 }
                 rdr.Close();
 
+
+                //--- Ledger Name ----
+                ddlData.lst_LedgerName = new List<string>();
+                ddlData.lst_LedgerName.Add("select");
+                sql = "select Upper(LedgerName) as [LedgerName] from TD_Mst_Ledger where CompanyID=" + CompanyID + " And ParentLedgerGroup='Sundry Creditors' Order by LedgerName";
+                cmd = new SqlCommand(sql, Common.conn);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    ddlData.lst_LedgerName.Add(Common.GetString(rdr["LedgerName"]));
+                }
+                rdr.Close();
             }
 
 
@@ -1058,6 +1070,103 @@ public class Report_DL
         {
             sda.SelectCommand = cmd;
             sda.Fill(dsRep, "Report_DebitCreditNoteRegister");
+        }
+        return dsRep;
+    }
+
+    #endregion
+
+    #region --- Journal Voucher Register --
+    public DataSet BuildReportData_JournalVoucherRegister(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("JournalRegister");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        strSQL = "";
+        if (repParamSearch.PartyName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.PartyName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@PartyName_List", strSQL);
+
+        strSQL = "";
+        if (repParamSearch.CostCenter is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.CostCenter.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@CostCenter_List", strSQL);
+
+
+        strSQL = "";
+        if (repParamSearch.LedgerName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.LedgerName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@LedgerName_List", strSQL);
+
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsRep = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsRep, "Report_JournalRegister");
+        }
+        return dsRep;
+    }
+
+    #endregion
+
+    #region --- Journal Voucher Register --
+    public DataSet BuildReportData_NegativeStockReport(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("NegativeStockReport");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        strSQL = "";
+        if (repParamSearch.ItemName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.ItemName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockItemName_List", strSQL);
+
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsRep = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsRep, "Report_NegativeStockReport");
         }
         return dsRep;
     }

@@ -12,7 +12,7 @@ using iTextSharp.text.xml;
 using Microsoft.Reporting.WebForms;
 using static ReportModel;
 
-public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
+public partial class OnlineReport_JournalRegister : System.Web.UI.Page
 {
     protected void Page_Init(object sender, EventArgs e)
     {
@@ -55,26 +55,26 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
         lbVendorName.DataSource = objData.lst_Party;
         lbVendorName.DataBind();
 
-        lbVoucherType.DataSource = objData.lst_VoucherType;
-        lbVoucherType.DataBind();
+        lbLedgerName.DataSource = objData.lst_LedgerName;
+        lbLedgerName.DataBind();
 
-        lbStockItemName.DataSource = objData.lst_Item;
-        lbStockItemName.DataBind();
+        lbCostCenter.DataSource = objData.lst_CostCenter;
+        lbCostCenter.DataBind();
     }
 
     private void GenerateRDLCReport(Report_Search repParamSearch)
     {
         ReportViewer1.Visible = true;
         ReportViewer1.ProcessingMode = ProcessingMode.Local;
-        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Accounts/Report_DebitCreditNoteRegister.rdlc");
+        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Accounts/Report_JournalRegister.rdlc");
 
-        DataSet dt = (new Report_DL()).BuildReportData_DebitCreditNoteRegister(repParamSearch);
+        DataSet dt = (new Report_DL()).BuildReportData_JournalVoucherRegister(repParamSearch);
         if (dt.Tables.Count >= 1)
         {
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()
             {
-                Name = "dsDebitCreditNoteRegister",
+                Name = "dsJournalRegister",
                 Value = dt.Tables[0]
             });
         }
@@ -138,34 +138,34 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
                 repParamSearch.PartyName = strVendorName.Remove(strVendorName.Length - 1, 1);// Remove last;
             }
 
-            //--- StockGroup::  Multi Select List Box Values  --
-            string strVoucherType = string.Empty;
-            foreach (ListItem item in lbVoucherType.Items)
+            //--- Cost Center::  Multi Select List Box Values  --
+            string strCostCenter = string.Empty;
+            foreach (ListItem item in lbCostCenter.Items)
             {
                 if (item.Selected)
                 {
-                    strVoucherType += "'" + item.Text + "'";
-                    strVoucherType += ",";
+                    strCostCenter += "'" + item.Text + "'";
+                    strCostCenter += ",";
                 }
             }
-            if (lbVoucherType.SelectedIndex != -1)
+            if (lbCostCenter.SelectedIndex != -1)
             {
-                repParamSearch.StockGroup = strVoucherType.Remove(strVoucherType.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+                repParamSearch.StockGroup = strCostCenter.Remove(strCostCenter.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
             }
 
-            //--- StockItemName::  Multi Select List Box Values  Item--
-            string strStockItemName = string.Empty;
-            foreach (ListItem item in lbStockItemName.Items)
+            //--- Ledger Name::  Multi Select List Box Values  Item--
+            string strLedgerName = string.Empty;
+            foreach (ListItem item in lbLedgerName.Items)
             {
                 if (item.Selected)
                 {
-                    strStockItemName += "'" + item.Text + "'";
-                    strStockItemName += ",";
+                    strLedgerName += "'" + item.Text + "'";
+                    strLedgerName += ",";
                 }
             }
-            if (lbStockItemName.SelectedIndex != -1)
+            if (lbLedgerName.SelectedIndex != -1)
             {
-                repParamSearch.ItemName = strStockItemName.Remove(strStockItemName.Length - 1, 1);// Remove last;
+                repParamSearch.ItemName = strLedgerName.Remove(strLedgerName.Length - 1, 1);// Remove last;
             }
 
 
@@ -187,8 +187,8 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
         string ToDate = Request.Form["_dtToDate"];
 
         lbCompany.SelectedIndex = -1;
-        lbVoucherType.SelectedIndex = -1;
-        lbStockItemName.SelectedIndex = -1;
+        lbCostCenter.SelectedIndex = -1;
+        lbLedgerName.SelectedIndex = -1;
         lbVendorName.SelectedIndex = -1;
         //--- Set Current Date in Date Fileds Input Box
         ReportViewer1.LocalReport.DataSources.Clear();
@@ -216,7 +216,7 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=Debit Credit Note Register." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=Journal Register." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

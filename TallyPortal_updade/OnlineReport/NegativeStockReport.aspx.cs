@@ -12,7 +12,7 @@ using iTextSharp.text.xml;
 using Microsoft.Reporting.WebForms;
 using static ReportModel;
 
-public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
+public partial class OnlineReport_NegativeStockReport : System.Web.UI.Page
 {
     protected void Page_Init(object sender, EventArgs e)
     {
@@ -52,12 +52,6 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
 
-        lbVendorName.DataSource = objData.lst_Party;
-        lbVendorName.DataBind();
-
-        lbVoucherType.DataSource = objData.lst_VoucherType;
-        lbVoucherType.DataBind();
-
         lbStockItemName.DataSource = objData.lst_Item;
         lbStockItemName.DataBind();
     }
@@ -66,15 +60,15 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
     {
         ReportViewer1.Visible = true;
         ReportViewer1.ProcessingMode = ProcessingMode.Local;
-        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Accounts/Report_DebitCreditNoteRegister.rdlc");
+        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Stock/Report_NegativeStockReport.rdlc");
 
-        DataSet dt = (new Report_DL()).BuildReportData_DebitCreditNoteRegister(repParamSearch);
+        DataSet dt = (new Report_DL()).BuildReportData_NegativeStockReport(repParamSearch);
         if (dt.Tables.Count >= 1)
         {
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()
             {
-                Name = "dsDebitCreditNoteRegister",
+                Name = "dsNegativeStockReport",
                 Value = dt.Tables[0]
             });
         }
@@ -122,36 +116,7 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
             if (lbCompany.SelectedIndex != -1)
             {
                 repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
-            }
-            //--- Vendor::  Multi Select List Box Values  Item--
-            string strVendorName = string.Empty;
-            foreach (ListItem item in lbVendorName.Items)
-            {
-                if (item.Selected)
-                {
-                    strVendorName += "'" + item.Text + "'";
-                    strVendorName += ",";
-                }
-            }
-            if (lbVendorName.SelectedIndex != -1)
-            {
-                repParamSearch.PartyName = strVendorName.Remove(strVendorName.Length - 1, 1);// Remove last;
-            }
-
-            //--- StockGroup::  Multi Select List Box Values  --
-            string strVoucherType = string.Empty;
-            foreach (ListItem item in lbVoucherType.Items)
-            {
-                if (item.Selected)
-                {
-                    strVoucherType += "'" + item.Text + "'";
-                    strVoucherType += ",";
-                }
-            }
-            if (lbVoucherType.SelectedIndex != -1)
-            {
-                repParamSearch.StockGroup = strVoucherType.Remove(strVoucherType.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
-            }
+            }           
 
             //--- StockItemName::  Multi Select List Box Values  Item--
             string strStockItemName = string.Empty;
@@ -187,9 +152,7 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
         string ToDate = Request.Form["_dtToDate"];
 
         lbCompany.SelectedIndex = -1;
-        lbVoucherType.SelectedIndex = -1;
         lbStockItemName.SelectedIndex = -1;
-        lbVendorName.SelectedIndex = -1;
         //--- Set Current Date in Date Fileds Input Box
         ReportViewer1.LocalReport.DataSources.Clear();
     }
@@ -216,7 +179,7 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=Debit Credit Note Register." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=Negative Stock Register" + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="DebitCreditNoteRegister.aspx.cs" Inherits="OnlineReport_DebitCreditNoteRegister" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="NegativeStockReport.aspx.cs" Inherits="OnlineReport_NegativeStockReport" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <h2 style="text-align: center">Debit Credit Note Register</h2>
+                            <h2 style="text-align: center">Negative Stock Report</h2>
                         </div>
                     </div>
                 </div>
@@ -55,21 +55,7 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <div class="form-group">
-                                    <label>Voucher Type</label>
-                                    <asp:ListBox ID="lbVoucherType" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>Party Name</label>
-                                    <asp:ListBox ID="lbVendorName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>Stock Item Name</label>
+                                    <label>Product Name</label>
                                     <asp:ListBox ID="lbStockItemName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
                                 </div>
                             </div>
@@ -92,7 +78,7 @@
                 <div class="row">
                     <div class="form-group col-md-12">
                         <rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Width="100%" Height="723px" AsyncRendering="False" InteractivityPostBackMode="AlwaysSynchronous" PageCountMode="Actual" ShowBackButton="False" ShowDocumentMapButton="False" ShowExportControls="False" ShowFindControls="False" ShowParameterPrompts="False" ShowPrintButton="False" ShowRefreshButton="False" ShowZoomControl="False">
-                            <LocalReport ReportPath="rdlcs\Accounts\Report_DebitCreditNoteRegister.rdlc">
+                            <LocalReport ReportPath="rdlcs\Stock\Report_NegativeStockReport.rdlc">
                             </LocalReport>
                         </rsweb:ReportViewer>
                     </div>
@@ -120,20 +106,6 @@
                             includeSelectAllOption: true,
                             maxHeight: 400,
                             enableFiltering: false,
-                            enableCaseInsensitiveFiltering: true
-                        });
-
-                        $('[id*=lbVoucherType]').multiselect({
-                            includeSelectAllOption: true,
-                            maxHeight: 400,
-                            enableFiltering: true,
-                            enableCaseInsensitiveFiltering: true
-                        });
-
-                        $('[id*=lbVendorName]').multiselect({
-                            includeSelectAllOption: true,
-                            maxHeight: 400,
-                            enableFiltering: true,
                             enableCaseInsensitiveFiltering: true
                         });
 

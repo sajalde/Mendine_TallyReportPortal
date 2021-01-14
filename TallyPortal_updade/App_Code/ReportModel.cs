@@ -19,6 +19,7 @@ using System.Web;
         public List<String> lst_CostCenter { get; set; }
         public List<String> lst_HQ { get; set; }
         public List<String> lst_VoucherType { get; set; }
+        public List<String> lst_LedgerName { get; set; }
     }
     public class Report_Search
     {
@@ -39,6 +40,7 @@ using System.Web;
         public string EndDate_Invoice { get; set; }
         public string VoucherType { get; set; }
         public string HQ { get; set; }
+        public string LedgerName { get; set; }
     }
 
         #endregion
