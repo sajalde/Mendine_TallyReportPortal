@@ -138,7 +138,7 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
                 repParamSearch.PartyName = strVendorName.Remove(strVendorName.Length - 1, 1);// Remove last;
             }
 
-            //--- StockGroup::  Multi Select List Box Values  --
+            //--- VoucherType::  Multi Select List Box Values  --
             string strVoucherType = string.Empty;
             foreach (ListItem item in lbVoucherType.Items)
             {
@@ -150,7 +150,7 @@ public partial class OnlineReport_DebitCreditNoteRegister : System.Web.UI.Page
             }
             if (lbVoucherType.SelectedIndex != -1)
             {
-                repParamSearch.StockGroup = strVoucherType.Remove(strVoucherType.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+                repParamSearch.VoucherType = strVoucherType.Remove(strVoucherType.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
             }
 
             //--- StockItemName::  Multi Select List Box Values  Item--

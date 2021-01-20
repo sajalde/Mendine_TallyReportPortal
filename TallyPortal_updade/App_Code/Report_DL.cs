@@ -150,7 +150,7 @@ public class Report_DL
                 //--- Voucher Type ----
                 ddlData.lst_VoucherType = new List<string>();
                 ddlData.lst_VoucherType.Add("select");
-                sql = "Select Distinct Upper(VoucherType) as [VoucherType] FROM  TD_Mst_VoucherType where CompanyID=" + CompanyID + " Order by VoucherType";
+                sql = "Select Distinct Upper(VoucherTypeName) as [VoucherType] FROM  TD_Mst_VoucherType where CompanyID=" + CompanyID + " Order by VoucherType";
                 cmd = new SqlCommand(sql, Common.conn);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
