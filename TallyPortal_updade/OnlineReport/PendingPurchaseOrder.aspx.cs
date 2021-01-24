@@ -63,7 +63,7 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
     {
         ReportViewer1.Visible = true;
         ReportViewer1.ProcessingMode = ProcessingMode.Local;
-        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Report_PendingPurchaseOrder.rdlc");
+        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Purchase/Report_PendingPurchaseOrder.rdlc");
 
         DataSet dt = (new Report_DL()).BuildReportData_PendingPO(repParamSearch);
         if (dt.Tables.Count >= 1)

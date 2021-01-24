@@ -498,6 +498,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>#,0.00;(#,0.00)</Format>
                                 <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
@@ -534,6 +535,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>#,0.00;(#,0.00)</Format>
                                 <Color>MidnightBlue</Color>
                               </Style>
                             </TextRun>
@@ -570,6 +572,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>#,0.00;(#,0.00)</Format>
                                 <Color>MidnightBlue</Color>
                               </Style>
                             </TextRun>
@@ -605,6 +608,7 @@
                               <Value>=Sum(Fields!QTY_Closing.Value, "dsStockDetails")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>#,0.00;(#,0.00)</Format>
                                 <Color>MidnightBlue</Color>
                               </Style>
                             </TextRun>
@@ -787,12 +791,13 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -808,6 +813,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>

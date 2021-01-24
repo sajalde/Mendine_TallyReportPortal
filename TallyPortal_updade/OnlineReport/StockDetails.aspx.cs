@@ -68,7 +68,7 @@ public partial class OnlineReport_StockDetails : System.Web.UI.Page
     {
         ReportViewer1.Visible = true;
         ReportViewer1.ProcessingMode = ProcessingMode.Local;
-        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Report_StockDetails.rdlc");
+        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Stock/Report_StockDetails.rdlc");
 
         DataSet dt = (new Report_DL()).BuildReportData_StockDetails(repParamSearch);
         if (dt.Tables.Count >= 1)

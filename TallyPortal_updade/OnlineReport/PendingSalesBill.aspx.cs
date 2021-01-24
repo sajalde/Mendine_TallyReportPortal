@@ -72,7 +72,7 @@ public partial class OnlineReport_PendingSalesBill : System.Web.UI.Page
     {
         ReportViewer1.Visible = true;
         ReportViewer1.ProcessingMode = ProcessingMode.Local;
-        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Report_PendingSalesBill.rdlc");
+        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Sales/Report_PendingSalesBill.rdlc");
 
         DataSet dt = (new Report_DL()).BuildReportData_PendingSalesBill(repParamSearch);
         if (dt.Tables.Count >= 1)
