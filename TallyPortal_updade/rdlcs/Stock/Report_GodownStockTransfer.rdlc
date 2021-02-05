@@ -24,7 +24,7 @@
               <Width>3.38333in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.60733in</Width>
+              <Width>3.23233in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -755,7 +755,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -791,7 +791,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -848,7 +848,7 @@
         <Top>0.02431in</Top>
         <Left>0.11125in</Left>
         <Height>0.89583in</Height>
-        <Width>15.67355in</Width>
+        <Width>15.29855in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -859,7 +859,7 @@
     <Height>0.94792in</Height>
     <Style />
   </Body>
-  <Width>15.7848in</Width>
+  <Width>15.4348in</Width>
   <Page>
     <PageHeader>
       <Height>1.00708in</Height>
@@ -871,7 +871,7 @@
           <Value>mendinelogo</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.11458in</Top>
-          <Left>13.25414in</Left>
+          <Left>12.87914in</Left>
           <Height>0.82306in</Height>
           <Width>2.48799in</Width>
           <Style>
@@ -1073,7 +1073,7 @@
           </Paragraphs>
           <rd:DefaultName>ExecutionTime</rd:DefaultName>
           <Top>0.06944in</Top>
-          <Left>13.25414in</Left>
+          <Left>12.87914in</Left>
           <Height>0.25in</Height>
           <Width>2.48799in</Width>
           <ZIndex>2</ZIndex>
