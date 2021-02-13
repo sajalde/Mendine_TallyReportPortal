@@ -11,6 +11,9 @@ using System.Web;
     {
         public List<String> lst_Company { get; set; }
         public List<String> lst_Godown { get; set; }
+        public List<String> lst_SourceGodown { get; set; }
+        public List<String> lst_DestinationGodown { get; set; }
+
         public List<String> lst_Party { get; set; }
         public List<String> lst_Item { get; set; }
         public List<String> lst_StockCategory { get; set; }

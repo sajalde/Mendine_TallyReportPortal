@@ -60,10 +60,10 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
         lbStockItemName.DataSource = objData.lst_Item;
         lbStockItemName.DataBind();
 
-        lbSourceGodown.DataSource = objData.lst_Godown;
+        lbSourceGodown.DataSource = objData.lst_SourceGodown;
         lbSourceGodown.DataBind();
 
-        lbDestinationGodown.DataSource = objData.lst_Godown;
+        lbDestinationGodown.DataSource = objData.lst_DestinationGodown;
         lbDestinationGodown.DataBind();
 
     }

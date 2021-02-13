@@ -63,6 +63,32 @@ public class Report_DL
                 }
                 rdr.Close();
 
+
+                //--- Source GodownName Drop Down ----
+                ddlData.lst_SourceGodown = new List<string>();
+                ddlData.lst_SourceGodown.Add("select");
+                sql = "Select Distinct Upper(GodownName) as [GodownName] from TD_Txn_BatchLine where CompanyID=" + CompanyID + " order by GodownName";
+                cmd = new SqlCommand(sql, Common.conn);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    ddlData.lst_SourceGodown.Add(Common.GetString(rdr["GodownName"]));
+                }
+                rdr.Close();
+
+
+                //--- Destination GodownName Drop Down ----
+                ddlData.lst_DestinationGodown = new List<string>();
+                ddlData.lst_DestinationGodown.Add("select");
+                sql = "Select Distinct Upper(DestinationGodownName) as [GodownName] from TD_Txn_BatchLine where CompanyID=" + CompanyID + " order by GodownName";
+                cmd = new SqlCommand(sql, Common.conn);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    ddlData.lst_DestinationGodown.Add(Common.GetString(rdr["GodownName"]));
+                }
+                rdr.Close();
+
                 //--- Party Name ----
                 ddlData.lst_Party = new List<string>();
                 ddlData.lst_Party.Add("select");
@@ -150,7 +176,7 @@ public class Report_DL
                 //--- Voucher Type ----
                 ddlData.lst_VoucherType = new List<string>();
                 ddlData.lst_VoucherType.Add("select");
-                sql = "Select Distinct Upper(VoucherTypeName) as [VoucherType] FROM  TD_Mst_VoucherType where CompanyID=" + CompanyID + " Order by VoucherType";
+                sql = "Select Distinct Upper(VoucherTypeName) as [VoucherType] FROM  TD_Mst_VoucherType where CompanyID=" + CompanyID + "  And (VoucherTypeParent='Credit Note' Or VoucherTypeParent='Debit Note') Order by VoucherType";
                 cmd = new SqlCommand(sql, Common.conn);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
