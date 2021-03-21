@@ -1162,7 +1162,7 @@ public class Report_DL
 
     #endregion
 
-    #region --- Journal Voucher Register --
+    #region --- Negative Stock Report --
     public DataSet BuildReportData_NegativeStockReport(Report_Search repParamSearch)
     {
         string RDLCReportSQL = string.Empty;
@@ -1193,6 +1193,66 @@ public class Report_DL
         {
             sda.SelectCommand = cmd;
             sda.Fill(dsRep, "Report_NegativeStockReport");
+        }
+        return dsRep;
+    }
+
+    #endregion
+
+    #region --- Cash Book --
+    public DataSet BuildReportData_CashBook(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("JournalRegister");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        strSQL = "";
+        if (repParamSearch.PartyName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.PartyName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@PartyName_List", strSQL);
+
+        strSQL = "";
+        if (repParamSearch.CostCenter is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.CostCenter.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@CostCenter_List", strSQL);
+
+
+        strSQL = "";
+        if (repParamSearch.LedgerName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.LedgerName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@LedgerName_List", strSQL);
+
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsRep = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsRep, "Report_JournalRegister");
         }
         return dsRep;
     }

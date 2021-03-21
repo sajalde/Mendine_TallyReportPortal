@@ -1,0 +1,6 @@
+SELECT      TD_Txn_VchHdr.CompanyID, TD_Txn_VchHdr.VoucherID, TD_Txn_VchHdr.Date, TD_Txn_VchHdr.VoucherTypeName, TD_Txn_VchHdr.PartyLedgerName, TD_Txn_BankAllocations.BankAllocationNo,
+                         TD_Txn_BankAllocations.InstrumentNumber, ABS(TD_Txn_BankAllocations.Amount) AS Amount, TD_Txn_BankAllocations.TransactionType, TD_Txn_BillLine.BillName, TD_Txn_BillLine.BillType
+FROM            TD_Txn_BankAllocations INNER JOIN
+                         TD_Txn_VchHdr ON TD_Txn_BankAllocations.CompanyID = TD_Txn_VchHdr.CompanyID AND TD_Txn_BankAllocations.VoucherID = TD_Txn_VchHdr.VoucherID INNER JOIN
+                         TD_Txn_BillLine ON TD_Txn_BankAllocations.CompanyID = TD_Txn_BillLine.Companyid AND TD_Txn_VchHdr.VoucherID = TD_Txn_BillLine.VoucherId
+WHERE TD_Txn_VchHdr.VoucherID = TD_Txn_BankAllocations.VoucherID  and TransactionType LIKE '%cash%' 

@@ -129,6 +129,9 @@
                                             <asp:HyperLink ID="tallyJournalRegister" runat="server" NavigateUrl="~/OnlineReport/JournalRegister.aspx">Journal Register</asp:HyperLink>
                                         </li>
 
+                                         <li>
+                                            <asp:HyperLink ID="tallyCashBook" runat="server" NavigateUrl="~/OnlineReport/Acc_CashBook.aspx">Cash Book</asp:HyperLink>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
