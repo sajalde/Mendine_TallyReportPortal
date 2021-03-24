@@ -23,6 +23,8 @@ using System.Web;
         public List<String> lst_HQ { get; set; }
         public List<String> lst_VoucherType { get; set; }
         public List<String> lst_LedgerName { get; set; }
+        public List<String> lst_TransactionType { get; set; }
+
     }
     public class Report_Search
     {
@@ -44,6 +46,7 @@ using System.Web;
         public string VoucherType { get; set; }
         public string HQ { get; set; }
         public string LedgerName { get; set; }
+        public string TransactionType { get; set; }
     }
 
         #endregion

@@ -199,6 +199,17 @@ public class Report_DL
                 rdr.Close();
             }
 
+            //--- Transaction Type ----
+            ddlData.lst_TransactionType = new List<string>();
+            ddlData.lst_TransactionType.Add("select");
+            sql = "Select Distinct Upper(VoucherType) as [VoucherType] FROM  TD_Mst_VoucherType where CompanyID=" + CompanyID + " Order by VoucherType";
+            cmd = new SqlCommand(sql, Common.conn);
+            rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                ddlData.lst_TransactionType.Add(Common.GetString(rdr["VoucherType"]));
+            }
+            rdr.Close();
 
         }
         catch (Exception ex)
@@ -1204,36 +1215,13 @@ public class Report_DL
     {
         string RDLCReportSQL = string.Empty;
         string strSQL = string.Empty;
-        RDLCReportSQL = GetRDLCReportSQL("JournalRegister");
+        RDLCReportSQL = GetRDLCReportSQL("CashBook");
 
 
         //--------- Replace Query with Paaramenter Value -----
         RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
         RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
         RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
-
-        strSQL = "";
-        if (repParamSearch.PartyName is null)
-        {
-            strSQL += "''" + "";
-        }
-        else
-        {
-            strSQL += "'" + repParamSearch.PartyName.Replace("'", "") + "'";
-        }
-        RDLCReportSQL = RDLCReportSQL.Replace("@PartyName_List", strSQL);
-
-        strSQL = "";
-        if (repParamSearch.CostCenter is null)
-        {
-            strSQL += "''" + "";
-        }
-        else
-        {
-            strSQL += "'" + repParamSearch.CostCenter.Replace("'", "") + "'";
-        }
-        RDLCReportSQL = RDLCReportSQL.Replace("@CostCenter_List", strSQL);
-
 
         strSQL = "";
         if (repParamSearch.LedgerName is null)
@@ -1246,13 +1234,24 @@ public class Report_DL
         }
         RDLCReportSQL = RDLCReportSQL.Replace("@LedgerName_List", strSQL);
 
+        strSQL = "";
+        if (repParamSearch.VoucherType is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.VoucherType.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@TransactionType_List", strSQL);
+
 
         SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
         DataSet dsRep = new DataSet();
         using (SqlDataAdapter sda = new SqlDataAdapter())
         {
             sda.SelectCommand = cmd;
-            sda.Fill(dsRep, "Report_JournalRegister");
+            sda.Fill(dsRep, "Report_CashBook");
         }
         return dsRep;
     }

@@ -55,7 +55,7 @@ public partial class OnlineReport_Acc_CashBook : System.Web.UI.Page
         lbLedgerName.DataSource = objData.lst_LedgerName;
         lbLedgerName.DataBind();
 
-        lbTransactionType.DataSource = objData.lst_CostCenter;
+        lbTransactionType.DataSource = objData.lst_TransactionType;
         lbTransactionType.DataBind();
     }
 
@@ -133,7 +133,7 @@ public partial class OnlineReport_Acc_CashBook : System.Web.UI.Page
             }
             if (lbTransactionType.SelectedIndex != -1)
             {
-                repParamSearch.StockGroup = strTransactionType.Remove(strTransactionType.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+                repParamSearch.VoucherType = strTransactionType.Remove(strTransactionType.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
             }
 
             //--- Ledger Name::  Multi Select List Box Values  Item--
