@@ -1,0 +1,17 @@
+SELECT DISTINCT 
+                         TD_Txn_VchHdr.CompanyID, TD_Txn_VchHdr.Date, TD_Txn_VchHdr.VoucherTypeName, TD_Txn_VchHdr.VoucherNo, TD_Txn_VchHdr.PartyLedgerName, TD_Txn_AccLine.Amount, TD_Txn_AccLine.LedgerName, 
+                         TD_Txn_BillLine.BillName
+FROM            TD_Txn_VchHdr INNER JOIN
+                         TD_Txn_InvLine ON TD_Txn_VchHdr.CompanyID = TD_Txn_InvLine.CompanyId INNER JOIN
+                         TD_Txn_AccLine ON TD_Txn_VchHdr.CompanyID = TD_Txn_AccLine.CompanyID AND TD_Txn_VchHdr.VoucherID = TD_Txn_AccLine.VoucherID INNER JOIN
+                         TD_Txn_BillLine ON TD_Txn_AccLine.CompanyID = TD_Txn_BillLine.Companyid AND TD_Txn_AccLine.VoucherID = TD_Txn_BillLine.VoucherId AND TD_Txn_AccLine.AccLineNo = TD_Txn_BillLine.AccLineNo AND 
+                         TD_Txn_VchHdr.VoucherID = TD_Txn_BillLine.VoucherId 
+                        
+						 WHERE 
+						 
+						 ((PartyLedgerName like 'Addapt %' and VoucherTypeName like 'Purchase for%'
+						 And
+						 LedgerName like 'Addapt %')
+						 OR
+						 (PartyLedgerName like 'Addapt %' and VoucherTypeName like 'Paymen%' ))
+						 AND TD_Txn_VchHdr.CompanyID = '4' AND TD_Txn_VchHdr.Date BETWEEN '2020-04-12 00:00:00.000' AND '2020-04-14 00:00:00.000'

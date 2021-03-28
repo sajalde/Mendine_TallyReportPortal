@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Acc_CashBook.aspx.cs" Inherits="OnlineReport_Acc_CashBook" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Acc_LedgerReport.aspx.cs" Inherits="OnlineReport_Acc_LedgerReport" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <h2 style="text-align: center">Cash Book</h2>
+                            <h2 style="text-align: center">LEDGER REPORT</h2>
                         </div>
                     </div>
                 </div>
@@ -54,20 +54,12 @@
 
 
                         <div class="row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                                 <div class="form-group">
                                     <label>Ledger Name</label>
                                     <asp:ListBox ID="lbLedgerName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
                                 </div>
                             </div>
-
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>Transaction Type</label>
-                                    <asp:ListBox ID="lbTransactionType" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
-                                </div>
-                            </div>
-
                         </div>
 
                         <div class="mb-4 mt-4">
@@ -86,7 +78,7 @@
                 <div class="row">
                     <div class="form-group col-md-12">
                         <rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Width="100%" Height="723px" AsyncRendering="False" InteractivityPostBackMode="AlwaysSynchronous" PageCountMode="Actual" ShowBackButton="False" ShowDocumentMapButton="False" ShowExportControls="False" ShowFindControls="False" ShowParameterPrompts="False" ShowPrintButton="False" ShowRefreshButton="False" ShowZoomControl="False">
-                            <LocalReport ReportPath="rdlcs\Accounts\Acc_CashBook.rdlc">
+                            <LocalReport ReportPath="rdlcs\Accounts\Report_LedgerReport.rdlc">
                             </LocalReport>
                         </rsweb:ReportViewer>
                     </div>
@@ -118,13 +110,6 @@
                         });
 
                         $('[id*=lbLedgerName]').multiselect({
-                            includeSelectAllOption: true,
-                            maxHeight: 400,
-                            enableFiltering: true,
-                            enableCaseInsensitiveFiltering: true
-                        });
-
-                        $('[id*=lbTransactionType]').multiselect({
                             includeSelectAllOption: true,
                             maxHeight: 400,
                             enableFiltering: true,

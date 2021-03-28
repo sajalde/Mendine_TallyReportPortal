@@ -132,6 +132,10 @@
                                          <li>
                                             <asp:HyperLink ID="tallyCashBook" runat="server" NavigateUrl="~/OnlineReport/Acc_CashBook.aspx">Cash Book</asp:HyperLink>
                                         </li>
+
+                                         <li>
+                                            <asp:HyperLink ID="tallyLedgerBook" runat="server" NavigateUrl="~/OnlineReport/Acc_LedgerReport.aspx">Ledger Report</asp:HyperLink>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

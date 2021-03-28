@@ -1257,4 +1257,40 @@ public class Report_DL
     }
 
     #endregion
+
+    #region --- Ledger Report --
+    public DataSet BuildReportData_LedgerReport(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("LedgerReport");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        strSQL = "";
+        if (repParamSearch.LedgerName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.LedgerName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@LedgerName_List", strSQL);
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsRep = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsRep, "Report_LedgerReport");
+        }
+        return dsRep;
+    }
+
+    #endregion
 }
