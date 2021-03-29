@@ -132,8 +132,6 @@ public partial class OnlineReport_Acc_LedgerReport : System.Web.UI.Page
             {
                 repParamSearch.ItemName = strLedgerName.Remove(strLedgerName.Length - 1, 1);// Remove last;
             }
-
-
             bool blncontinue = true;
 
             if (blncontinue)

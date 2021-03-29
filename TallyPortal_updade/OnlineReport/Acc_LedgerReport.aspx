@@ -86,12 +86,12 @@
 
             </div>
 
-            <script type="text/javascript">  
-                $(function () {
-                    $("#dtFromDate").datepicker();
-                    $("#dtToDate").datepicker();
-                });
-            </script>
+          <script type="text/javascript">  
+              $(function () {
+                  $("#dtFromDate").datepicker();
+                  $("#dtToDate").datepicker();
+              });
+          </script>
 
             <script type="text/javascript">  
                 function pageLoad(sender, args) {
@@ -115,7 +115,7 @@
                             enableFiltering: true,
                             enableCaseInsensitiveFiltering: true
                         });
-
+                        
                         setTimeout(function () {
                             window.document.getElementById('wp').style.display = 'none';
                             window.document.getElementById('searchp').style.display = '';
@@ -137,7 +137,7 @@
                 $('form').live("submit", function () {
                     //ShowProgress();
                 });
-            </script>
+            </script>          
 
         </ContentTemplate>
 
