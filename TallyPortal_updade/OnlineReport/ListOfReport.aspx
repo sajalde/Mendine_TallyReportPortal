@@ -60,6 +60,7 @@
                             <li>
                                 <asp:HyperLink ID="Tallylead" runat="server" NavigateUrl="~/OnlineReport/LeadTimeReport.aspx">Lead Time Report</asp:HyperLink>
                             </li>
+
                         </ul>
 
                     </div>
@@ -129,12 +130,16 @@
                                             <asp:HyperLink ID="tallyJournalRegister" runat="server" NavigateUrl="~/OnlineReport/JournalRegister.aspx">Journal Register</asp:HyperLink>
                                         </li>
 
-                                         <li>
+                                        <li>
                                             <asp:HyperLink ID="tallyCashBook" runat="server" NavigateUrl="~/OnlineReport/Acc_CashBook.aspx">Cash Book</asp:HyperLink>
                                         </li>
 
-                                         <li>
+                                        <li>
                                             <asp:HyperLink ID="tallyLedgerBook" runat="server" NavigateUrl="~/OnlineReport/Acc_LedgerReport.aspx">Ledger Report</asp:HyperLink>
+                                        </li>
+
+                                        <li>
+                                            <asp:HyperLink ID="TallyCostCenter" runat="server" NavigateUrl="~/OnlineReport/Acc_CostcenterReport.aspx">Cost Center Report</asp:HyperLink>
                                         </li>
                                     </ul>
                                 </div>

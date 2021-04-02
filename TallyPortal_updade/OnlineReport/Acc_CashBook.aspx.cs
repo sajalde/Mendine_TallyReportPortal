@@ -198,7 +198,7 @@ public partial class OnlineReport_Acc_CashBook : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=Journal Register." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=Cash Book." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

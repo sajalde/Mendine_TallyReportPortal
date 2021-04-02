@@ -130,7 +130,7 @@ public partial class OnlineReport_Acc_LedgerReport : System.Web.UI.Page
             }
             if (lbLedgerName.SelectedIndex != -1)
             {
-                repParamSearch.ItemName = strLedgerName.Remove(strLedgerName.Length - 1, 1);// Remove last;
+                repParamSearch.LedgerName = strLedgerName.Remove(strLedgerName.Length - 1, 1);// Remove last;
             }
             bool blncontinue = true;
 
@@ -177,7 +177,7 @@ public partial class OnlineReport_Acc_LedgerReport : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=Journal Register." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=Ledger Report." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();
