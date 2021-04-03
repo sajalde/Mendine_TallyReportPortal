@@ -1318,6 +1318,7 @@ public class Report_DL
         }
         RDLCReportSQL = RDLCReportSQL.Replace("@CostCenter_List", strSQL);
 
+        strSQL = "";
         if (repParamSearch.LedgerName is null)
         {
             strSQL += "''" + "";

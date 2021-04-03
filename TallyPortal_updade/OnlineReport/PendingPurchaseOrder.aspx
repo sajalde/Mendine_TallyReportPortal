@@ -27,7 +27,7 @@
                 <div class="panel panel-info">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 <div class="form-group">
                                     <label>Start Date</label>
                                     <asp:TextBox ID="dtFromDate" runat="server"></asp:TextBox>
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 <div class="form-group">
                                     <label>End Date </label>
                                     <asp:TextBox ID="dtToDate" runat="server"></asp:TextBox>
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-6">
                                 <div class="form-group">
                                     <label>Company</label>
                                     <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" Width="75%" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged"></asp:ListBox>
