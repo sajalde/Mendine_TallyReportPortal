@@ -92,7 +92,8 @@ public class Report_DL
                 //--- Party Name ----
                 ddlData.lst_Party = new List<string>();
                 ddlData.lst_Party.Add("select");
-                sql = "Select Distinct Upper(LedgerName) as [PartyName]  from TD_Mst_Ledger  where ParentLedgerGroup Like 'Sundry Creditors%' And CompanyID=" + CompanyID + " order by  Upper(LedgerName)";
+                //sql = "Select Distinct Upper(LedgerName) as [PartyName]  from TD_Mst_Ledger  where ParentLedgerGroup Like 'Sundry Creditors%' And CompanyID=" + CompanyID + " order by  Upper(LedgerName)";
+                sql = "Select Distinct Upper(LedgerName) as [PartyName]  from TD_Mst_Ledger  where  CompanyID=" + CompanyID + " order by  Upper(LedgerName)";
                 cmd = new SqlCommand(sql, Common.conn);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
