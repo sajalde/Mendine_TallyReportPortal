@@ -770,6 +770,7 @@
                               <Value>=Sum(Fields!AmountWithoutGST.Value, "dsLedgerReport")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
@@ -805,6 +806,7 @@
                               <Value>=Sum(Fields!GST.Value, "dsLedgerReport")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
@@ -840,6 +842,7 @@
                               <Value>=Sum(Fields!OtherExpenses.Value, "dsLedgerReport")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
@@ -875,6 +878,7 @@
                               <Value>=Sum(Fields!Roundoff.Value, "dsLedgerReport")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
@@ -910,6 +914,7 @@
                               <Value>=Sum(Fields!Amount.Value, "dsLedgerReport")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
@@ -931,6 +936,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
