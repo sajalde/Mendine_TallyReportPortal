@@ -1,0 +1,15 @@
+/*   GROUP   */
+
+
+SELECT DISTINCT [CompanyID], [StockDate], [StockItemName] ,[BatchName]
+      ,SUM([Quantity]) AS Quantity
+      ,[UOM]
+      ,SUM([Amount])AS Amount
+  FROM [EasyReports3.6].[dbo].[TD_Txn_StockDetails]
+  WHERE
+   CompanyID = 4 AND StockItemName like 'BACILOL (100)' AND StockDate = '2020-04-01 00:00:00.000'
+   GROUP BY [CompanyID], [StockDate], [StockItemName]
+      ,[BatchName]
+      ,[UOM] 
+	  
+	  HAVING SUM([Quantity]) LIKE '-%'
