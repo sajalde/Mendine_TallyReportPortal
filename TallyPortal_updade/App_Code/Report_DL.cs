@@ -1179,7 +1179,7 @@ public class Report_DL
     {
         string RDLCReportSQL = string.Empty;
         string strSQL = string.Empty;
-        RDLCReportSQL = GetRDLCReportSQL("NegativeStockReport");
+        RDLCReportSQL = GetRDLCReportSQL("NegativeBatch");
 
 
         //--------- Replace Query with Paaramenter Value -----
@@ -1337,6 +1337,65 @@ public class Report_DL
         {
             sda.SelectCommand = cmd;
             sda.Fill(dsRep, "Report_CostCenter");
+        }
+        return dsRep;
+    }
+
+    #endregion
+
+    #region --- Negative Batch Report --
+    public DataSet BuildReportData_NegativeBatchReport(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("NegativeBatch");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        //RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        strSQL = "";
+        if (repParamSearch.ItemName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.ItemName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockItemName_List", strSQL);
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsNegativeStockReport = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsNegativeStockReport, "Report_NegativeStock");
+        }
+        return dsNegativeStockReport;
+    }
+
+    #endregion
+
+    #region --- Negative Ledger Reports --
+    public DataSet BuildReportData_NegativeLedger(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("NegativeLedger");
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+      
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsRep = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsRep, "Report_NegativeLedger");
         }
         return dsRep;
     }

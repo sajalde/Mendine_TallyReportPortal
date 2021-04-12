@@ -26,10 +26,8 @@ public partial class OnlineReport_Acc_NegativeLedger : System.Web.UI.Page
 
             d = d.AddMonths(-2);
 
-            Session["StartDate"] = d.ToString("dd/MM/yyyy");
-            Session["EndDate"] = DateTime.Now.ToString("dd/MM/yyyy");
+            Session["StartDate"] = d.ToString("dd/MM/yyyy");        
             dtFromDate.Text = Session["StartDate"].ToString();
-            dtToDate.Text = Session["EndDate"].ToString();
             //generate report
             Report_Search repParamSearch = new Report_Search();
             ReportViewer1.Visible = false;
@@ -51,27 +49,21 @@ public partial class OnlineReport_Acc_NegativeLedger : System.Web.UI.Page
         Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName);
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
-
-        lbLedgerName.DataSource = objData.lst_LedgerName;
-        lbLedgerName.DataBind();
-
-        lbTransactionType.DataSource = objData.lst_TransactionType;
-        lbTransactionType.DataBind();
     }
 
     private void GenerateRDLCReport(Report_Search repParamSearch)
     {
         ReportViewer1.Visible = true;
         ReportViewer1.ProcessingMode = ProcessingMode.Local;
-        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Accounts/Report_CashBook.rdlc");
+        ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/rdlcs/Accounts/Report_NegativeLedger.rdlc");
 
-        DataSet dt = (new Report_DL()).BuildReportData_CashBook(repParamSearch);
+        DataSet dt = (new Report_DL()).BuildReportData_NegativeLedger(repParamSearch);
         if (dt.Tables.Count >= 1)
         {
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource()
             {
-                Name = "dsCashBook",
+                Name = "dsNegativeLedger",
                 Value = dt.Tables[0]
             });
         }
@@ -98,13 +90,10 @@ public partial class OnlineReport_Acc_NegativeLedger : System.Web.UI.Page
 
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
             DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
-            DateTime enddate = Convert.ToDateTime(dtToDate.Text);
-
+       
             repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
-            repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");
-
+         
             Session["StartDate"] = repParamSearch.StartDate;
-            Session["EndDate"] = repParamSearch.EndDate;
 
             //--- Company:: Multi Select List Box Values --
             string strCompany = string.Empty;
@@ -120,38 +109,7 @@ public partial class OnlineReport_Acc_NegativeLedger : System.Web.UI.Page
             {
                 repParamSearch.CompanyName = strCompany.Remove(strCompany.Length - 1, 1);// Remove last ,lbCompany.SelectedItem.Text;
             }
-
-            //--- Transaction Type::  Multi Select List Box Values  --
-            string strTransactionType = string.Empty;
-            foreach (ListItem item in lbTransactionType.Items)
-            {
-                if (item.Selected)
-                {
-                    strTransactionType += "'" + item.Text + "'";
-                    strTransactionType += ",";
-                }
-            }
-            if (lbTransactionType.SelectedIndex != -1)
-            {
-                repParamSearch.VoucherType = strTransactionType.Remove(strTransactionType.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
-            }
-
-            //--- Ledger Name::  Multi Select List Box Values  Item--
-            string strLedgerName = string.Empty;
-            foreach (ListItem item in lbLedgerName.Items)
-            {
-                if (item.Selected)
-                {
-                    strLedgerName += "'" + item.Text + "'";
-                    strLedgerName += ",";
-                }
-            }
-            if (lbLedgerName.SelectedIndex != -1)
-            {
-                repParamSearch.ItemName = strLedgerName.Remove(strLedgerName.Length - 1, 1);// Remove last;
-            }
-
-
+          
             bool blncontinue = true;
 
             if (blncontinue)
@@ -167,11 +125,8 @@ public partial class OnlineReport_Acc_NegativeLedger : System.Web.UI.Page
 
         //GenerateRDLCReport(repParamSearch);
         string FromDate = Request.Form["_dtFromDate"];
-        string ToDate = Request.Form["_dtToDate"];
 
         lbCompany.SelectedIndex = -1;
-        lbLedgerName.SelectedIndex = -1;
-        lbTransactionType.SelectedIndex = -1;
         //--- Set Current Date in Date Fileds Input Box
         ReportViewer1.LocalReport.DataSources.Clear();
     }
@@ -198,7 +153,7 @@ public partial class OnlineReport_Acc_NegativeLedger : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=Cash Book." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=NegativeLedger." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

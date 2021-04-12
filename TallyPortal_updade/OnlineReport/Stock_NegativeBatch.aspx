@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <h2 style="text-align: center">Stock Details</h2>
+                            <h2 style="text-align: center">Negative Stock Report</h2>
                         </div>
                     </div>
                 </div>
@@ -35,42 +35,17 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>To Date</label>
-                                    <asp:TextBox ID="dtToDate" runat="server"></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy"
-                                        TargetControlID="dtToDate" />
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <div class="form-group">
                                     <label>Company</label>
                                     <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" Width="75%" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged"></asp:ListBox>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>Stock Category</label>
-                                    <asp:ListBox ID="lbStockCategory" runat="server" SelectionMode="Multiple" Width="75%"  AutoPostBack="True" OnSelectedIndexChanged="lbStockCategory_SelectedIndexChanged"></asp:ListBox>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <div class="form-group">
                                     <label>Stock Item Name</label>
                                     <asp:ListBox ID="lbStockItemName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>Voucher Type</label>
-                                    <asp:ListBox ID="lbVoucherType" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
                                 </div>
                             </div>
 
@@ -93,7 +68,7 @@
                 <div class="form-group col-md-12">
 
                     <rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Width="100%" Height="723px" AsyncRendering="False" InteractivityPostBackMode="AlwaysSynchronous" PageCountMode="Actual" ShowBackButton="False" ShowDocumentMapButton="False" ShowExportControls="False" ShowFindControls="False" ShowParameterPrompts="False" ShowPrintButton="False" ShowRefreshButton="False" ShowZoomControl="False">
-                        <LocalReport ReportPath="rdlcs\Stock\Report_StockDetails.rdlc">
+                        <LocalReport ReportPath="rdlcs\Stock\Report_NegativeStockReport.rdlc">
                         </LocalReport>
                     </rsweb:ReportViewer>
                 </div>
@@ -114,8 +89,6 @@
                         var StartDate = '<%=Session["StartDate"]%>';
                         $("#dtFromDate").val(StartDate);
 
-                        var EndDate = '<%=Session["EndDate"]%>';
-                        $("#dtToDate").val(EndDate);
 
                         $('[id*=lbCompany]').multiselect({
                             includeSelectAllOption: true,
@@ -123,28 +96,8 @@
                             enableFiltering: false,
                             enableCaseInsensitiveFiltering: true
                         });
-                        $('[id*=lbStockCategory]').multiselect({
-                            includeSelectAllOption: true,
-                            maxHeight: 400,
-                            enableFiltering: true,
-                            enableCaseInsensitiveFiltering: true,
-                            
-                            enableClickableOptGroups: true,
-                            onChange: function (option, checked, select) {
-                                //alert('onChange triggered ...');
-                            }
-                        });
-                        $('#lbStockCategory-select-onChange-button').on('click', function () {
-                            $('#lbStockCategory-select-onChange').multiselect('select', '1', true);
-                        });
 
                         $('[id*=lbStockItemName]').multiselect({
-                            includeSelectAllOption: true,
-                            maxHeight: 400,
-                            enableFiltering: true,
-                            enableCaseInsensitiveFiltering: true
-                        });
-                        $('[id*=lbVoucherType]').multiselect({
                             includeSelectAllOption: true,
                             maxHeight: 400,
                             enableFiltering: true,
