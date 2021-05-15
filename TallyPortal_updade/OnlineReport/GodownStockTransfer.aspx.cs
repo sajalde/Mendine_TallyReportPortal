@@ -12,7 +12,7 @@ using iTextSharp.text.xml;
 using Microsoft.Reporting.WebForms;
 using static ReportModel;
 
-public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
+public partial class OnlineReport_GodownStockTransfer : System.Web.UI.Page
 {
     protected void Page_Init(object sender, EventArgs e)
     {

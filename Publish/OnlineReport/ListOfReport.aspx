@@ -61,6 +61,9 @@
                                 <asp:HyperLink ID="Tallylead" runat="server" NavigateUrl="~/OnlineReport/LeadTimeReport.aspx">Lead Time Report</asp:HyperLink>
                             </li>
 
+                             <li>
+                                <asp:HyperLink ID="TallyNegativeBatch" runat="server" NavigateUrl="~/OnlineReport/Stock_NegativeBatch.aspx">Negative Batch Report</asp:HyperLink>
+                            </li>
                         </ul>
 
                     </div>
@@ -140,6 +143,10 @@
 
                                         <li>
                                             <asp:HyperLink ID="TallyCostCenter" runat="server" NavigateUrl="~/OnlineReport/Acc_CostcenterReport.aspx">Cost Center Report</asp:HyperLink>
+                                        </li>
+
+                                        <li>
+                                            <asp:HyperLink ID="TallyNegativeLedger" runat="server" NavigateUrl="~/OnlineReport/Acc_NegativeLedger.aspx">Negative Ledger Report</asp:HyperLink>
                                         </li>
                                     </ul>
                                 </div>

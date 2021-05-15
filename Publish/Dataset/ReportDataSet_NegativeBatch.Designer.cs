@@ -20,17 +20,17 @@ namespace ReportRDLC.Dataset {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("ReportDataSet_NegativeLedger")]
+    [global::System.Xml.Serialization.XmlRootAttribute("ReportDataSet_NegativeBatch")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class ReportDataSet_NegativeLedger : global::System.Data.DataSet {
+    public partial class ReportDataSet_NegativeBatch : global::System.Data.DataSet {
         
-        private dtNegativeLedgerDataTable tabledtNegativeLedger;
+        private dtNegativeBatchDataTable tabledtNegativeBatch;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public ReportDataSet_NegativeLedger() {
+        public ReportDataSet_NegativeBatch() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace ReportRDLC.Dataset {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected ReportDataSet_NegativeLedger(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected ReportDataSet_NegativeBatch(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace ReportRDLC.Dataset {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["dtNegativeLedger"] != null)) {
-                    base.Tables.Add(new dtNegativeLedgerDataTable(ds.Tables["dtNegativeLedger"]));
+                if ((ds.Tables["dtNegativeBatch"] != null)) {
+                    base.Tables.Add(new dtNegativeBatchDataTable(ds.Tables["dtNegativeBatch"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace ReportRDLC.Dataset {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtNegativeLedgerDataTable dtNegativeLedger {
+        public dtNegativeBatchDataTable dtNegativeBatch {
             get {
-                return this.tabledtNegativeLedger;
+                return this.tabledtNegativeBatch;
             }
         }
         
@@ -127,7 +127,7 @@ namespace ReportRDLC.Dataset {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            ReportDataSet_NegativeLedger cln = ((ReportDataSet_NegativeLedger)(base.Clone()));
+            ReportDataSet_NegativeBatch cln = ((ReportDataSet_NegativeBatch)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace ReportRDLC.Dataset {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["dtNegativeLedger"] != null)) {
-                    base.Tables.Add(new dtNegativeLedgerDataTable(ds.Tables["dtNegativeLedger"]));
+                if ((ds.Tables["dtNegativeBatch"] != null)) {
+                    base.Tables.Add(new dtNegativeBatchDataTable(ds.Tables["dtNegativeBatch"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace ReportRDLC.Dataset {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tabledtNegativeLedger = ((dtNegativeLedgerDataTable)(base.Tables["dtNegativeLedger"]));
+            this.tabledtNegativeBatch = ((dtNegativeBatchDataTable)(base.Tables["dtNegativeBatch"]));
             if ((initTable == true)) {
-                if ((this.tabledtNegativeLedger != null)) {
-                    this.tabledtNegativeLedger.InitVars();
+                if ((this.tabledtNegativeBatch != null)) {
+                    this.tabledtNegativeBatch.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace ReportRDLC.Dataset {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "ReportDataSet_NegativeLedger";
+            this.DataSetName = "ReportDataSet_NegativeBatch";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/ReportDataSet_NegativeLedger.xsd";
+            this.Namespace = "http://tempuri.org/ReportDataSet_NegativeBatch.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tabledtNegativeLedger = new dtNegativeLedgerDataTable();
-            base.Tables.Add(this.tabledtNegativeLedger);
+            this.tabledtNegativeBatch = new dtNegativeBatchDataTable();
+            base.Tables.Add(this.tabledtNegativeBatch);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializedtNegativeLedger() {
+        private bool ShouldSerializedtNegativeBatch() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace ReportRDLC.Dataset {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            ReportDataSet_NegativeLedger ds = new ReportDataSet_NegativeLedger();
+            ReportDataSet_NegativeBatch ds = new ReportDataSet_NegativeBatch();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,29 +270,35 @@ namespace ReportRDLC.Dataset {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void dtNegativeLedgerRowChangeEventHandler(object sender, dtNegativeLedgerRowChangeEvent e);
+        public delegate void dtNegativeBatchRowChangeEventHandler(object sender, dtNegativeBatchRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtNegativeLedgerDataTable : global::System.Data.TypedTableBase<dtNegativeLedgerRow> {
+        public partial class dtNegativeBatchDataTable : global::System.Data.TypedTableBase<dtNegativeBatchRow> {
             
-            private global::System.Data.DataColumn columnLedgerName;
+            private global::System.Data.DataColumn columnCompanyID;
             
-            private global::System.Data.DataColumn columnGroupName;
+            private global::System.Data.DataColumn columnStockDate;
             
-            private global::System.Data.DataColumn columnDRAmount;
+            private global::System.Data.DataColumn columnStockItemName;
             
-            private global::System.Data.DataColumn columnCRAmount;
+            private global::System.Data.DataColumn columnBatchName;
+            
+            private global::System.Data.DataColumn columnQuantity;
+            
+            private global::System.Data.DataColumn columnUOM;
             
             private global::System.Data.DataColumn columnAmount;
             
+            private global::System.Data.DataColumn columnRate;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtNegativeLedgerDataTable() {
-                this.TableName = "dtNegativeLedger";
+            public dtNegativeBatchDataTable() {
+                this.TableName = "dtNegativeBatch";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -300,7 +306,7 @@ namespace ReportRDLC.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtNegativeLedgerDataTable(global::System.Data.DataTable table) {
+            internal dtNegativeBatchDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -317,40 +323,56 @@ namespace ReportRDLC.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected dtNegativeLedgerDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected dtNegativeBatchDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn LedgerNameColumn {
+            public global::System.Data.DataColumn CompanyIDColumn {
                 get {
-                    return this.columnLedgerName;
+                    return this.columnCompanyID;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn GroupNameColumn {
+            public global::System.Data.DataColumn StockDateColumn {
                 get {
-                    return this.columnGroupName;
+                    return this.columnStockDate;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn DRAmountColumn {
+            public global::System.Data.DataColumn StockItemNameColumn {
                 get {
-                    return this.columnDRAmount;
+                    return this.columnStockItemName;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn CRAmountColumn {
+            public global::System.Data.DataColumn BatchNameColumn {
                 get {
-                    return this.columnCRAmount;
+                    return this.columnBatchName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn QuantityColumn {
+                get {
+                    return this.columnQuantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn UOMColumn {
+                get {
+                    return this.columnUOM;
                 }
             }
             
@@ -359,6 +381,14 @@ namespace ReportRDLC.Dataset {
             public global::System.Data.DataColumn AmountColumn {
                 get {
                     return this.columnAmount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RateColumn {
+                get {
+                    return this.columnRate;
                 }
             }
             
@@ -373,49 +403,52 @@ namespace ReportRDLC.Dataset {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtNegativeLedgerRow this[int index] {
+            public dtNegativeBatchRow this[int index] {
                 get {
-                    return ((dtNegativeLedgerRow)(this.Rows[index]));
+                    return ((dtNegativeBatchRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtNegativeLedgerRowChangeEventHandler dtNegativeLedgerRowChanging;
+            public event dtNegativeBatchRowChangeEventHandler dtNegativeBatchRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtNegativeLedgerRowChangeEventHandler dtNegativeLedgerRowChanged;
+            public event dtNegativeBatchRowChangeEventHandler dtNegativeBatchRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtNegativeLedgerRowChangeEventHandler dtNegativeLedgerRowDeleting;
+            public event dtNegativeBatchRowChangeEventHandler dtNegativeBatchRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtNegativeLedgerRowChangeEventHandler dtNegativeLedgerRowDeleted;
+            public event dtNegativeBatchRowChangeEventHandler dtNegativeBatchRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AdddtNegativeLedgerRow(dtNegativeLedgerRow row) {
+            public void AdddtNegativeBatchRow(dtNegativeBatchRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtNegativeLedgerRow AdddtNegativeLedgerRow(string LedgerName, string GroupName, decimal DRAmount, decimal CRAmount, decimal Amount) {
-                dtNegativeLedgerRow rowdtNegativeLedgerRow = ((dtNegativeLedgerRow)(this.NewRow()));
+            public dtNegativeBatchRow AdddtNegativeBatchRow(int CompanyID, System.DateTime StockDate, string StockItemName, string BatchName, decimal Quantity, string UOM, decimal Amount, string Rate) {
+                dtNegativeBatchRow rowdtNegativeBatchRow = ((dtNegativeBatchRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        LedgerName,
-                        GroupName,
-                        DRAmount,
-                        CRAmount,
-                        Amount};
-                rowdtNegativeLedgerRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowdtNegativeLedgerRow);
-                return rowdtNegativeLedgerRow;
+                        CompanyID,
+                        StockDate,
+                        StockItemName,
+                        BatchName,
+                        Quantity,
+                        UOM,
+                        Amount,
+                        Rate};
+                rowdtNegativeBatchRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtNegativeBatchRow);
+                return rowdtNegativeBatchRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                dtNegativeLedgerDataTable cln = ((dtNegativeLedgerDataTable)(base.Clone()));
+                dtNegativeBatchDataTable cln = ((dtNegativeBatchDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -423,64 +456,76 @@ namespace ReportRDLC.Dataset {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new dtNegativeLedgerDataTable();
+                return new dtNegativeBatchDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnLedgerName = base.Columns["LedgerName"];
-                this.columnGroupName = base.Columns["GroupName"];
-                this.columnDRAmount = base.Columns["DRAmount"];
-                this.columnCRAmount = base.Columns["CRAmount"];
+                this.columnCompanyID = base.Columns["CompanyID"];
+                this.columnStockDate = base.Columns["StockDate"];
+                this.columnStockItemName = base.Columns["StockItemName"];
+                this.columnBatchName = base.Columns["BatchName"];
+                this.columnQuantity = base.Columns["Quantity"];
+                this.columnUOM = base.Columns["UOM"];
                 this.columnAmount = base.Columns["Amount"];
+                this.columnRate = base.Columns["Rate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnLedgerName = new global::System.Data.DataColumn("LedgerName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLedgerName);
-                this.columnGroupName = new global::System.Data.DataColumn("GroupName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnGroupName);
-                this.columnDRAmount = new global::System.Data.DataColumn("DRAmount", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDRAmount);
-                this.columnCRAmount = new global::System.Data.DataColumn("CRAmount", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCRAmount);
+                this.columnCompanyID = new global::System.Data.DataColumn("CompanyID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompanyID);
+                this.columnStockDate = new global::System.Data.DataColumn("StockDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStockDate);
+                this.columnStockItemName = new global::System.Data.DataColumn("StockItemName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStockItemName);
+                this.columnBatchName = new global::System.Data.DataColumn("BatchName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBatchName);
+                this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQuantity);
+                this.columnUOM = new global::System.Data.DataColumn("UOM", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUOM);
                 this.columnAmount = new global::System.Data.DataColumn("Amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAmount);
-                this.columnLedgerName.AllowDBNull = false;
-                this.columnLedgerName.MaxLength = 200;
-                this.columnGroupName.MaxLength = 60;
-                this.columnDRAmount.ReadOnly = true;
-                this.columnCRAmount.ReadOnly = true;
+                this.columnRate = new global::System.Data.DataColumn("Rate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRate);
+                this.columnCompanyID.AllowDBNull = false;
+                this.columnStockDate.AllowDBNull = false;
+                this.columnStockItemName.AllowDBNull = false;
+                this.columnStockItemName.MaxLength = 200;
+                this.columnBatchName.AllowDBNull = false;
+                this.columnBatchName.MaxLength = 60;
+                this.columnQuantity.ReadOnly = true;
+                this.columnUOM.MaxLength = 60;
                 this.columnAmount.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtNegativeLedgerRow NewdtNegativeLedgerRow() {
-                return ((dtNegativeLedgerRow)(this.NewRow()));
+            public dtNegativeBatchRow NewdtNegativeBatchRow() {
+                return ((dtNegativeBatchRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new dtNegativeLedgerRow(builder);
+                return new dtNegativeBatchRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(dtNegativeLedgerRow);
+                return typeof(dtNegativeBatchRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.dtNegativeLedgerRowChanged != null)) {
-                    this.dtNegativeLedgerRowChanged(this, new dtNegativeLedgerRowChangeEvent(((dtNegativeLedgerRow)(e.Row)), e.Action));
+                if ((this.dtNegativeBatchRowChanged != null)) {
+                    this.dtNegativeBatchRowChanged(this, new dtNegativeBatchRowChangeEvent(((dtNegativeBatchRow)(e.Row)), e.Action));
                 }
             }
             
@@ -488,8 +533,8 @@ namespace ReportRDLC.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.dtNegativeLedgerRowChanging != null)) {
-                    this.dtNegativeLedgerRowChanging(this, new dtNegativeLedgerRowChangeEvent(((dtNegativeLedgerRow)(e.Row)), e.Action));
+                if ((this.dtNegativeBatchRowChanging != null)) {
+                    this.dtNegativeBatchRowChanging(this, new dtNegativeBatchRowChangeEvent(((dtNegativeBatchRow)(e.Row)), e.Action));
                 }
             }
             
@@ -497,8 +542,8 @@ namespace ReportRDLC.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.dtNegativeLedgerRowDeleted != null)) {
-                    this.dtNegativeLedgerRowDeleted(this, new dtNegativeLedgerRowChangeEvent(((dtNegativeLedgerRow)(e.Row)), e.Action));
+                if ((this.dtNegativeBatchRowDeleted != null)) {
+                    this.dtNegativeBatchRowDeleted(this, new dtNegativeBatchRowChangeEvent(((dtNegativeBatchRow)(e.Row)), e.Action));
                 }
             }
             
@@ -506,14 +551,14 @@ namespace ReportRDLC.Dataset {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.dtNegativeLedgerRowDeleting != null)) {
-                    this.dtNegativeLedgerRowDeleting(this, new dtNegativeLedgerRowChangeEvent(((dtNegativeLedgerRow)(e.Row)), e.Action));
+                if ((this.dtNegativeBatchRowDeleting != null)) {
+                    this.dtNegativeBatchRowDeleting(this, new dtNegativeBatchRowChangeEvent(((dtNegativeBatchRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemovedtNegativeLedgerRow(dtNegativeLedgerRow row) {
+            public void RemovedtNegativeBatchRow(dtNegativeBatchRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -522,7 +567,7 @@ namespace ReportRDLC.Dataset {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                ReportDataSet_NegativeLedger ds = new ReportDataSet_NegativeLedger();
+                ReportDataSet_NegativeBatch ds = new ReportDataSet_NegativeBatch();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -540,7 +585,7 @@ namespace ReportRDLC.Dataset {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "dtNegativeLedgerDataTable";
+                attribute2.FixedValue = "dtNegativeBatchDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -584,73 +629,90 @@ namespace ReportRDLC.Dataset {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtNegativeLedgerRow : global::System.Data.DataRow {
+        public partial class dtNegativeBatchRow : global::System.Data.DataRow {
             
-            private dtNegativeLedgerDataTable tabledtNegativeLedger;
+            private dtNegativeBatchDataTable tabledtNegativeBatch;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtNegativeLedgerRow(global::System.Data.DataRowBuilder rb) : 
+            internal dtNegativeBatchRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tabledtNegativeLedger = ((dtNegativeLedgerDataTable)(this.Table));
+                this.tabledtNegativeBatch = ((dtNegativeBatchDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string LedgerName {
+            public int CompanyID {
                 get {
-                    return ((string)(this[this.tabledtNegativeLedger.LedgerNameColumn]));
+                    return ((int)(this[this.tabledtNegativeBatch.CompanyIDColumn]));
                 }
                 set {
-                    this[this.tabledtNegativeLedger.LedgerNameColumn] = value;
+                    this[this.tabledtNegativeBatch.CompanyIDColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string GroupName {
+            public System.DateTime StockDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tabledtNegativeBatch.StockDateColumn]));
+                }
+                set {
+                    this[this.tabledtNegativeBatch.StockDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string StockItemName {
+                get {
+                    return ((string)(this[this.tabledtNegativeBatch.StockItemNameColumn]));
+                }
+                set {
+                    this[this.tabledtNegativeBatch.StockItemNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string BatchName {
+                get {
+                    return ((string)(this[this.tabledtNegativeBatch.BatchNameColumn]));
+                }
+                set {
+                    this[this.tabledtNegativeBatch.BatchNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal Quantity {
                 get {
                     try {
-                        return ((string)(this[this.tabledtNegativeLedger.GroupNameColumn]));
+                        return ((decimal)(this[this.tabledtNegativeBatch.QuantityColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'GroupName\' in table \'dtNegativeLedger\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Quantity\' in table \'dtNegativeBatch\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtNegativeLedger.GroupNameColumn] = value;
+                    this[this.tabledtNegativeBatch.QuantityColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal DRAmount {
+            public string UOM {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtNegativeLedger.DRAmountColumn]));
+                        return ((string)(this[this.tabledtNegativeBatch.UOMColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DRAmount\' in table \'dtNegativeLedger\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'UOM\' in table \'dtNegativeBatch\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtNegativeLedger.DRAmountColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal CRAmount {
-                get {
-                    try {
-                        return ((decimal)(this[this.tabledtNegativeLedger.CRAmountColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CRAmount\' in table \'dtNegativeLedger\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtNegativeLedger.CRAmountColumn] = value;
+                    this[this.tabledtNegativeBatch.UOMColumn] = value;
                 }
             }
             
@@ -659,63 +721,79 @@ namespace ReportRDLC.Dataset {
             public decimal Amount {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtNegativeLedger.AmountColumn]));
+                        return ((decimal)(this[this.tabledtNegativeBatch.AmountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Amount\' in table \'dtNegativeLedger\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Amount\' in table \'dtNegativeBatch\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtNegativeLedger.AmountColumn] = value;
+                    this[this.tabledtNegativeBatch.AmountColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsGroupNameNull() {
-                return this.IsNull(this.tabledtNegativeLedger.GroupNameColumn);
+            public string Rate {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtNegativeBatch.RateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Rate\' in table \'dtNegativeBatch\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtNegativeBatch.RateColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetGroupNameNull() {
-                this[this.tabledtNegativeLedger.GroupNameColumn] = global::System.Convert.DBNull;
+            public bool IsQuantityNull() {
+                return this.IsNull(this.tabledtNegativeBatch.QuantityColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsDRAmountNull() {
-                return this.IsNull(this.tabledtNegativeLedger.DRAmountColumn);
+            public void SetQuantityNull() {
+                this[this.tabledtNegativeBatch.QuantityColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetDRAmountNull() {
-                this[this.tabledtNegativeLedger.DRAmountColumn] = global::System.Convert.DBNull;
+            public bool IsUOMNull() {
+                return this.IsNull(this.tabledtNegativeBatch.UOMColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsCRAmountNull() {
-                return this.IsNull(this.tabledtNegativeLedger.CRAmountColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetCRAmountNull() {
-                this[this.tabledtNegativeLedger.CRAmountColumn] = global::System.Convert.DBNull;
+            public void SetUOMNull() {
+                this[this.tabledtNegativeBatch.UOMColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsAmountNull() {
-                return this.IsNull(this.tabledtNegativeLedger.AmountColumn);
+                return this.IsNull(this.tabledtNegativeBatch.AmountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetAmountNull() {
-                this[this.tabledtNegativeLedger.AmountColumn] = global::System.Convert.DBNull;
+                this[this.tabledtNegativeBatch.AmountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsRateNull() {
+                return this.IsNull(this.tabledtNegativeBatch.RateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetRateNull() {
+                this[this.tabledtNegativeBatch.RateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -723,22 +801,22 @@ namespace ReportRDLC.Dataset {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class dtNegativeLedgerRowChangeEvent : global::System.EventArgs {
+        public class dtNegativeBatchRowChangeEvent : global::System.EventArgs {
             
-            private dtNegativeLedgerRow eventRow;
+            private dtNegativeBatchRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtNegativeLedgerRowChangeEvent(dtNegativeLedgerRow row, global::System.Data.DataRowAction action) {
+            public dtNegativeBatchRowChangeEvent(dtNegativeBatchRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtNegativeLedgerRow Row {
+            public dtNegativeBatchRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -754,7 +832,7 @@ namespace ReportRDLC.Dataset {
         }
     }
 }
-namespace ReportRDLC.Dataset.ReportDataSet_NegativeLedgerTableAdapters {
+namespace ReportRDLC.Dataset.ReportDataSet_NegativeBatchTableAdapters {
     
     
     /// <summary>
@@ -766,7 +844,7 @@ namespace ReportRDLC.Dataset.ReportDataSet_NegativeLedgerTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class dtNegativeLedgerTableAdapter : global::System.ComponentModel.Component {
+    public partial class dtNegativeBatchTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -780,7 +858,7 @@ namespace ReportRDLC.Dataset.ReportDataSet_NegativeLedgerTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public dtNegativeLedgerTableAdapter() {
+        public dtNegativeBatchTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -877,11 +955,13 @@ namespace ReportRDLC.Dataset.ReportDataSet_NegativeLedgerTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "dtNegativeLedger";
-            tableMapping.ColumnMappings.Add("LedgerName", "LedgerName");
-            tableMapping.ColumnMappings.Add("GroupName", "GroupName");
-            tableMapping.ColumnMappings.Add("DRAmount", "DRAmount");
-            tableMapping.ColumnMappings.Add("CRAmount", "CRAmount");
+            tableMapping.DataSetTable = "dtNegativeBatch";
+            tableMapping.ColumnMappings.Add("CompanyID", "CompanyID");
+            tableMapping.ColumnMappings.Add("StockDate", "StockDate");
+            tableMapping.ColumnMappings.Add("StockItemName", "StockItemName");
+            tableMapping.ColumnMappings.Add("BatchName", "BatchName");
+            tableMapping.ColumnMappings.Add("Quantity", "Quantity");
+            tableMapping.ColumnMappings.Add("UOM", "UOM");
             tableMapping.ColumnMappings.Add("Amount", "Amount");
             this._adapter.TableMappings.Add(tableMapping);
         }
@@ -899,17 +979,18 @@ namespace ReportRDLC.Dataset.ReportDataSet_NegativeLedgerTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT  AL.LedgerName, ML.ParentLedgerGroup AS GroupName, SUM(case when AL.Amount < 0 then AL.Amount  else 0 end *-1) AS DRAmount,
-SUM(case when AL.Amount > 0 then AL.Amount  else 0 end) AS CRAmount, SUM(AL.Amount * - 1) AS Amount                    
-FROM TD_Mst_Company as c
-INNER JOIN TD_Mst_VoucherType as VT ON C.CompanyID = VT.CompanyID 
-INNER JOIN TD_Txn_AccLine as AL 
-INNER JOIN TD_Txn_VchHdr as VH  ON AL.CompanyID = VH.CompanyID AND AL.VoucherID = VH.VoucherID ON VT.CompanyID = VH.CompanyID AND VT.VoucherTypeName = VH.VoucherTypeName 
-LEFT OUTER JOIN TD_Mst_Ledger as ML ON AL.CompanyID = ML.CompanyID AND AL.LedgerName = ML.LedgerName
-WHERE     (VH.IsOptional <> 1) AND (VH.IsCancelled <> 1) AND (VH.IsDeleted <> 1)  And C.CompanyID=4  And VH.Date <='03/31/2021'
---AND (VT.VoucherType <> 'Purchase Order') AND (VT.VoucherType <> 'Sales Order') AND  (VT.VoucherType <> 'Receipt Note') AND (VT.VoucherType <> 'Delivery Note') 
---AND  (VT.VoucherType <> '#Internal Stock Journal#') AND (VT.VoucherType <> 'Reversing Journal') AND  (VT.VoucherType <> 'Memorandum') AND (AL.LedgerName <> '#InventoryLine#')
-GROUP BY  AL.LedgerName, ML.ParentLedgerGroup";
+            this._commandCollection[0].CommandText = @"SELECT DISTINCT [CompanyID], [StockDate], [StockItemName] ,[BatchName]
+      ,SUM([Quantity]) AS Quantity
+      ,[UOM]
+      ,SUM([Amount])AS Amount
+  FROM [EasyReports3.6].[dbo].[TD_Txn_StockDetails]
+  WHERE
+   CompanyID = 4 AND StockItemName like 'BACILOL (100)' AND StockDate = '2020-04-01 00:00:00.000'
+   GROUP BY [CompanyID], [StockDate], [StockItemName]
+      ,[BatchName]
+      ,[UOM] 
+	  
+	  HAVING SUM([Quantity]) LIKE '-%'";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -917,7 +998,7 @@ GROUP BY  AL.LedgerName, ML.ParentLedgerGroup";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(ReportDataSet_NegativeLedger.dtNegativeLedgerDataTable dataTable) {
+        public virtual int Fill(ReportDataSet_NegativeBatch.dtNegativeBatchDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -930,9 +1011,9 @@ GROUP BY  AL.LedgerName, ML.ParentLedgerGroup";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual ReportDataSet_NegativeLedger.dtNegativeLedgerDataTable GetData() {
+        public virtual ReportDataSet_NegativeBatch.dtNegativeBatchDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            ReportDataSet_NegativeLedger.dtNegativeLedgerDataTable dataTable = new ReportDataSet_NegativeLedger.dtNegativeLedgerDataTable();
+            ReportDataSet_NegativeBatch.dtNegativeBatchDataTable dataTable = new ReportDataSet_NegativeBatch.dtNegativeBatchDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1006,7 +1087,7 @@ GROUP BY  AL.LedgerName, ML.ParentLedgerGroup";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateUpdatedRows(ReportDataSet_NegativeLedger dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(ReportDataSet_NegativeBatch dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1016,7 +1097,7 @@ GROUP BY  AL.LedgerName, ML.ParentLedgerGroup";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateInsertedRows(ReportDataSet_NegativeLedger dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(ReportDataSet_NegativeBatch dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1026,7 +1107,7 @@ GROUP BY  AL.LedgerName, ML.ParentLedgerGroup";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateDeletedRows(ReportDataSet_NegativeLedger dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(ReportDataSet_NegativeBatch dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             return result;
         }
@@ -1060,7 +1141,7 @@ GROUP BY  AL.LedgerName, ML.ParentLedgerGroup";
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public virtual int UpdateAll(ReportDataSet_NegativeLedger dataSet) {
+        public virtual int UpdateAll(ReportDataSet_NegativeBatch dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

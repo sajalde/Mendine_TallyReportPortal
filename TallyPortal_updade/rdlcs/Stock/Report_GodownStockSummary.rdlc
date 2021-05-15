@@ -6,31 +6,31 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.3062in</Width>
+              <Width>3.12287in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.3in</Width>
+              <Width>1.23433in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.90733in</Width>
+              <Width>1.70733in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.3in</Width>
+              <Width>1.275in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.65069in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.3in</Width>
+              <Width>1.30833in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.75in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.4in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.73333in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1.3in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1.83333in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -561,10 +561,9 @@
                               <Value>=Sum(Fields!OpeningStock_QTY.Value, "dsGodownStockSummary")</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>0.00;(0.00)</Format>
-                                <Color>#4d4d4d</Color>
+                                <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -599,10 +598,9 @@
                               <Value>=Sum(Fields!OpeningStock_Value.Value, "dsGodownStockSummary")</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>0.00;(0.00)</Format>
-                                <Color>#4d4d4d</Color>
+                                <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -637,10 +635,9 @@
                               <Value>=Sum(Fields!InWard_QTY.Value, "dsGodownStockSummary")</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>0.00;(0.00)</Format>
-                                <Color>#4d4d4d</Color>
+                                <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -675,9 +672,9 @@
                               <Value>=Sum(Fields!Inward_Value.Value, "dsGodownStockSummary")</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>#4d4d4d</Color>
+                                <Format>0.00;(0.00)</Format>
+                                <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -711,6 +708,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!OutWard_QTY.Value, "dsGodownStockSummary")</Value>
                               <Style>
+                                <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
@@ -747,6 +745,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!OutWard_QTY.Value, "dsGodownStockSummary")</Value>
                               <Style>
+                                <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>DarkBlue</Color>
                               </Style>
@@ -782,6 +781,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!Closing_QTY.Value, "dsGodownStockSummary")</Value>
                               <Style>
+                                <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
@@ -816,9 +816,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Sum(Fields!Closing_Value.Value, "dsGodownStockSummary")</Value>
                               <Style>
+                                <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
@@ -1210,7 +1212,7 @@
         <Top>0.02431in</Top>
         <Left>0.11125in</Left>
         <Height>0.89583in</Height>
-        <Width>15.63088in</Width>
+        <Width>15.18188in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1221,7 +1223,7 @@
     <Height>0.94792in</Height>
     <Style />
   </Body>
-  <Width>15.7838in</Width>
+  <Width>15.64213in</Width>
   <Page>
     <PageHeader>
       <Height>1.00708in</Height>
@@ -1233,7 +1235,7 @@
           <Value>mendinelogo</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.11458in</Top>
-          <Left>13.25414in</Left>
+          <Left>12.75414in</Left>
           <Height>0.82306in</Height>
           <Width>2.48799in</Width>
           <Style>
@@ -1435,7 +1437,7 @@
           </Paragraphs>
           <rd:DefaultName>ExecutionTime</rd:DefaultName>
           <Top>0.06944in</Top>
-          <Left>13.25414in</Left>
+          <Left>12.75414in</Left>
           <Height>0.25in</Height>
           <Width>2.48799in</Width>
           <ZIndex>2</ZIndex>

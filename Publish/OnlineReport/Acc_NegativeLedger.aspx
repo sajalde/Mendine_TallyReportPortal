@@ -1,7 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Stock_NegativeBatch.aspx.cs" Inherits="OnlineReport_Stock_NegativeBatch" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Acc_NegativeLedger.aspx.cs" Inherits="OnlineReport_Acc_NegativeLedger" %>
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
@@ -18,7 +16,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <h2 style="text-align: center">Negative Batch Report</h2>
+                            <h2 style="text-align: center">Negative Ledger Report</h2>
                         </div>
                     </div>
                 </div>
@@ -30,56 +28,46 @@
                                 <div class="form-group">
                                     <label>From Date</label>
                                     <asp:TextBox ID="dtFromDate" runat="server"></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy"
+                                    <asp:CalendarExtender ID="txttodate_CalendarExtender" runat="server" Format="dd/MM/yyyy"
                                         TargetControlID="dtFromDate" />
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <div class="form-group">
                                     <label>Company</label>
                                     <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" Width="75%" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged"></asp:ListBox>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="form-group col-md-4">
-                                <div class="form-group">
-                                    <label>Stock Item Name</label>
-                                    <asp:ListBox ID="lbStockItemName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
+                        <div class="mb-4 mt-4">
+                            <div class="m-4">
+                                <div class="form-group mb-0 text-center">
+                                    <asp:Button ID="btnSearch" runat="server" Text="Show Report" class="btn btn-success waves-effect waves-light" OnClick="btnSearch_Click" />
+                                    <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-danger waves-effect waves-light" OnClick="btnReset_Click" />
+                                    <asp:Button ID="btnExporttoCSV" runat="server" Text="Export to Excel" class="btn btn-info waves-effect waves-light" OnClick="btnExporttoCSV_Click" />
                                 </div>
                             </div>
-
                         </div>
 
-                    <div class="mb-4 mt-4">
-                        <div class="m-4">
-                            <div class="form-group mb-0 text-center">
-                                <asp:Button ID="btnSearch" runat="server" Text="Show Report" class="btn btn-success waves-effect waves-light" OnClick="btnSearch_Click" />
-                                <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-danger waves-effect waves-light" OnClick="btnReset_Click" />
-                                <asp:Button ID="btnExporttoCSV" runat="server" Text="Export to Excel" class="btn btn-info waves-effect waves-light" OnClick="btnExporttoCSV_Click" />
-                            </div>
-                        </div>
                     </div>
-
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group col-md-12">
-
-                    <rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Width="100%" Height="723px" AsyncRendering="False" InteractivityPostBackMode="AlwaysSynchronous" PageCountMode="Actual" ShowBackButton="False" ShowDocumentMapButton="False" ShowExportControls="False" ShowFindControls="False" ShowParameterPrompts="False" ShowPrintButton="False" ShowRefreshButton="False" ShowZoomControl="False">
-                        <LocalReport ReportPath="rdlcs\Stock\Report_NegativeStockReport.rdlc">
-                        </LocalReport>
-                    </rsweb:ReportViewer>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Width="100%" Height="723px" AsyncRendering="False" InteractivityPostBackMode="AlwaysSynchronous" PageCountMode="Actual" ShowBackButton="False" ShowDocumentMapButton="False" ShowExportControls="False" ShowFindControls="False" ShowParameterPrompts="False" ShowPrintButton="False" ShowRefreshButton="False" ShowZoomControl="False">
+                            <LocalReport ReportPath="rdlcs\Accounts\Report_NegativeLedger.rdlc">
+                            </LocalReport>
+                        </rsweb:ReportViewer>
+                    </div>
                 </div>
-            </div>
 
             </div>
 
             <script type="text/javascript">  
                 $(function () {
                     $("#dtFromDate").datepicker();
-                    $("#dtToDate").datepicker();
                 });
             </script>
 
@@ -89,18 +77,10 @@
                         var StartDate = '<%=Session["StartDate"]%>';
                         $("#dtFromDate").val(StartDate);
 
-
                         $('[id*=lbCompany]').multiselect({
                             includeSelectAllOption: true,
                             maxHeight: 400,
                             enableFiltering: false,
-                            enableCaseInsensitiveFiltering: true
-                        });
-
-                        $('[id*=lbStockItemName]').multiselect({
-                            includeSelectAllOption: true,
-                            maxHeight: 400,
-                            enableFiltering: true,
                             enableCaseInsensitiveFiltering: true
                         });
 

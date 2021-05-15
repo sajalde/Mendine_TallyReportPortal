@@ -21,7 +21,7 @@
               <Width>1.48707in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.48707in</Width>
+              <Width>1.08707in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.48707in</Width>
@@ -30,10 +30,10 @@
               <Width>1in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.35833in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.60833in</Width>
+              <Width>2.59166in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -382,7 +382,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox17</rd:DefaultName>
@@ -809,6 +811,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>dd-MMM-yy</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1096,7 +1099,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -1155,7 +1158,7 @@
         <DataSetName>dsFinalProductStock</DataSetName>
         <Left>0.21875in</Left>
         <Height>0.89583in</Height>
-        <Width>14.17407in</Width>
+        <Width>15.11574in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1166,7 +1169,7 @@
     <Height>0.94792in</Height>
     <Style />
   </Body>
-  <Width>14.39282in</Width>
+  <Width>15.33449in</Width>
   <Page>
     <PageHeader>
       <Height>1.00708in</Height>
@@ -1178,7 +1181,7 @@
           <Value>mendinelogo</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.03819in</Top>
-          <Left>11.90483in</Left>
+          <Left>12.77983in</Left>
           <Height>0.82306in</Height>
           <Width>2.48799in</Width>
           <Style>
@@ -1364,7 +1367,7 @@
           </Paragraphs>
           <rd:DefaultName>ExecutionTime</rd:DefaultName>
           <Top>0.06944in</Top>
-          <Left>7.62022in</Left>
+          <Left>12.74522in</Left>
           <Height>0.25in</Height>
           <Width>2.48799in</Width>
           <ZIndex>2</ZIndex>
