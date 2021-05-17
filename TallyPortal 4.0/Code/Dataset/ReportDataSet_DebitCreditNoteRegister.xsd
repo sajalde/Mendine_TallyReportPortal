@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReportDataSet_DebitCreditNoteRegister" targetNamespace="http://tempuri.org/ReportDataSet_DebitCreditNoteRegister.xsd" xmlns:mstns="http://tempuri.org/ReportDataSet_DebitCreditNoteRegister.xsd" xmlns="http://tempuri.org/ReportDataSet_DebitCreditNoteRegister.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="MendineMasterdummyConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="MendineMasterdummyConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.MendineMasterdummyConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="dtDebitCreditNoteRegisterTableAdapter" GeneratorDataComponentClassName="dtDebitCreditNoteRegisterTableAdapter" Name="dtDebitCreditNoteRegister" UserDataComponentName="dtDebitCreditNoteRegisterTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="MendineMasterdummyConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT VH.VoucherTypeName, VH.Date , vh.PartyLedgerName as [PartyName], VH.Reference, VH.CostCentreName,
+IL.StockItemName, IL.ActualQuantity,   IL.Rate, IL.RateUOM, IL.Amount, GSTClass as [GST], 0 as [GSTAmount], IL.Amount + 0 as [TotalAmount] , VH.Narration 
+FROM  TD_Txn_VchHdr as VH 
+INNER JOIN TD_Txn_InvLine as IL ON VH.CompanyID = IL.CompanyId AND VH.VoucherID = IL.VoucherID 
+FULL OUTER JOIN TD_Txn_AccLine ON IL.AccLineNo = TD_Txn_AccLine.AccLineNo AND VH.CompanyID = TD_Txn_AccLine.CompanyID AND IL.VoucherID = TD_Txn_AccLine.VoucherID
+where VoucherTypeName like '%Debit Note%' or VoucherTypeName like '%credit%'
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="VoucherTypeName" DataSetColumn="VoucherTypeName" />
+              <Mapping SourceColumn="Date" DataSetColumn="Date" />
+              <Mapping SourceColumn="PartyName" DataSetColumn="PartyName" />
+              <Mapping SourceColumn="Reference" DataSetColumn="Reference" />
+              <Mapping SourceColumn="CostCentreName" DataSetColumn="CostCentreName" />
+              <Mapping SourceColumn="StockItemName" DataSetColumn="StockItemName" />
+              <Mapping SourceColumn="ActualQuantity" DataSetColumn="ActualQuantity" />
+              <Mapping SourceColumn="Rate" DataSetColumn="Rate" />
+              <Mapping SourceColumn="RateUOM" DataSetColumn="RateUOM" />
+              <Mapping SourceColumn="Amount" DataSetColumn="Amount" />
+              <Mapping SourceColumn="GST" DataSetColumn="GST" />
+              <Mapping SourceColumn="GSTAmount" DataSetColumn="GSTAmount" />
+              <Mapping SourceColumn="TotalAmount" DataSetColumn="TotalAmount" />
+              <Mapping SourceColumn="Narration" DataSetColumn="Narration" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReportDataSet_DebitCreditNoteRegister" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportDataSet_DebitCreditNoteRegister" msprop:Generator_UserDSName="ReportDataSet_DebitCreditNoteRegister">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtDebitCreditNoteRegister" msprop:Generator_TableClassName="dtDebitCreditNoteRegisterDataTable" msprop:Generator_TableVarName="tabledtDebitCreditNoteRegister" msprop:Generator_TablePropName="dtDebitCreditNoteRegister" msprop:Generator_RowDeletingName="dtDebitCreditNoteRegisterRowDeleting" msprop:Generator_RowChangingName="dtDebitCreditNoteRegisterRowChanging" msprop:Generator_RowEvHandlerName="dtDebitCreditNoteRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="dtDebitCreditNoteRegisterRowDeleted" msprop:Generator_UserTableName="dtDebitCreditNoteRegister" msprop:Generator_RowChangedName="dtDebitCreditNoteRegisterRowChanged" msprop:Generator_RowEvArgName="dtDebitCreditNoteRegisterRowChangeEvent" msprop:Generator_RowClassName="dtDebitCreditNoteRegisterRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VoucherTypeName" msprop:Generator_ColumnVarNameInTable="columnVoucherTypeName" msprop:Generator_ColumnPropNameInRow="VoucherTypeName" msprop:Generator_ColumnPropNameInTable="VoucherTypeNameColumn" msprop:Generator_UserColumnName="VoucherTypeName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PartyName" msprop:Generator_ColumnVarNameInTable="columnPartyName" msprop:Generator_ColumnPropNameInRow="PartyName" msprop:Generator_ColumnPropNameInTable="PartyNameColumn" msprop:Generator_UserColumnName="PartyName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Reference" msprop:Generator_ColumnVarNameInTable="columnReference" msprop:Generator_ColumnPropNameInRow="Reference" msprop:Generator_ColumnPropNameInTable="ReferenceColumn" msprop:Generator_UserColumnName="Reference" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CostCentreName" msprop:Generator_ColumnVarNameInTable="columnCostCentreName" msprop:Generator_ColumnPropNameInRow="CostCentreName" msprop:Generator_ColumnPropNameInTable="CostCentreNameColumn" msprop:Generator_UserColumnName="CostCentreName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StockItemName" msprop:Generator_ColumnVarNameInTable="columnStockItemName" msprop:Generator_ColumnPropNameInRow="StockItemName" msprop:Generator_ColumnPropNameInTable="StockItemNameColumn" msprop:Generator_UserColumnName="StockItemName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ActualQuantity" msprop:Generator_ColumnVarNameInTable="columnActualQuantity" msprop:Generator_ColumnPropNameInRow="ActualQuantity" msprop:Generator_ColumnPropNameInTable="ActualQuantityColumn" msprop:Generator_UserColumnName="ActualQuantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Rate" msprop:Generator_ColumnVarNameInTable="columnRate" msprop:Generator_ColumnPropNameInRow="Rate" msprop:Generator_ColumnPropNameInTable="RateColumn" msprop:Generator_UserColumnName="Rate" type="xs:decimal" minOccurs="0" />
+              <xs:element name="RateUOM" msprop:Generator_ColumnVarNameInTable="columnRateUOM" msprop:Generator_ColumnPropNameInRow="RateUOM" msprop:Generator_ColumnPropNameInTable="RateUOMColumn" msprop:Generator_UserColumnName="RateUOM" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Amount" msprop:Generator_ColumnVarNameInTable="columnAmount" msprop:Generator_ColumnPropNameInRow="Amount" msprop:Generator_ColumnPropNameInTable="AmountColumn" msprop:Generator_UserColumnName="Amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GST" msprop:Generator_ColumnVarNameInTable="columnGST" msprop:Generator_ColumnPropNameInRow="GST" msprop:Generator_ColumnPropNameInTable="GSTColumn" msprop:Generator_UserColumnName="GST" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GSTAmount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnGSTAmount" msprop:Generator_ColumnPropNameInRow="GSTAmount" msprop:Generator_ColumnPropNameInTable="GSTAmountColumn" msprop:Generator_UserColumnName="GSTAmount" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalAmount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalAmount" msprop:Generator_ColumnPropNameInRow="TotalAmount" msprop:Generator_ColumnPropNameInTable="TotalAmountColumn" msprop:Generator_UserColumnName="TotalAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Narration" msprop:Generator_ColumnVarNameInTable="columnNarration" msprop:Generator_ColumnPropNameInRow="Narration" msprop:Generator_ColumnPropNameInTable="NarrationColumn" msprop:Generator_UserColumnName="Narration" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="900" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

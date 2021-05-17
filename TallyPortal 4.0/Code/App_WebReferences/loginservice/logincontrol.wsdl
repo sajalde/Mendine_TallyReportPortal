@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="UserNamePwdcheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserNamePwdcheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserNamePwdcheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="UserNamePwdcheckSoapIn">
+    <wsdl:part name="parameters" element="tns:UserNamePwdcheck" />
+  </wsdl:message>
+  <wsdl:message name="UserNamePwdcheckSoapOut">
+    <wsdl:part name="parameters" element="tns:UserNamePwdcheckResponse" />
+  </wsdl:message>
+  <wsdl:portType name="logincontrolSoap">
+    <wsdl:operation name="UserNamePwdcheck">
+      <wsdl:input message="tns:UserNamePwdcheckSoapIn" />
+      <wsdl:output message="tns:UserNamePwdcheckSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="logincontrolSoap" type="tns:logincontrolSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UserNamePwdcheck">
+      <soap:operation soapAction="http://tempuri.org/UserNamePwdcheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="logincontrolSoap12" type="tns:logincontrolSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UserNamePwdcheck">
+      <soap12:operation soapAction="http://tempuri.org/UserNamePwdcheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="logincontrol">
+    <wsdl:port name="logincontrolSoap" binding="tns:logincontrolSoap">
+      <soap:address location="http://hr.recruitment.mendine.co.in/register/logincontrol.asmx" />
+    </wsdl:port>
+    <wsdl:port name="logincontrolSoap12" binding="tns:logincontrolSoap12">
+      <soap12:address location="http://hr.recruitment.mendine.co.in/register/logincontrol.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
