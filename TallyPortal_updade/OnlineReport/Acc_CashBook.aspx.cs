@@ -52,7 +52,7 @@ public partial class OnlineReport_Acc_CashBook : System.Web.UI.Page
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
 
-        lbLedgerName.DataSource = objData.lst_LedgerName;
+        lbLedgerName.DataSource = objData.lst_LedgerName_Cash;
         lbLedgerName.DataBind();
 
         lbTransactionType.DataSource = objData.lst_TransactionType;
@@ -137,18 +137,18 @@ public partial class OnlineReport_Acc_CashBook : System.Web.UI.Page
             }
 
             //--- Ledger Name::  Multi Select List Box Values  Item--
-            string strLedgerName = string.Empty;
+            string strLedgerName_Cash = string.Empty;
             foreach (ListItem item in lbLedgerName.Items)
             {
                 if (item.Selected)
                 {
-                    strLedgerName += "'" + item.Text + "'";
-                    strLedgerName += ",";
+                    strLedgerName_Cash += "'" + item.Text + "'";
+                    strLedgerName_Cash += ",";
                 }
             }
             if (lbLedgerName.SelectedIndex != -1)
             {
-                repParamSearch.ItemName = strLedgerName.Remove(strLedgerName.Length - 1, 1);// Remove last;
+                repParamSearch.LedgerNameCash = strLedgerName_Cash.Remove(strLedgerName_Cash.Length - 1, 1);// Remove last;
             }
 
 

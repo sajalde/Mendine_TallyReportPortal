@@ -236,7 +236,7 @@ public partial class OnlineReport_GodownStockTransfer : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=PendingPurchaseOrderReport." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=GodownStockTransfer." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

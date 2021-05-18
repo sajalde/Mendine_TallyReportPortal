@@ -216,7 +216,7 @@ public partial class OnlineReport_FinalProductStock : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=PendingPurchaseOrderReport." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=FinalProductStock." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

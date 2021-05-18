@@ -81,7 +81,7 @@
                             <div class="col-md-12">
                                 <ul>
                                     <li>
-                                        <asp:HyperLink ID="tallyPendingpo" runat="server" NavigateUrl="~/OnlineReport/PendingPurchaseOrder.aspx">Pending PO</asp:HyperLink>
+                                        <asp:HyperLink ID="tallyPendingpo" runat="server" NavigateUrl="~/OnlineReport/PendingPurchaseOrder.aspx">Pending Purchase Order</asp:HyperLink>
                                     </li>
                                     <li>
                                         <asp:HyperLink ID="tallyPendingPurchaseBill" runat="server" NavigateUrl="~/OnlineReport/PendingPurchaseBill.aspx">Pending Purchase Bill</asp:HyperLink>

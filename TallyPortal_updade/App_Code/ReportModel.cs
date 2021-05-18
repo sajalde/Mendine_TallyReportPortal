@@ -23,6 +23,7 @@ using System.Web;
         public List<String> lst_HQ { get; set; }
         public List<String> lst_VoucherType { get; set; }
         public List<String> lst_LedgerName { get; set; }
+        public List<String> lst_LedgerName_Cash { get; set; }
         public List<String> lst_TransactionType { get; set; }
 
     }
@@ -46,6 +47,7 @@ using System.Web;
         public string VoucherType { get; set; }
         public string HQ { get; set; }
         public string LedgerName { get; set; }
+        public string LedgerNameCash { get; set; }
         public string TransactionType { get; set; }
     }
 

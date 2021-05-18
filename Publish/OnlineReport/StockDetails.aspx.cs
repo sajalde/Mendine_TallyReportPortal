@@ -217,7 +217,7 @@ public partial class OnlineReport_StockDetails : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=VoucherType." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=StockDetails." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

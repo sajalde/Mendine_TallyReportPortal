@@ -163,7 +163,7 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
             }
             if (lbPONumber.SelectedIndex != -1)
             {
-                repParamSearch.ItemName = strPONumber.Remove(strPONumber.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+                repParamSearch.PONumber = strPONumber.Remove(strPONumber.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
             }
 
             bool blncontinue = true;

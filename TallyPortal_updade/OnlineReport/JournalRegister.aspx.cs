@@ -150,7 +150,7 @@ public partial class OnlineReport_JournalRegister : System.Web.UI.Page
             }
             if (lbCostCenter.SelectedIndex != -1)
             {
-                repParamSearch.StockGroup = strCostCenter.Remove(strCostCenter.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
+                repParamSearch.CostCenter = strCostCenter.Remove(strCostCenter.Length - 1, 1);// Remove last , lbItemName.SelectedItem.Text;
             }
 
             //--- Ledger Name::  Multi Select List Box Values  Item--

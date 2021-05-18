@@ -60,7 +60,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-6">
                                 <div class="form-group">
                                     <label>Stock Item Name</label>
                                     <asp:ListBox ID="lbStockItemName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>

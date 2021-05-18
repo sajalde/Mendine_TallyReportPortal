@@ -198,6 +198,18 @@ public class Report_DL
                     ddlData.lst_LedgerName.Add(Common.GetString(rdr["LedgerName"]));
                 }
                 rdr.Close();
+
+                //--- Cash Ledger Name ----
+                ddlData.lst_LedgerName_Cash = new List<string>();
+                ddlData.lst_LedgerName_Cash.Add("select");
+                sql = "select Upper(LedgerName) as [LedgerName] from TD_Mst_Ledger where CompanyID=" + CompanyID + " And ParentLedgerGroup='Cash-in-hand' Order by LedgerName";
+                cmd = new SqlCommand(sql, Common.conn);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    ddlData.lst_LedgerName_Cash.Add(Common.GetString(rdr["LedgerName"]));
+                }
+                rdr.Close();
             }
 
             //--- Transaction Type ----
@@ -1225,13 +1237,13 @@ public class Report_DL
         RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
 
         strSQL = "";
-        if (repParamSearch.LedgerName is null)
+        if (repParamSearch.LedgerNameCash is null)
         {
             strSQL += "''" + "";
         }
         else
         {
-            strSQL += "'" + repParamSearch.LedgerName.Replace("'", "") + "'";
+            strSQL += "'" + repParamSearch.LedgerNameCash.Replace("'", "") + "'";
         }
         RDLCReportSQL = RDLCReportSQL.Replace("@LedgerName_List", strSQL);
 
