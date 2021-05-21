@@ -416,12 +416,12 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Sum(Fields!Quantity.Value, "dsNegativeStockReport")</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>#4d4d4d</Color>
+                                <Format>0.00;(0.00)</Format>
+                                <Color>Blue</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -530,7 +530,6 @@
                               <Value>=Sum(Fields!Amount.Value, "dsNegativeStockReport")</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
-                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>Blue</Color>
                               </Style>

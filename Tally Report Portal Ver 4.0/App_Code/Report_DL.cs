@@ -1202,7 +1202,7 @@ public class Report_DL
     {
         string RDLCReportSQL = string.Empty;
         string strSQL = string.Empty;
-        RDLCReportSQL = GetRDLCReportSQL("NegativeBatch");
+        RDLCReportSQL = GetRDLCReportSQL("NegativeStockReport");
 
 
         //--------- Replace Query with Paaramenter Value -----
