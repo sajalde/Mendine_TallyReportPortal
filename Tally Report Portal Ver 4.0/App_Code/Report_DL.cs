@@ -1424,4 +1424,40 @@ public class Report_DL
     }
 
     #endregion
+
+    #region --- Exception Report --
+    public DataSet BuildReportData_ExceptionReport(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("ExceptionReport");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        strSQL = "";
+        if (repParamSearch.VoucherType is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.VoucherType.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@VoucherType_List", strSQL);
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsRep = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsRep, "ExceptionReport");
+        }
+        return dsRep;
+    }
+
+    #endregion
 }

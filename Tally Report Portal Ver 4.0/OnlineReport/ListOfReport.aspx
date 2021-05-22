@@ -148,6 +148,10 @@
                                         <li>
                                             <asp:HyperLink ID="TallyNegativeLedger" runat="server" NavigateUrl="~/OnlineReport/Acc_NegativeLedger.aspx">Negative Ledger Report</asp:HyperLink>
                                         </li>
+
+                                        <li>
+                                            <asp:HyperLink ID="TallyExceptionReport" runat="server" NavigateUrl="~/OnlineReport/Acc_ExceptionReport.aspx">Exception Report</asp:HyperLink>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
