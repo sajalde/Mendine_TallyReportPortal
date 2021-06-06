@@ -147,7 +147,7 @@ public partial class OnlineReport_Acc_CostcenterReport : System.Web.UI.Page
             }
             if (lbCostCenter.SelectedIndex != -1)
             {
-                repParamSearch.LedgerName = strCostCenterName.Remove(strCostCenterName.Length - 1, 1);// Remove last;
+                repParamSearch.CostCenter = strCostCenterName.Remove(strCostCenterName.Length - 1, 1);// Remove last;
             }
             bool blncontinue = true;
 

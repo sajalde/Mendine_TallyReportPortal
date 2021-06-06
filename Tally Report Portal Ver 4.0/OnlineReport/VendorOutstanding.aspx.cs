@@ -143,7 +143,7 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
             }
             if (lbCostCenter.SelectedIndex != -1)
             {
-                repParamSearch.ItemName = strCostcenter.Remove(strCostcenter.Length - 1, 1);// Remove last;
+                repParamSearch.CostCenter = strCostcenter.Remove(strCostcenter.Length - 1, 1);// Remove last;
             }
 
             bool blncontinue = true;

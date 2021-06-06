@@ -80,7 +80,7 @@ public class Report_DL
                 //--- Destination GodownName Drop Down ----
                 ddlData.lst_DestinationGodown = new List<string>();
                 ddlData.lst_DestinationGodown.Add("select");
-                sql = "Select Distinct Upper(DestinationGodownName) as [GodownName] from TD_Txn_BatchLine where CompanyID='" + CompanyID + "' order by GodownName";
+                sql = "Select Distinct Upper(DestinationGodown) as [GodownName] from TD_Txn_VchHdr where CompanyID='" + CompanyID + "' order by GodownName";
                 cmd = new SqlCommand(sql, Common.conn);
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -283,7 +283,7 @@ public class Report_DL
 
     public List<String> Common_BindStockItemByStockGroup(string CompanyName, string Groups)
     {
-        Int32? CompanyID = 0;
+        string CompanyID = string.Empty;
         Search_DropdownList ddlData = new Search_DropdownList();
         string sql = string.Empty;
         SqlCommand cmd = null;
@@ -292,12 +292,12 @@ public class Report_DL
         try
         {
             //---------- Get Company Id by Name
-            sql = "Select CompanyID from TD_Mst_Company where CompanyName='" + CompanyName + "'";
+            sql = "Select ID as [CompanyID] from TD_Mst_Company where CompanyName='" + CompanyName + "'";
             cmd = new SqlCommand(sql, Common.conn);
             rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                CompanyID = Convert.ToInt32(Common.GetString(rdr["CompanyID"]));
+                CompanyID = Convert.ToString(Common.GetString(rdr["CompanyID"]));
             }
 
             rdr.Close();

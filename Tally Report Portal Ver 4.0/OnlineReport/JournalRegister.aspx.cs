@@ -165,7 +165,7 @@ public partial class OnlineReport_JournalRegister : System.Web.UI.Page
             }
             if (lbLedgerName.SelectedIndex != -1)
             {
-                repParamSearch.ItemName = strLedgerName.Remove(strLedgerName.Length - 1, 1);// Remove last;
+                repParamSearch.LedgerName = strLedgerName.Remove(strLedgerName.Length - 1, 1);// Remove last;
             }
 
 
