@@ -129,9 +129,9 @@
                                         <li>
                                             <asp:HyperLink ID="tallyDebitCreditNoteRegister" runat="server" NavigateUrl="~/OnlineReport/DebitCreditNoteRegister.aspx">Debit Credit Note Register</asp:HyperLink>
                                         </li>
-                                        <li>
+                                       <%-- <li>
                                             <asp:HyperLink ID="tallyJournalRegister" runat="server" NavigateUrl="~/OnlineReport/JournalRegister.aspx">Journal Register</asp:HyperLink>
-                                        </li>
+                                        </li>--%>
 
                                         <li>
                                             <asp:HyperLink ID="tallyCashBook" runat="server" NavigateUrl="~/OnlineReport/Acc_CashBook.aspx">Cash Book</asp:HyperLink>
@@ -149,9 +149,9 @@
                                             <asp:HyperLink ID="TallyNegativeLedger" runat="server" NavigateUrl="~/OnlineReport/Acc_NegativeLedger.aspx">Negative Ledger Report</asp:HyperLink>
                                         </li>
 
-                                        <li>
+                                       <%-- <li>
                                             <asp:HyperLink ID="TallyExceptionReport" runat="server" NavigateUrl="~/OnlineReport/Acc_ExceptionReport.aspx">Exception Report</asp:HyperLink>
-                                        </li>
+                                        </li>--%>
                                     </ul>
                                 </div>
                             </div>

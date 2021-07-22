@@ -15,13 +15,13 @@
               <Width>1.61182in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.69059in</Width>
+              <Width>1.82392in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.5944in</Width>
+              <Width>1.87773in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.38333in</Width>
+              <Width>4.10833in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>3.23233in</Width>
@@ -381,16 +381,19 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Sum(Fields!BilledQuantity.Value, "dsGodownStockTransfer")</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox5</rd:DefaultName>
@@ -458,6 +461,7 @@
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -642,6 +646,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -678,6 +683,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -714,6 +720,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -848,7 +855,7 @@
         <Top>0.02431in</Top>
         <Left>0.11125in</Left>
         <Height>0.89583in</Height>
-        <Width>15.29855in</Width>
+        <Width>16.44022in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -859,7 +866,7 @@
     <Height>0.94792in</Height>
     <Style />
   </Body>
-  <Width>15.4348in</Width>
+  <Width>16.55147in</Width>
   <Page>
     <PageHeader>
       <Height>1.00708in</Height>
@@ -871,7 +878,7 @@
           <Value>mendinelogo</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.11458in</Top>
-          <Left>12.87914in</Left>
+          <Left>14.00414in</Left>
           <Height>0.82306in</Height>
           <Width>2.48799in</Width>
           <Style>
@@ -1073,7 +1080,7 @@
           </Paragraphs>
           <rd:DefaultName>ExecutionTime</rd:DefaultName>
           <Top>0.06944in</Top>
-          <Left>12.87914in</Left>
+          <Left>14.00414in</Left>
           <Height>0.25in</Height>
           <Width>2.48799in</Width>
           <ZIndex>2</ZIndex>

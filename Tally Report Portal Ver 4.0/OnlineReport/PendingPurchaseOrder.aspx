@@ -7,10 +7,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
 
     <script type="text/javascript" src="../lib/jquery-3.3.1.min.js"></script>
-    <link  href="../lib/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="../lib/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../lib/bootstrap.min.js"></script>
     <link href="../lib/bootstrap-multiselect.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../lib/bootstrap-multiselect.min.js"></script>
+    <link href="../css/customcontrol.css" type="text/css" rel="stylesheet" />
+
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="pnl_report"
+        ClientIDMode="Predictable" ViewStateMode="Inherit">
+        <ProgressTemplate>
+            <div class="divloader">
+                <img alt="" src="loader.gif" />
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
 
 
     <asp:UpdatePanel runat="server" ID="pnl_report">
@@ -27,53 +37,66 @@
                 <div class="panel panel-info">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>Start Date</label>
-                                    <asp:TextBox ID="dtFromDate" runat="server"></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy"
-                                        TargetControlID="dtFromDate" />
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">Start Date</label>
+                                    <div class="col-sm-8">
+                                        <asp:TextBox ID="dtFromDate" runat="server" class="form-control"></asp:TextBox>
+                                        <asp:CalendarExtender ID="txtfromdate_CalendarExtender" runat="server" Format="dd/MM/yyyy"
+                                            TargetControlID="dtFromDate" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>End Date </label>
-                                    <asp:TextBox ID="dtToDate" runat="server"></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy"
-                                        TargetControlID="dtToDate" />
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">End Date</label>
+                                    <div class="col-sm-8">
+                                        <asp:TextBox ID="dtToDate" runat="server" class="form-control"></asp:TextBox>
+                                        <asp:CalendarExtender ID="dtToDate_CalendarExtender" runat="server" Format="dd/MM/yyyy"
+                                            TargetControlID="dtToDate" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <div class="form-group">
-                                    <label>Company</label>
-                                    <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" Width="75%" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged"></asp:ListBox>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">Company</label>
+                                    <div class="col-sm-8">
+                                        <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged" class="form-control"></asp:ListBox>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-md-4">
-                                <div class="form-group">
-                                    <label>Party Name</label>
-                                    <asp:ListBox ID="lbPartyName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">Party Name</label>
+                                    <div class="col-sm-8">
+                                        <asp:ListBox ID="lbPartyName" runat="server" SelectionMode="Multiple" class="form-control"></asp:ListBox>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-4">
-                                <div class="form-group">
-                                    <label>Item Name</label>
-                                    <asp:ListBox ID="lbItemName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">Item Name</label>
+                                    <div class="col-sm-8">
+                                        <asp:ListBox ID="lbItemName" runat="server" SelectionMode="Multiple" class="form-control"></asp:ListBox>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-4">
-                                <div class="form-group">
-                                    <label>Purchase Order Number</label>
-                                    <asp:ListBox ID="lbPONumber" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">Purchase Order Number</label>
+                                    <div class="col-sm-8">
+                                        <asp:ListBox ID="lbPONumber" runat="server" SelectionMode="Multiple" class="form-control"></asp:ListBox>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="mb-4 mt-4">
@@ -112,40 +135,40 @@
                 function pageLoad(sender, args) {
                     $(document).ready(function () {
                         var StartDate = '<%=Session["StartDate"]%>';
-            $("#dtFromDate").val(StartDate);
+                        $("#dtFromDate").val(StartDate);
 
-            var EndDate = '<%=Session["EndDate"]%>';
-            $("#dtToDate").val(EndDate);
+                        var EndDate = '<%=Session["EndDate"]%>';
+                        $("#dtToDate").val(EndDate);
 
-            $('[id*=lbCompany]').multiselect({
-                includeSelectAllOption: true,
-                maxHeight: 400,
-                enableFiltering: false,
-                enableCaseInsensitiveFiltering: true
-            });
-            $('[id*=lbItemName]').multiselect({
-                includeSelectAllOption: true,
-                maxHeight: 400,
-                enableFiltering: true,
-                enableCaseInsensitiveFiltering: true
-            });
-            $('[id*=lbPartyName]').multiselect({
-                includeSelectAllOption: true,
-                maxHeight: 400,
-                enableFiltering: true,
-                enableCaseInsensitiveFiltering: true
-            });
-            $('[id*=lbPONumber]').multiselect({
-                includeSelectAllOption: true,
-                maxHeight: 400,
-                enableFiltering: true,
-                enableCaseInsensitiveFiltering: true
-            });
-            setTimeout(function () {
-                window.document.getElementById('wp').style.display = 'none';
-                window.document.getElementById('searchp').style.display = '';
-            }, 100);
-        });
+                        $('[id*=lbCompany]').multiselect({
+                            includeSelectAllOption: true,
+                            maxHeight: 400,
+                            enableFiltering: false,
+                            enableCaseInsensitiveFiltering: true
+                        });
+                        $('[id*=lbItemName]').multiselect({
+                            includeSelectAllOption: true,
+                            maxHeight: 400,
+                            enableFiltering: true,
+                            enableCaseInsensitiveFiltering: true
+                        });
+                        $('[id*=lbPartyName]').multiselect({
+                            includeSelectAllOption: true,
+                            maxHeight: 400,
+                            enableFiltering: true,
+                            enableCaseInsensitiveFiltering: true
+                        });
+                        $('[id*=lbPONumber]').multiselect({
+                            includeSelectAllOption: true,
+                            maxHeight: 400,
+                            enableFiltering: true,
+                            enableCaseInsensitiveFiltering: true
+                        });
+                        setTimeout(function () {
+                            window.document.getElementById('wp').style.display = 'none';
+                            window.document.getElementById('searchp').style.display = '';
+                        }, 100);
+                    });
                 }
                 function ShowProgress() {
                     setTimeout(function () {
@@ -167,7 +190,7 @@
         </ContentTemplate>
 
         <Triggers>
-            <asp:PostBackTrigger ControlID="btnSearch" />
+            <asp:AsyncPostBackTrigger ControlID="btnSearch" />
             <asp:PostBackTrigger ControlID="btnReset" />
             <asp:PostBackTrigger ControlID="btnExporttoCSV" />
         </Triggers>

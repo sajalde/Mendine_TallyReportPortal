@@ -11,6 +11,17 @@
     <script type="text/javascript" src="../lib/bootstrap.min.js"></script>
     <link href="../lib/bootstrap-multiselect.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../lib/bootstrap-multiselect.min.js"></script>
+    <link href="../css/customcontrol.css" type="text/css" rel="stylesheet" />
+
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="pnl_report"
+        ClientIDMode="Predictable" ViewStateMode="Inherit">
+        <ProgressTemplate>
+            <div class="divloader">
+                <img alt="" src="loader.gif" />
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
 
     <asp:UpdatePanel runat="server" ID="pnl_report">
         <ContentTemplate>
@@ -26,78 +37,89 @@
                 <div class="panel panel-info">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>From Date</label>
-                                    <asp:TextBox ID="dtFromDate" runat="server"></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender3" runat="server" Format="dd/MM/yyyy"
-                                        TargetControlID="dtFromDate" />
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">Start Date</label>
+                                    <div class="col-sm-8">
+                                        <asp:TextBox ID="dtFromDate" runat="server" class="form-control"></asp:TextBox>
+                                        <asp:CalendarExtender ID="txtfromdate_CalendarExtender" runat="server" Format="dd/MM/yyyy"
+                                            TargetControlID="dtFromDate" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>To Date</label>
-                                    <asp:TextBox ID="dtToDate" runat="server"></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender2" runat="server" Format="dd/MM/yyyy"
-                                        TargetControlID="dtToDate" />
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">End Date</label>
+                                    <div class="col-sm-8">
+                                        <asp:TextBox ID="dtToDate" runat="server" class="form-control"></asp:TextBox>
+                                        <asp:CalendarExtender ID="dtToDate_CalendarExtender" runat="server" Format="dd/MM/yyyy"
+                                            TargetControlID="dtToDate" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <div class="form-group">
-                                    <label>Company</label>
-                                    <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" Width="75%" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged"></asp:ListBox>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">Company</label>
+                                    <div class="col-sm-8">
+                                        <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged" class="form-control"></asp:ListBox>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>Stock Category</label>
-                                    <asp:ListBox ID="lbStockCategory" runat="server" SelectionMode="Multiple" Width="75%"  AutoPostBack="True" OnSelectedIndexChanged="lbStockCategory_SelectedIndexChanged"></asp:ListBox>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">Stock Category</label>
+                                    <div class="col-sm-8">
+                                        <asp:ListBox ID="lbStockCategory" runat="server" SelectionMode="Multiple" class="form-control"></asp:ListBox>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>Stock Item Name</label>
-                                    <asp:ListBox ID="lbStockItemName" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">Item Name</label>
+                                    <div class="col-sm-8">
+                                        <asp:ListBox ID="lbStockItemName" runat="server" SelectionMode="Multiple" class="form-control"></asp:ListBox>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-3">
-                                <div class="form-group">
-                                    <label>Voucher Type</label>
-                                    <asp:ListBox ID="lbVoucherType" runat="server" SelectionMode="Multiple" Width="75%"></asp:ListBox>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-sm-4">Voucher Type</label>
+                                    <div class="col-sm-8">
+                                        <asp:ListBox ID="lbVoucherType" runat="server" SelectionMode="Multiple" class="form-control"></asp:ListBox>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
 
-                    <div class="mb-4 mt-4">
-                        <div class="m-4">
-                            <div class="form-group mb-0 text-center">
-                                <asp:Button ID="btnSearch" runat="server" Text="Show Report" class="btn btn-success waves-effect waves-light" OnClick="btnSearch_Click" />
-                                <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-danger waves-effect waves-light" OnClick="btnReset_Click" />
-                                <asp:Button ID="btnExporttoCSV" runat="server" Text="Export to Excel" class="btn btn-info waves-effect waves-light" OnClick="btnExporttoCSV_Click" />
+                        <div class="mb-4 mt-4">
+                            <div class="m-4">
+                                <div class="form-group mb-0 text-center">
+                                    <asp:Button ID="btnSearch" runat="server" Text="Show Report" class="btn btn-success waves-effect waves-light" OnClick="btnSearch_Click" />
+                                    <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-danger waves-effect waves-light" OnClick="btnReset_Click" />
+                                    <asp:Button ID="btnExporttoCSV" runat="server" Text="Export to Excel" class="btn btn-info waves-effect waves-light" OnClick="btnExporttoCSV_Click" />
+                                </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group col-md-12">
+                <div class="row">
+                    <div class="form-group col-md-12">
 
-                    <rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Width="100%" Height="723px" AsyncRendering="False" InteractivityPostBackMode="AlwaysSynchronous" PageCountMode="Actual" ShowBackButton="False" ShowDocumentMapButton="False" ShowExportControls="False" ShowFindControls="False" ShowParameterPrompts="False" ShowPrintButton="False" ShowRefreshButton="False" ShowZoomControl="False">
-                        <LocalReport ReportPath="rdlcs\Stock\Report_StockDetails.rdlc">
-                        </LocalReport>
-                    </rsweb:ReportViewer>
+                        <rsweb:ReportViewer ID="ReportViewer1" runat="server" BackColor="" ClientIDMode="AutoID" HighlightBackgroundColor="" InternalBorderColor="204, 204, 204" InternalBorderStyle="Solid" InternalBorderWidth="1px" LinkActiveColor="" LinkActiveHoverColor="" LinkDisabledColor="" PrimaryButtonBackgroundColor="" PrimaryButtonForegroundColor="" PrimaryButtonHoverBackgroundColor="" PrimaryButtonHoverForegroundColor="" SecondaryButtonBackgroundColor="" SecondaryButtonForegroundColor="" SecondaryButtonHoverBackgroundColor="" SecondaryButtonHoverForegroundColor="" SplitterBackColor="" ToolbarDividerColor="" ToolbarForegroundColor="" ToolbarForegroundDisabledColor="" ToolbarHoverBackgroundColor="" ToolbarHoverForegroundColor="" ToolBarItemBorderColor="" ToolBarItemBorderStyle="Solid" ToolBarItemBorderWidth="1px" ToolBarItemHoverBackColor="" ToolBarItemPressedBorderColor="51, 102, 153" ToolBarItemPressedBorderStyle="Solid" ToolBarItemPressedBorderWidth="1px" ToolBarItemPressedHoverBackColor="153, 187, 226" Width="100%" Height="723px" AsyncRendering="False" InteractivityPostBackMode="AlwaysSynchronous" PageCountMode="Actual" ShowBackButton="False" ShowDocumentMapButton="False" ShowExportControls="False" ShowFindControls="False" ShowParameterPrompts="False" ShowPrintButton="False" ShowRefreshButton="False" ShowZoomControl="False">
+                            <LocalReport ReportPath="rdlcs\Stock\Report_StockDetails.rdlc">
+                            </LocalReport>
+                        </rsweb:ReportViewer>
+                    </div>
                 </div>
-            </div>
 
             </div>
 
@@ -128,7 +150,7 @@
                             maxHeight: 400,
                             enableFiltering: true,
                             enableCaseInsensitiveFiltering: true,
-                            
+
                             enableClickableOptGroups: true,
                             onChange: function (option, checked, select) {
                                 //alert('onChange triggered ...');
@@ -177,7 +199,7 @@
         </ContentTemplate>
 
         <Triggers>
-            <asp:PostBackTrigger ControlID="btnSearch" />
+             <asp:AsyncPostBackTrigger ControlID="btnSearch" />
             <asp:PostBackTrigger ControlID="btnReset" />
             <asp:PostBackTrigger ControlID="btnExporttoCSV" />
         </Triggers>

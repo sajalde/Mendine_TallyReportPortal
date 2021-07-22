@@ -30,7 +30,7 @@
               <Width>1.325in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.25in</Width>
+              <Width>3.03333in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -93,7 +93,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox9</rd:DefaultName>
@@ -129,7 +131,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox15</rd:DefaultName>
@@ -165,7 +169,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox21</rd:DefaultName>
@@ -201,7 +207,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox23</rd:DefaultName>
@@ -237,7 +245,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox25</rd:DefaultName>
@@ -273,7 +283,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox10</rd:DefaultName>
@@ -309,7 +321,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox13</rd:DefaultName>
@@ -345,7 +359,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox17</rd:DefaultName>
@@ -1054,7 +1070,7 @@
         <DataSetName>dsFinalProductStock</DataSetName>
         <Left>0.09375in</Left>
         <Height>0.89583in</Height>
-        <Width>14.76605in</Width>
+        <Width>15.54938in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1065,7 +1081,7 @@
     <Height>0.94792in</Height>
     <Style />
   </Body>
-  <Width>14.8598in</Width>
+  <Width>15.64587in</Width>
   <Page>
     <PageHeader>
       <Height>1.00708in</Height>
@@ -1077,7 +1093,7 @@
           <Value>mendinelogo</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.03819in</Top>
-          <Left>12.28288in</Left>
+          <Left>13.15788in</Left>
           <Height>0.82306in</Height>
           <Width>2.48799in</Width>
           <Style>
@@ -1280,7 +1296,7 @@
           </Paragraphs>
           <rd:DefaultName>ExecutionTime</rd:DefaultName>
           <Top>0.06944in</Top>
-          <Left>12.37022in</Left>
+          <Left>13.12022in</Left>
           <Height>0.25in</Height>
           <Width>2.48799in</Width>
           <ZIndex>2</ZIndex>
