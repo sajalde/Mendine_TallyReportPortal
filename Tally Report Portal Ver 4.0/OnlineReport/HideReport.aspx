@@ -46,9 +46,6 @@
                                     <li>
                                         <asp:HyperLink ID="tallyJournalRegister" runat="server" NavigateUrl="~/OnlineReport/JournalRegister.aspx">Journal Register</asp:HyperLink>
                                     </li>
-                                    <li>
-                                        <asp:HyperLink ID="TallyExceptionReport" runat="server" NavigateUrl="~/OnlineReport/Acc_ExceptionReport.aspx">Exception Report</asp:HyperLink>
-                                    </li>
                                 </ul>
                             </div>
                         </div>

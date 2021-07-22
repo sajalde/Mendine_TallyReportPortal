@@ -25,7 +25,7 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
             Session["StartDate"] = d.ToString("dd/MM/yyyy");
             Session["EndDate"] = DateTime.Now.ToString("dd/MM/yyyy");
             dtFromDate.Text = Session["StartDate"].ToString();
-            dtToDate.Text = Session["EndDate"].ToString();
+            //dtToDate.Text = Session["EndDate"].ToString();
             //generate report
             Report_Search repParamSearch = new Report_Search();
             ReportViewer1.Visible = false;
@@ -94,7 +94,7 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
 
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
             DateTime startDate = Convert.ToDateTime(dtFromDate.Text);
-            DateTime enddate = Convert.ToDateTime(dtToDate.Text);
+            DateTime enddate = DateTime.Now;
 
             repParamSearch.StartDate = startDate.ToString("MM/dd/yyyy");
             repParamSearch.EndDate = enddate.ToString("MM/dd/yyyy");

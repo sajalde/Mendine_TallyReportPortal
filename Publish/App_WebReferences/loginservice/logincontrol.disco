@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://hr.recruitment.mendine.co.in/register/logincontrol.asmx?wsdl" docRef="http://hr.recruitment.mendine.co.in/register/logincontrol.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://hr.recruitment.mendine.co.in/register/logincontrol.asmx" xmlns:q1="http://tempuri.org/" binding="q1:logincontrolSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://hr.recruitment.mendine.co.in/register/logincontrol.asmx" xmlns:q2="http://tempuri.org/" binding="q2:logincontrolSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

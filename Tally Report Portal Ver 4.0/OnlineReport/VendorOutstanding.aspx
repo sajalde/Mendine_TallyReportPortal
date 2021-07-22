@@ -49,17 +49,6 @@
 
                             <div class="col-md-4">
                                 <div class="form-group row">
-                                    <label class="col-sm-4">Due Date</label>
-                                    <div class="col-sm-8">
-                                        <asp:TextBox ID="dtToDate" runat="server" class="form-control"></asp:TextBox>
-                                        <asp:CalendarExtender ID="dtToDate_CalendarExtender" runat="server" Format="dd/MM/yyyy"
-                                            TargetControlID="dtToDate" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group row">
                                     <label class="col-sm-4">Company</label>
                                     <div class="col-sm-8">
                                         <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged" class="form-control"></asp:ListBox>

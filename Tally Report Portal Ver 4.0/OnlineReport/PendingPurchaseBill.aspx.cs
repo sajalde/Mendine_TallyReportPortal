@@ -219,7 +219,7 @@ public partial class OnlineReport_PendingPurchaseBill : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=PendingPurchaseOrderReport." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=PendingPurchaseBillReport." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

@@ -61,8 +61,12 @@
                                 <asp:HyperLink ID="Tallylead" runat="server" NavigateUrl="~/OnlineReport/LeadTimeReport.aspx">Lead Time Report</asp:HyperLink>
                             </li>
 
-                             <li>
+                            <li>
                                 <asp:HyperLink ID="TallyNegativeBatch" runat="server" NavigateUrl="~/OnlineReport/Stock_NegativeBatch.aspx">Negative Batch Report</asp:HyperLink>
+                            </li>
+
+                            <li>
+                                <asp:HyperLink ID="tallyNegativeStockReport" runat="server" NavigateUrl="~/OnlineReport/NegativeStockReport.aspx">Negative Stock Report</asp:HyperLink>
                             </li>
                         </ul>
 
@@ -89,9 +93,7 @@
                                     <li>
                                         <asp:HyperLink ID="tallyVendorOutstanding" runat="server" NavigateUrl="~/OnlineReport/VendorOutstanding.aspx">Vendor Outstanding</asp:HyperLink>
                                     </li>
-                                    <li>
-                                        <asp:HyperLink ID="tallyNegativeStockReport" runat="server" NavigateUrl="~/OnlineReport/NegativeStockReport.aspx">Negative Stock Report</asp:HyperLink>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -129,7 +131,7 @@
                                         <li>
                                             <asp:HyperLink ID="tallyDebitCreditNoteRegister" runat="server" NavigateUrl="~/OnlineReport/DebitCreditNoteRegister.aspx">Debit Credit Note Register</asp:HyperLink>
                                         </li>
-                                       <%-- <li>
+                                        <%-- <li>
                                             <asp:HyperLink ID="tallyJournalRegister" runat="server" NavigateUrl="~/OnlineReport/JournalRegister.aspx">Journal Register</asp:HyperLink>
                                         </li>--%>
 
@@ -149,9 +151,9 @@
                                             <asp:HyperLink ID="TallyNegativeLedger" runat="server" NavigateUrl="~/OnlineReport/Acc_NegativeLedger.aspx">Negative Ledger Report</asp:HyperLink>
                                         </li>
 
-                                       <%-- <li>
+                                        <li>
                                             <asp:HyperLink ID="TallyExceptionReport" runat="server" NavigateUrl="~/OnlineReport/Acc_ExceptionReport.aspx">Exception Report</asp:HyperLink>
-                                        </li>--%>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

@@ -102,7 +102,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group row">
-                                    <label class="col-sm-4">HQ</label>
+                                    <label class="col-sm-4">Ledger Name</label>
                                     <div class="col-sm-8">
                                         <asp:ListBox ID="lbHQ" runat="server" SelectionMode="Multiple" class="form-control"></asp:ListBox>
                                     </div>
