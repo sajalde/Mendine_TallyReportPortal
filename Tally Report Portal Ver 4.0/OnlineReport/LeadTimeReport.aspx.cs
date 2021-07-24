@@ -57,7 +57,8 @@ public partial class OnlineReport_LeadTimeReport : System.Web.UI.Page
 
     private void PopulateSearchDropdowns(string CompanyName)
     {
-        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName);
+        string ComboName = "VendorName,StockItem";
+        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName, ComboName);
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
 
@@ -217,7 +218,7 @@ public partial class OnlineReport_LeadTimeReport : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=PendingPurchaseOrderReport." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=Lead Time Report." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

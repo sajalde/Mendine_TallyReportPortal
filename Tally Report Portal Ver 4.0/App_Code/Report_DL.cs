@@ -11,7 +11,7 @@ public class Report_DL
 {
     #region ----- Common  ----
     #region Bind Drop Down
-    public Search_DropdownList Common_BindDropdownData(string CompanyName)
+    public Search_DropdownList Common_BindDropdownData(string CompanyName, string ComboName)
     {
         String CompanyID = "";
         Search_DropdownList ddlData = new Search_DropdownList();
@@ -48,180 +48,219 @@ public class Report_DL
                 {
                     CompanyID = Convert.ToString(Common.GetString(rdr["CompanyID"]));
                 }
-
                 rdr.Close();
 
-                //--- GodownName Drop Down ----
-                ddlData.lst_Godown = new List<string>();
-                ddlData.lst_Godown.Add("select");
-                sql = "Select Distinct Upper(GodownName) as [GodownName] from TD_Mst_Godown where CompanyID='" + CompanyID + "' order by GodownName";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+
+                if (ComboName.Contains("GodownName"))
                 {
-                    ddlData.lst_Godown.Add(Common.GetString(rdr["GodownName"]));
+                    //--- GodownName Drop Down ----
+                    ddlData.lst_Godown = new List<string>();
+                    ddlData.lst_Godown.Add("select");
+                    sql = "Select Distinct Upper(GodownName) as [GodownName] from TD_Mst_Godown where CompanyID='" + CompanyID + "' order by GodownName";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_Godown.Add(Common.GetString(rdr["GodownName"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-
-                //--- Source GodownName Drop Down ----
-                ddlData.lst_SourceGodown = new List<string>();
-                ddlData.lst_SourceGodown.Add("select");
-                sql = "Select Distinct Upper(GodownName) as [GodownName] from TD_Txn_BatchLine where CompanyID='" + CompanyID + "' order by GodownName";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("SourceGodown"))
                 {
-                    ddlData.lst_SourceGodown.Add(Common.GetString(rdr["GodownName"]));
+                    //--- Source GodownName Drop Down ----
+                    ddlData.lst_SourceGodown = new List<string>();
+                    ddlData.lst_SourceGodown.Add("select");
+                    sql = "Select Distinct Upper(GodownName) as [GodownName] from TD_Txn_BatchLine where CompanyID='" + CompanyID + "' order by GodownName";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_SourceGodown.Add(Common.GetString(rdr["GodownName"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-
-                //--- Destination GodownName Drop Down ----
-                ddlData.lst_DestinationGodown = new List<string>();
-                ddlData.lst_DestinationGodown.Add("select");
-                sql = "Select Distinct Upper(DestinationGodown) as [GodownName] from TD_Txn_VchHdr where CompanyID='" + CompanyID + "' order by GodownName";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("DestinationGodown"))
                 {
-                    ddlData.lst_DestinationGodown.Add(Common.GetString(rdr["GodownName"]));
+                    //--- Destination GodownName Drop Down ----
+                    ddlData.lst_DestinationGodown = new List<string>();
+                    ddlData.lst_DestinationGodown.Add("select");
+                    sql = "Select Distinct Upper(DestinationGodown) as [GodownName] from TD_Txn_VchHdr where CompanyID='" + CompanyID + "' order by GodownName";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_DestinationGodown.Add(Common.GetString(rdr["GodownName"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-                //--- Party Name ----
-                ddlData.lst_Party = new List<string>();
-                ddlData.lst_Party.Add("select");
-                //sql = "Select Distinct Upper(LedgerName) as [PartyName]  from TD_Mst_Ledger  where ParentLedgerGroup Like 'Sundry Creditors%' And CompanyID=" + CompanyID + " order by  Upper(LedgerName)";
-                sql = "Select Distinct Upper(LedgerName) as [PartyName]  from TD_Mst_Ledger  where  CompanyID='" + CompanyID + "' order by  Upper(LedgerName)";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("VendorName"))
                 {
-                    ddlData.lst_Party.Add(Common.GetString(rdr["PartyName"]));
+                    //--- Party Name ----
+                    ddlData.lst_Party = new List<string>();
+                    ddlData.lst_Party.Add("select");
+                    //sql = "Select Distinct Upper(LedgerName) as [PartyName]  from TD_Mst_Ledger  where ParentLedgerGroup Like 'Sundry Creditors%' And CompanyID=" + CompanyID + " order by  Upper(LedgerName)";
+                    sql = "Select Distinct Upper(LedgerName) as [PartyName]  from TD_Mst_Ledger  where  CompanyID='" + CompanyID + "' order by  Upper(LedgerName)";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_Party.Add(Common.GetString(rdr["PartyName"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-                //--- Stock CATEGORY Drop Down ----
-                ddlData.lst_StockCategory = new List<string>();
-                ddlData.lst_StockCategory.Add("select");
-                sql = "Select Distinct Upper(StockCategoryName) as [CategoryName] from TD_Mst_StockCategory where CompanyID='" + CompanyID + "' order by CategoryName";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("StockCategory"))
                 {
-                    ddlData.lst_StockCategory.Add(Common.GetString(rdr["CategoryName"]));
+                    //--- Stock CATEGORY Drop Down ----
+                    ddlData.lst_StockCategory = new List<string>();
+                    ddlData.lst_StockCategory.Add("select");
+                    sql = "Select Distinct Upper(StockCategoryName) as [CategoryName] from TD_Mst_StockCategory where CompanyID='" + CompanyID + "' order by CategoryName";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_StockCategory.Add(Common.GetString(rdr["CategoryName"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-                //--- Stock Group Drop Down ----
-                ddlData.lst_StockGroup = new List<string>();
-                ddlData.lst_StockGroup.Add("select");
-                sql = "Select Distinct Upper(StockGroupName) as [StockGroupName] from TD_Mst_StockGroup where CompanyID='" + CompanyID + "' order by Upper(StockGroupName)";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("StockGroup"))
                 {
-                    ddlData.lst_StockGroup.Add(Common.GetString(rdr["StockGroupName"]));
+                    //--- Stock Group Drop Down ----
+                    ddlData.lst_StockGroup = new List<string>();
+                    ddlData.lst_StockGroup.Add("select");
+                    sql = "Select Distinct Upper(StockGroupName) as [StockGroupName] from TD_Mst_StockGroup where CompanyID='" + CompanyID + "' order by Upper(StockGroupName)";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_StockGroup.Add(Common.GetString(rdr["StockGroupName"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-                //--- Stock Item Drop Down ----
-                ddlData.lst_Item = new List<string>();
-                ddlData.lst_Item.Add("select");
-                sql = "Select Distinct Upper(StockItemName) as [ItemName]  from TD_Mst_StockItem Where CompanyID='" + CompanyID + "' order by ItemName";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("StockItem"))
                 {
-                    ddlData.lst_Item.Add(Common.GetString(rdr["ItemName"]));
+                    //--- Stock Item Drop Down ----
+                    ddlData.lst_Item = new List<string>();
+                    ddlData.lst_Item.Add("select");
+                    sql = "Select Distinct Upper(StockItemName) as [ItemName]  from TD_Mst_StockItem Where CompanyID='" + CompanyID + "' order by ItemName";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_Item.Add(Common.GetString(rdr["ItemName"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-                //--- Purchase Order Number ----
-                ddlData.lst_PONumber = new List<string>();
-                ddlData.lst_PONumber.Add("select");
-                sql = "Select VoucherNo  from TD_Txn_VchHdr where CompanyID = '" + CompanyID + "' And IsDeleted = 0  and VoucherTypeName Like 'Purchase Order%'  Order by Date desc";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("PONumber"))
                 {
-                    ddlData.lst_PONumber.Add(Common.GetString(rdr["VoucherNo"]));
+                    //--- Purchase Order Number ----
+                    ddlData.lst_PONumber = new List<string>();
+                    ddlData.lst_PONumber.Add("select");
+                    sql = "Select VoucherNo  from TD_Txn_VchHdr where CompanyID = '" + CompanyID + "' And IsDeleted = 0  and VoucherTypeName Like 'Purchase Order%'  Order by Date desc";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_PONumber.Add(Common.GetString(rdr["VoucherNo"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-                //--- Cost Center ----
-                ddlData.lst_CostCenter = new List<string>();
-                ddlData.lst_CostCenter.Add("select");
-                sql = "Select Upper(CostCentreName) as [CostCentreName] FROM  TD_Mst_CostCentre where CompanyID='" + CompanyID + "' Order by CostCentreName";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("CostCenter"))
                 {
-                    ddlData.lst_CostCenter.Add(Common.GetString(rdr["CostCentreName"]));
+                    //--- Cost Center ----
+                    ddlData.lst_CostCenter = new List<string>();
+                    ddlData.lst_CostCenter.Add("select");
+                    sql = "Select Upper(CostCentreName) as [CostCentreName] FROM  TD_Mst_CostCentre where CompanyID='" + CompanyID + "' Order by CostCentreName";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_CostCenter.Add(Common.GetString(rdr["CostCentreName"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-                //--- HQ ----
-                ddlData.lst_HQ = new List<string>();
-                ddlData.lst_HQ.Add("select");
-                sql = "Select Distinct Upper(LedgerName) as [HQ] FROM  TD_Txn_AccLine where CompanyID='" + CompanyID + "' Order by HQ";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("HQName"))
                 {
-                    ddlData.lst_HQ.Add(Common.GetString(rdr["HQ"]));
+                    //--- HQ ----
+                    ddlData.lst_HQ = new List<string>();
+                    ddlData.lst_HQ.Add("select");
+                    sql = "Select Distinct Upper(LedgerName) as [HQ] FROM  TD_Txn_AccLine where CompanyID='" + CompanyID + "' Order by HQ";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_HQ.Add(Common.GetString(rdr["HQ"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-                //--- Voucher Type ----
-                ddlData.lst_VoucherType = new List<string>();
-                ddlData.lst_VoucherType.Add("select");
-                sql = "Select Distinct Upper(VoucherTypeName) as [VoucherType] FROM  TD_Mst_VoucherType where CompanyID='" + CompanyID + "'  And (VoucherTypeParent='Credit Note' Or VoucherTypeParent='Debit Note') Order by VoucherType";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("VoucherType"))
                 {
-                    ddlData.lst_VoucherType.Add(Common.GetString(rdr["VoucherType"]));
+                    //--- Voucher Type ----
+                    ddlData.lst_VoucherType = new List<string>();
+                    ddlData.lst_VoucherType.Add("select");
+                    sql = "Select Distinct Upper(VoucherTypeName) as [VoucherType] FROM  TD_Mst_VoucherType where CompanyID='" + CompanyID + "'  And (VoucherTypeParent='Credit Note' Or VoucherTypeParent='Debit Note') Order by VoucherType";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_VoucherType.Add(Common.GetString(rdr["VoucherType"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-
-                //--- Ledger Name ----
-                ddlData.lst_LedgerName = new List<string>();
-                ddlData.lst_LedgerName.Add("select");
-                sql = "select Upper(LedgerName) as [LedgerName] from TD_Mst_Ledger where CompanyID='" + CompanyID + "' And ParentLedgerGroup='Sundry Creditors' Order by LedgerName";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("LedgerName"))
                 {
-                    ddlData.lst_LedgerName.Add(Common.GetString(rdr["LedgerName"]));
+                    //--- Ledger Name ----
+                    ddlData.lst_LedgerName = new List<string>();
+                    ddlData.lst_LedgerName.Add("select");
+                    sql = "select Upper(LedgerName) as [LedgerName] from TD_Mst_Ledger where CompanyID='" + CompanyID + "' And ParentLedgerGroup='Sundry Creditors' Order by LedgerName";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_LedgerName.Add(Common.GetString(rdr["LedgerName"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-                //--- Cash Ledger Name ----
-                ddlData.lst_LedgerName_Cash = new List<string>();
-                ddlData.lst_LedgerName_Cash.Add("select");
-                sql = "select Upper(LedgerName) as [LedgerName] from TD_Mst_Ledger where CompanyID='" + CompanyID + "' And ParentLedgerGroup='Cash-in-hand' Order by LedgerName";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("CashLedger"))
                 {
-                    ddlData.lst_LedgerName_Cash.Add(Common.GetString(rdr["LedgerName"]));
+                    //--- Cash Ledger Name ----
+                    ddlData.lst_LedgerName_Cash = new List<string>();
+                    ddlData.lst_LedgerName_Cash.Add("select");
+                    sql = "select Upper(LedgerName) as [LedgerName] from TD_Mst_Ledger where CompanyID='" + CompanyID + "' And ParentLedgerGroup='Cash-in-hand' Order by LedgerName";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_LedgerName_Cash.Add(Common.GetString(rdr["LedgerName"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
 
-                //--- Transaction Type ----
-                ddlData.lst_TransactionType = new List<string>();
-                ddlData.lst_TransactionType.Add("select");
-                sql = "Select Distinct Upper(VoucherType) as [VoucherType] FROM  TD_Mst_VoucherType where CompanyID='" + CompanyID + "' Order by VoucherType";
-                cmd = new SqlCommand(sql, Common.conn);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                if (ComboName.Contains("TransactionType"))
                 {
-                    ddlData.lst_TransactionType.Add(Common.GetString(rdr["VoucherType"]));
+                    //--- Transaction Type ----
+                    ddlData.lst_TransactionType = new List<string>();
+                    ddlData.lst_TransactionType.Add("select");
+                    sql = "Select Distinct Upper(VoucherType) as [VoucherType] FROM  TD_Mst_VoucherType where CompanyID='" + CompanyID + "' Order by VoucherType";
+                    cmd = new SqlCommand(sql, Common.conn);
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        ddlData.lst_TransactionType.Add(Common.GetString(rdr["VoucherType"]));
+                    }
+                    rdr.Close();
                 }
-                rdr.Close();
             }
 
         }

@@ -28,3 +28,7 @@
     background:rgba(0, 0, 0, 0.4);
     z-index:9999;
 }
+
+#ctl00_MainContent_ReportViewer1_ctl05 {
+    background: #428bca !important;
+}

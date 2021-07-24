@@ -15,25 +15,22 @@
               <Width>2.66182in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.45726in</Width>
+              <Width>1.80726in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.38607in</Width>
+              <Width>1.78607in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.275in</Width>
+              <Width>3.46667in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.21666in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.89167in</Width>
+              <Width>1.05in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.19167in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1.875in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.21666in</Width>
@@ -42,7 +39,7 @@
               <Width>1.45in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.80734in</Width>
+              <Width>2.26567in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -377,44 +374,6 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox21</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#7292cc</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#4c68a2</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox24">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>GST</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox24</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#7292cc</Color>
@@ -800,7 +759,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -850,6 +808,7 @@
                               <Value>=Sum(Fields!Amount.Value, "dsDebitCreditNoteRegister")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
@@ -875,41 +834,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox36">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>DarkBlue</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox36</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Textbox37">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -920,6 +844,7 @@
                               <Value>=Sum(Fields!GSTAmount.Value, "dsDebitCreditNoteRegister")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
@@ -955,6 +880,7 @@
                               <Value>=Sum(Fields!TotalAmount.Value, "dsDebitCreditNoteRegister")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>DarkBlue</Color>
                               </Style>
                             </TextRun>
@@ -1317,6 +1243,7 @@
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>8pt</FontSize>
+                                <Format>0.00;(0.00)</Format>
                                 <Color>#4d4d4d</Color>
                               </Style>
                             </TextRun>
@@ -1327,42 +1254,6 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Amount1</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="GST">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!GST.Value</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>8pt</FontSize>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Left</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>GST</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -1504,7 +1395,6 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -1531,7 +1421,7 @@
         <Top>0.02431in</Top>
         <Left>0.11125in</Left>
         <Height>0.89583in</Height>
-        <Width>21.40589in</Width>
+        <Width>20.08923in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1542,7 +1432,7 @@
     <Height>0.94792in</Height>
     <Style />
   </Body>
-  <Width>21.58381in</Width>
+  <Width>20.28381in</Width>
   <Page>
     <PageHeader>
       <Height>1.00708in</Height>
@@ -1554,7 +1444,7 @@
           <Value>mendinelogo</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.11458in</Top>
-          <Left>19.00414in</Left>
+          <Left>17.62914in</Left>
           <Height>0.82306in</Height>
           <Width>2.48799in</Width>
           <Style>
@@ -1756,7 +1646,7 @@
           </Paragraphs>
           <rd:DefaultName>ExecutionTime</rd:DefaultName>
           <Top>0.06944in</Top>
-          <Left>19.00414in</Left>
+          <Left>17.75414in</Left>
           <Height>0.25in</Height>
           <Width>2.48799in</Width>
           <ZIndex>2</ZIndex>

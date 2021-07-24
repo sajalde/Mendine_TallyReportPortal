@@ -48,7 +48,8 @@ public partial class OnlineReport_JournalRegister : System.Web.UI.Page
 
     private void PopulateSearchDropdowns(string CompanyName)
     {
-        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName);
+        string ComboName = "VendorName,LedgerName,CostCenter";
+        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName, ComboName);
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
 

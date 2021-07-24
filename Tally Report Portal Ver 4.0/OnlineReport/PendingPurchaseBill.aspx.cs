@@ -51,7 +51,8 @@ public partial class OnlineReport_PendingPurchaseBill : System.Web.UI.Page
 
     private void PopulateSearchDropdowns(string CompanyName)
     {
-        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName);
+        string ComboName = "VendorName,StockGroup,StockItem";
+        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName, ComboName);
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
 
@@ -219,7 +220,7 @@ public partial class OnlineReport_PendingPurchaseBill : System.Web.UI.Page
         Response.Charset = "";
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
         Response.ContentType = contentType;
-        Response.AppendHeader("Content-Disposition", "attachment; filename=PendingPurchaseBillReport." + extension);
+        Response.AppendHeader("Content-Disposition", "attachment; filename=Pending Purchase Bill." + extension);
         Response.BinaryWrite(bytes);
         Response.Flush();
         Response.End();

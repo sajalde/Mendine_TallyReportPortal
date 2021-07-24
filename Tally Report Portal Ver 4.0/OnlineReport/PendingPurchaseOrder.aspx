@@ -90,7 +90,7 @@
 
                             <div class="col-md-4">
                                 <div class="form-group row">
-                                    <label class="col-sm-4">Purchase Order Number</label>
+                                    <label class="col-sm-4">Purchase Order No</label>
                                     <div class="col-sm-8">
                                         <asp:ListBox ID="lbPONumber" runat="server" SelectionMode="Multiple" class="form-control"></asp:ListBox>
                                     </div>

@@ -50,7 +50,8 @@ public partial class OnlineReport_GodownStockTransfer : System.Web.UI.Page
 
     private void PopulateSearchDropdowns(string CompanyName)
     {
-        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName);
+        string ComboName = "StockCategory,StockItem,SourceGodown,DestinationGodown";
+        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName, ComboName);
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
 

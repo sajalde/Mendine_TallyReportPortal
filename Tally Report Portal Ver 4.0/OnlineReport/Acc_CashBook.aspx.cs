@@ -48,7 +48,9 @@ public partial class OnlineReport_Acc_CashBook : System.Web.UI.Page
 
     private void PopulateSearchDropdowns(string CompanyName)
     {
-        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName);
+        string ComboName = "CashLedger,TransactionType";
+        Search_DropdownList objData = (new Report_DL()).Common_BindDropdownData(CompanyName, ComboName);
+
         lbCompany.DataSource = objData.lst_Company;
         lbCompany.DataBind();
 
