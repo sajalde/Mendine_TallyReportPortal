@@ -22,7 +22,7 @@ public partial class OnlineReport_PendingPurchaseOrder : System.Web.UI.Page
             DateTime d = DateTime.Now;
             d = d.AddMonths(-2);
 
-            Session["StartDate"] = d.ToString("dd/MM/yyyy");
+            Session["StartDate"] = DateTime.Now.ToString("dd/MM/yyyy");
             Session["EndDate"] = DateTime.Now.ToString("dd/MM/yyyy");
             dtFromDate.Text = Session["StartDate"].ToString();
             //dtToDate.Text = Session["EndDate"].ToString();

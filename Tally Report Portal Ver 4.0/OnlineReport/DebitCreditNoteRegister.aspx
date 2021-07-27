@@ -62,7 +62,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-4">Company</label>
                                     <div class="col-sm-8">
-                                        <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged" class="form-control"></asp:ListBox>
+                                        <asp:ListBox ID="lbCompany" runat="server" AutoPostBack="true" OnSelectedIndexChanged="lbCompany_SelectedIndexChanged" class="form-control"></asp:ListBox>                                        
                                     </div>
                                 </div>
                             </div>
@@ -103,6 +103,7 @@
                                     <asp:Button ID="btnSearch" runat="server" Text="Show Report" class="btn btn-success waves-effect waves-light" OnClick="btnSearch_Click" />
                                     <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-danger waves-effect waves-light" OnClick="btnReset_Click" />
                                     <asp:Button ID="btnExporttoCSV" runat="server" Text="Export to Excel" class="btn btn-info waves-effect waves-light" OnClick="btnExporttoCSV_Click" />
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorCompany" ControlToValidate="lbCompany" InitialValue="" runat="server" ErrorMessage="Please select any Company" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -122,10 +123,10 @@
             </div>
 
             <script type="text/javascript">  
-                $(function () {
-                    $("#dtFromDate").datepicker();
-                    $("#dtToDate").datepicker();
-                });
+                //$(function () {
+                //    $("#dtFromDate").datepicker();
+                //    $("#dtToDate").datepicker();
+                //});
             </script>
 
             <script type="text/javascript">  
@@ -166,8 +167,8 @@
                         });
 
                         setTimeout(function () {
-                            window.document.getElementById('wp').style.display = 'none';
-                            window.document.getElementById('searchp').style.display = '';
+                            //window.document.getElementById('wp').style.display = 'none';
+                            //window.document.getElementById('searchp').style.display = '';
                         }, 100);
                     });
                 }
@@ -183,9 +184,9 @@
                         loading.css({ top: top, left: left });
                     }, 100);
                 }
-                $('form').live("submit", function () {
-                    //ShowProgress();
-                });
+                //$('form').live("submit", function () {
+                //    //ShowProgress();
+                //});
             </script>
 
         </ContentTemplate>

@@ -59,7 +59,7 @@
 
 
                         <div class="row">
-                                                        <div class="col-md-4">
+                            <div class="col-md-4">
                                 <div class="form-group row">
                                     <label class="col-sm-4">Party Name</label>
                                     <div class="col-sm-8">
@@ -84,6 +84,7 @@
                                     <asp:Button ID="btnSearch" runat="server" Text="Show Report" class="btn btn-success waves-effect waves-light" OnClick="btnSearch_Click" />
                                     <asp:Button ID="btnReset" runat="server" Text="Reset" class="btn btn-danger waves-effect waves-light" OnClick="btnReset_Click" />
                                     <asp:Button ID="btnExporttoCSV" runat="server" Text="Export to Excel" class="btn btn-info waves-effect waves-light" OnClick="btnExporttoCSV_Click" />
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorCompany" ControlToValidate="lbCompany" InitialValue="" runat="server" ErrorMessage="Please select any Company" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
