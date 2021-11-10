@@ -755,6 +755,75 @@ public class Report_DL
 
     #endregion
 
+    #region --- Pending Purchase Order Report --
+    public DataSet BuildReportData_PurchaseOrderRegister(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        try
+        {
+            RDLCReportSQL = GetRDLCReportSQL("PurchaseOrderRegister");
+
+
+            //--------- Replace Query with Paaramenter Value -----
+            RDLCReportSQL = RDLCReportSQL.Replace("@CompanyIDs", repParamSearch.CompanyName);
+            RDLCReportSQL = RDLCReportSQL.Replace("@PO_DateFrom", "'" + repParamSearch.StartDate + "'");
+            RDLCReportSQL = RDLCReportSQL.Replace("@PO_DateTo", "'" + repParamSearch.EndDate + "'");
+
+            if (repParamSearch.PartyName is null)
+            {
+                strSQL += "''" + "";
+            }
+            else
+            {
+                strSQL += "'" + repParamSearch.PartyName.Replace("'", "") + "'";
+            }
+
+            RDLCReportSQL = RDLCReportSQL.Replace("@PartyName_List", strSQL);
+            strSQL = "";
+            if (repParamSearch.ItemName is null)
+            {
+                strSQL += "''" + "";
+            }
+            else
+            {
+                strSQL += "'" + repParamSearch.ItemName.Replace("'", "") + "'";
+            }
+            RDLCReportSQL = RDLCReportSQL.Replace("@ItemName_List", strSQL);
+
+            strSQL = "";
+            if (repParamSearch.PONumber is null)
+            {
+                strSQL += "''" + "";
+            }
+            else
+            {
+                strSQL += "'" + repParamSearch.PONumber.Replace("'", "") + "'";
+            }
+            RDLCReportSQL = RDLCReportSQL.Replace("@PONo_List", strSQL);
+
+
+            SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+            DataSet dsPurchaseOrderRegister = new DataSet();
+            using (SqlDataAdapter sda = new SqlDataAdapter())
+            {
+                sda.SelectCommand = cmd;
+                sda.Fill(dsPurchaseOrderRegister, "rpt_PurchaseOrderRegister");
+            }
+            return dsPurchaseOrderRegister;
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+        finally
+        {
+            Common.CloseConnection();
+        }
+    }
+
+    #endregion
+
     #region --- VendorOutstanding --
     public DataSet BuildReportData_VendorOutstanding(Report_Search repParamSearch)
     {
@@ -978,6 +1047,76 @@ public class Report_DL
             sda.Fill(dsPendingPurchaseBill, "Report_PendingPurchaseBill");
         }
         return dsPendingPurchaseBill;
+    }
+
+    #endregion
+
+    #region --- Purchase Register --
+    public DataSet BuildReportData_PurchaseRegister(Report_Search repParamSearch)
+    {
+        string RDLCReportSQL = string.Empty;
+        string strSQL = string.Empty;
+        RDLCReportSQL = GetRDLCReportSQL("PurchaseRegister");
+
+
+        //--------- Replace Query with Paaramenter Value -----
+        RDLCReportSQL = RDLCReportSQL.Replace("@CompanyNames", repParamSearch.CompanyName);
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateFrom", "'" + repParamSearch.StartDate + "'");
+        RDLCReportSQL = RDLCReportSQL.Replace("@DateTo", "'" + repParamSearch.EndDate + "'");
+
+        strSQL = "";
+        if (repParamSearch.PartyName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.PartyName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@PartyName_List", strSQL);
+
+        strSQL = "";
+        if (repParamSearch.StockGroup is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.StockGroup.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockGroupName_List", strSQL);
+
+        strSQL = "";
+        if (repParamSearch.GodownName_Source is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.GodownName_Source.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@GodownName_List", strSQL);
+
+        strSQL = "";
+        if (repParamSearch.ItemName is null)
+        {
+            strSQL += "''" + "";
+        }
+        else
+        {
+            strSQL += "'" + repParamSearch.ItemName.Replace("'", "") + "'";
+        }
+        RDLCReportSQL = RDLCReportSQL.Replace("@StockItemName_List", strSQL);
+
+
+        SqlCommand cmd = new SqlCommand(RDLCReportSQL, Common.conn);
+        DataSet dsPurchaseRegister = new DataSet();
+        using (SqlDataAdapter sda = new SqlDataAdapter())
+        {
+            sda.SelectCommand = cmd;
+            sda.Fill(dsPurchaseRegister, "Report_PurchaseRegister");
+        }
+        return dsPurchaseRegister;
     }
 
     #endregion

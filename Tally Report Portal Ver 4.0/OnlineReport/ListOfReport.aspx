@@ -92,6 +92,12 @@
                                     </li>
                                     <li>
                                         <asp:HyperLink ID="tallyVendorOutstanding" runat="server" NavigateUrl="~/OnlineReport/VendorOutstanding.aspx">Vendor Outstanding</asp:HyperLink>
+                                    </li>                                   
+                                    <li>
+                                        <asp:HyperLink ID="tallyPurchaseOrderRegister" runat="server" NavigateUrl="~/OnlineReport/PurchaseOrderRegister.aspx">Purchase Order Register</asp:HyperLink>
+                                    </li>
+                                    <li>
+                                        <asp:HyperLink ID="tallyPurchaseRegister" runat="server" NavigateUrl="~/OnlineReport/PurchaseRegister.aspx">Purchase Register</asp:HyperLink>
                                     </li>
 
                                 </ul>
